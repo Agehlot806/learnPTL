@@ -1,0 +1,283 @@
+/* @import url('https://fonts.googleapis.com/css2?family=Jost:wght@100;200;300;400;500;600;700;800;900&display=swap'); */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+
+:root {
+    --white-color: #fff;
+    --black-color: #000;
+    --theme-color: #5e3fd7;
+    /* --theme-color: linear-gradient(316deg, #6247aa 0%, #a594f9 74%); */
+    --red-color: #db4437;
+    --star-color: #ffc014;
+    --heading-color: #654bae;
+    --gray-color: #767588;
+    --green-color: #45c881;
+    --orange-color: #FC8068;
+    --body-font-color: #52526C;
+    --gradient-overlay-bg: linear-gradient(180deg, rgba(0, 0, 61, 0.27) 0%, rgba(1, 1, 52, 0.9) 100%);
+    --gradient-banner-bg: linear-gradient(130deg, #ad90c1 0%, rgb(3, 0, 84) 100%), linear-gradient(130deg, #09007b 0%, rgba(15, 0, 66, 0) 30%), linear-gradient(129.96deg, rgb(255, 47, 47) 10.43%, rgb(0, 4, 96) 92.78%), radial-gradient(100% 246.94% at 100% 0%, rgb(255, 255, 255) 0%, rgba(37, 0, 66, 0.8) 100%), linear-gradient(121.18deg, rgb(20, 0, 255) 0.45%, rgb(27, 0, 62) 100%), linear-gradient(154.03deg, rgb(206, 0, 0) 0%, rgb(255, 0, 61) 74.04%), linear-gradient(341.1deg, rgb(178, 91, 186) 7.52%, rgb(16, 0, 119) 77.98%), linear-gradient(222.34deg, rgb(169, 0, 0) 12.99%, rgb(0, 255, 224) 87.21%), linear-gradient(150.76deg, rgb(183, 213, 0) 15.35%, rgb(34, 0, 170) 89.57%);
+    --btn-font-size: 15px;
+
+}
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    overflow-x: hidden;
+    background-color: #f8f6f0;
+}
+
+a {
+    text-decoration: none;
+}
+
+p {
+    font-weight: 400;
+    font-size: 16px;
+    /* line-height: 154%; */
+    color: var(--gray-color);
+}
+
+li {
+    list-style-type: none;
+}
+
+input:focus-visible {
+    outline: none;
+}
+
+.modal-backdrop {
+    --bs-backdrop-bg: transparent;
+}
+
+.btn-close {
+    border: 1px solid var(--gray-color);
+    border-radius: 50%;
+}
+
+.form-control:focus {
+    box-shadow: none;
+    background: transparent;
+    border-color: var(--theme-color);
+}
+
+.form-select:focus {
+    border-color: var(--heading-color);
+    box-shadow: none;
+}
+
+.section-padding {
+    padding-top: 40px;
+    padding-bottom: 40px;
+}
+
+.main-heading {
+    margin: 0 0 40px;
+}
+
+.needspeace {
+    padding: 30px 0 0;
+}
+
+.main-heading h1 {
+    color: var(--heading-color);
+}
+
+.theme-button1 {
+    color: var(--white-color) !important;
+    /* background-color: var(--theme-color); */
+    border: 2px solid transparent;
+    font-size: var(--btn-font-size);
+    border-radius: 4px;
+    font-weight: 600 !important;
+    background: #a594f9;
+}
+
+.playvideo-bg .play-video i {
+    color: #fff;
+    background: red;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    padding: 7px 10px;
+    font-size: 16px;
+}
+.playvideo-bg {
+    text-align: right;
+}
+.playvideo-bg a {
+    color: var(--black-color);
+    font-weight: 600;
+}
+
+.theme-button1:hover {
+    color: #a594f9 !important;
+    background: var(--white-color);
+    border: 2px solid #a594f9;
+}
+
+.theme-button1 a {
+    color: var(--white-color) !important;
+}
+
+.theme-button1:hover a {
+    color: var(--theme-color) !important;
+}
+
+.theme-button1 i {
+    margin: 0 0 0 15px;
+}
+
+.red-button {
+    color: var(--white-color) !important;
+    background-color: var(--red-color);
+    border: 2px solid var(--red-color);
+    padding: 9.5px 24px !important;
+    font-size: var(--btn-font-size);
+    border-radius: 4px;
+    font-weight: 600 !important;
+}
+
+.red-button:hover {
+    color: var(--red-color) !important;
+    background-color: var(--white-color);
+    border: 2px solid var(--red-color);
+}
+
+.Follow-button {
+    color: var(--white-color) !important;
+    background-color: var(--green-color);
+    border: 2px solid var(--green-color);
+    padding: 9.5px 24px !important;
+    font-size: var(--btn-font-size);
+    border-radius: 4px;
+    font-weight: 600 !important;
+}
+
+.Follow-button:hover {
+    color: var(--green-color) !important;
+    background-color: var(--white-color);
+    border: 2px solid var(--green-color);
+}
+
+.all-bg {
+    text-align: center;
+    padding: 28px 0;
+}
+
+.all-bg h1 {
+    color: var(--black-color);
+    font-weight: 600;
+}
+
+.all-bg span {
+    color: var(--black-color);
+}
+
+.all-bg a {
+    color: var(--gray-color);
+}
+
+/* ===bolderBtn ==== */
+.bolderrightText {
+    text-align: right;
+}
+
+.bolderBtn {
+    background: var(--white-color);
+    border: 2px solid var(--theme-color);
+    font-weight: 500;
+    font-size: var(--btn-font-size);
+    margin: 0 6px 0 0;
+    color: var(--theme-color);
+}
+
+.bolderBtn:hover {
+    color: var(--white-color);
+    background: linear-gradient(316deg, #6247aa 0%, #a594f9 74%);
+    border: 2px solid var(--theme-color);
+}
+
+/* Password Eye icon css */
+.password-input {
+    position: relative;
+}
+
+.password-input i {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 10px;
+}
+
+
+/* White Button css */
+.white-button {
+    color: var(--black-color) !important;
+    background-color: var(--white-color);
+    border: 2px solid var(--white-color);
+    padding: 9.5px 24px !important;
+    font-size: var(--btn-font-size);
+    border-radius: 4px;
+    font-weight: 600 !important;
+}
+
+.white-button:hover {
+    color: var(--white-color) !important;
+    background-color: var(--black-color);
+    border: 2px solid var(--white-color);
+}
+
+/* Plan Button */
+.plan-button {
+    border: 1px solid rgba(0, 0, 0, .19);
+    background: var(--white-color);
+    color: #52526C;
+}
+
+@media only screen and (max-width: 1024px) {
+    .bolderBtn button {
+        padding: 0.375rem 5px;
+    }
+}
+
+.all-overlay-bg {
+    background: linear-gradient(316deg, #6247aa 0%, #a594f9 74%);
+    height: 100%;
+    padding: 45px 0 0;
+}
+
+
+/* ======= All Tabs Design Area ============== */
+
+.all-tabs ul li button {
+    color: var(--black-color);
+    font-weight: 500;
+}
+
+.all-tabs .nav-tabs {
+    --bs-nav-tabs-border-color: var(--theme-color);
+    --bs-nav-tabs-link-active-border-color: var(--theme-color);
+    /* --bs-nav-tabs-border-width: 1.5px; */
+    --bs-nav-tabs-link-active-bg: var(--theme-color);
+    --bs-nav-tabs-link-active-color: var(--white-color);
+}
+.all-tabs .nav-link:hover {
+    color: var(--theme-color);
+}
+.all-tabs .nav-link:focus {
+    color: var(--white-color);
+}
+.all-tabs {
+    border-right: 1px solid var(--theme-color);
+    height: 100vh;
+}
+.all-tabs ul li button {
+    margin: 0;
+}
+
+

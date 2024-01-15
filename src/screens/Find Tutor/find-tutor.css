@@ -1,0 +1,127 @@
+.filter-All {
+    border-bottom: 1px solid #ccc;
+}
+
+.filter-All .filtertext {
+    background: var(--white-color);
+    border: 2px solid var(--theme-color);
+    color: var(--theme-color);
+    margin: 0 0 10px;
+}
+
+.filter-All .accordion-button {
+    color: var(--heading-color);
+    font-weight: 500;
+    background: transparent;
+}
+
+.filter-All .accordion-item {
+    background: var(--white-color);
+}
+
+.filter-All .accordion-button:focus {
+    border-color: none;
+    box-shadow: none;
+}
+
+.filter-All .accordion-button:not(.collapsed) {
+    background-color: transparent;
+    box-shadow: none;
+}
+
+.filter-options .form-check {
+    margin: 0 0 15px;
+}
+
+.filter-All .accordion-body {
+    padding: 0 20px;
+}
+
+.filter-All .form-range {
+    margin: 0 0 20px;
+}
+
+.filter-All .form-range i {
+    background-color: var(--theme-color);
+    color: var(--white-color);
+    padding: 6px;
+    border-radius: 3px;
+    margin: 0 10px;
+}
+
+.course-cards {
+    background: var(--white-color);
+    box-shadow: rgb(255 255 255) 0px 50px 100px -20px, rgb(255 255 255) 0px 30px 60px -30px, rgb(20 0 145) 0px 0px 6px 0px inset;
+    border-radius: 4px;
+    padding: 20px;
+    height: 100%;
+    transition: .5s;
+}
+
+.course-cards:hover {
+    box-shadow: rgb(255 255 255) 0px 50px 100px -20px, rgb(20 0 146) 0px 30px 60px -30px, rgb(7 0 86) 0px 0px 6px 0px inset;
+}
+
+.course-cards img {
+    width: 100%;
+    border-radius: 3px;
+    margin: 0 0 15px;
+}
+
+.course-cards h4 {
+    color: var(--heading-color);
+    font-size: 18px;
+}
+
+.course-cards p {
+    margin: 6px 0;
+}
+
+.course-cards a i {
+    color: var(--star-color);
+    font-size: 18px;
+    margin: 0 3px 8px 0;
+}
+
+.sort-by {
+    display: -webkit-inline-box;
+    margin: 0 0 20px;
+}
+
+.sort-by h6 {
+    margin: 12px;
+}
+
+.filter-All .form-range input {
+    width: 100px;
+}
+
+/* jwijnojncw */
+/* Position the modal directly beneath the card */
+.modal-content {
+    position: relative;
+    top: 50px; /* Adjust as needed for spacing */
+  }
+  
+  /* Optionally style the modal title */
+  .modal-title {
+    font-weight: bold;
+    font-size: 1.2rem;
+    text-align: center;
+  }
+
+
+
+  /* Pagination css Area */
+
+  .pagination-container .pagination {
+    justify-content: center;
+}
+.pagination-container li.page-item a {
+    margin: 0 10px;
+    font-size: 20px;
+    padding: 5px 20px;
+    border-radius: 6px;
+    color: #000;
+    font-weight: 600;
+}

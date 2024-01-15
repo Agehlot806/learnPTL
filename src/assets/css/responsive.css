@@ -1,0 +1,160 @@
+/* ================= All Responsive screens CSS ======================*/
+
+
+@media only screen and (max-width: 1024px) {
+    .come-for-learn-text {
+        font-size: 10px;
+        width: 100%;
+        margin-bottom: 15px;
+    }
+
+    .Tutors-Language h4 {
+        font-size: 18px;
+        width: 225px;
+    }
+}
+
+@media only screen and (max-width: 912px) {
+    .nav-bg {
+        padding: 0;
+        height: 100%;
+    }
+
+    .nav-bg .navbar-toggler {
+        border: none;
+    }
+
+    .home-heading {
+        font-size: 35px;
+    }
+
+    .home-content p {
+        font-size: 12px;
+    }
+
+    .lessons-banner h1 {
+        font-size: 55px;
+    }
+
+    .faq-img {
+        margin: 40px 0;
+    }
+
+    .footer-head {
+        margin: 15px 0;
+    }
+
+    .overlay-bg {
+        padding: 41px 0;
+    }
+    .Becomeatutor-Homebg {
+        background-image: linear-gradient(316deg, #cdc1ff 0%, #e5d9f2 74%);
+    }
+    .main-heading h1 {
+        color: var(--black-color);
+    }
+    .full-screen {
+        height: 100%;
+    }
+}
+
+@media only screen and (max-width: 540px) {
+    p {
+        font-weight: 400;
+        font-size: 14px;
+    }
+
+    .main-heading h1 {
+        font-size: 20px;
+    }
+
+    .lessons-banner h1 {
+        font-size: 30px;
+    }
+
+    .Tutors-Language h4 {
+        width: 178px;
+    }
+
+    .lessons-banner {
+        padding: 35px;
+    }
+    .home-pointsContent h4 {
+        font-size: 25px;
+    }
+}
+
+@media only screen and (max-width: 414px) {
+    .main-heading h1 {
+        font-size: 18px;
+    }
+    .Tutors-Language h4 {
+        width: 168px;
+        font-size: 16px;
+    }
+    .footer-head a i {
+        font-size: 18px;
+        margin: 0 4px;
+    }
+    .main-heading h1 {
+        font-size: 14px;
+    }
+    p {
+        font-size: 10px;
+    }
+    .bolderBtn {
+        font-size: 12px;
+    }
+}
+
+@media only screen and (max-width: 375px) {
+
+    .Tutors-Language h4 {
+        width: 140px;
+        font-size: 12px;
+    }
+    .Tutors-Language h6 {
+        font-size: 12px;
+    }
+    .Tutors-Language h4 {
+        width: 140px;
+        font-size: 12px;
+    }
+    .home-pointsContent h4 {
+        font-size: 20px;
+    }
+    .home-points{
+        padding: 10px;
+    }
+    .home-pointsContent {
+        margin: 10px 0 0 25px;
+    }
+    .Preply-works h3 {
+        font-size: 14px;
+    }
+    .lessons-banner h1 {
+        font-size: 20px;
+    }
+    .lessons-banner {
+        padding: 18px;
+    }
+    .home-tutor-banner {
+        padding: 25px 0 1px;
+    }
+    .faq .accordion-button {
+        font-size: 12px;
+    }
+    .faq .accordion-body {
+        font-size: 10px;
+    }
+    .theme-button1 {
+        font-size: 12px;
+    }
+    .footer-head h4 {
+        font-size: 15px;
+    }
+    .footer-head li {
+        font-size: 12px;
+        margin: 10px 0;
+    }
+}

@@ -1,0 +1,29 @@
+/* =================== Login Start css ======================= */
+.sign-content {
+    padding: 20px;
+}
+.logo-left img {
+    width: 200px;
+}
+.loginImg {
+    text-align: center;
+}
+.loginImg img {
+    width: 287px;
+    height: auto;
+}
+.logo-left {
+    padding: 0px 100px;
+}
+.logo-left p {
+    font-size: 28px;
+    margin: 30px 0;
+    color: whitesmoke;
+}
+.sign-content form label {
+    font-weight: 500;
+}
+.sign-content h5 {
+    font-size: 30px;
+    font-weight: bold;
+}

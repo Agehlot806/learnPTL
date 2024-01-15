@@ -1,0 +1,49 @@
+.details-nav {
+    text-align: center;
+}
+.details-nav li button {
+    margin: 0 35px;
+    color: var(--black-color);
+    font-weight: 600;
+}
+a.message-active {
+    color: var(--heading-color) !important;
+}
+.all-massages {
+    display: flex;
+}
+.all-massages img {
+    width: 78px;
+    margin: 0 10px 0 0;
+    border-radius: 3px;
+}
+.all-massages h4 {
+    font-size: 15px;
+    font-weight: 600;
+    margin: 0 0 2px;
+}
+.all-massages {
+    display: flex;
+    background: #e6e6e6;
+    border-radius: 3px;
+    padding: 12px;
+}
+
+.all-mass-time{
+    margin: 0 0 0 50px;
+}
+
+
+
+
+
+
+
+.message-details {
+    display: flex;
+    margin: 20px 0;
+}
+.message-details h4 {
+    margin: 0 15px 0 0;
+    font-size: 16px;
+}

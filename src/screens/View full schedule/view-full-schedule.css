@@ -1,0 +1,146 @@
+.viewFull-side {
+    background: var(--white-color);
+    padding: 16px;
+    border-radius: 3px;
+}
+.viewFull-side .teacher-price img {
+    width: 100%;
+    height: auto;
+    margin: 0 0 15px;
+}
+.viewFull-side .teacher-price h3 {
+    font-weight: 600;
+    color: var(--heading-color);
+}
+.viewFull-side .details ul {
+    padding: 0;
+}
+.viewFull-side .details ul li {
+    color: var(--body-font-color);
+    margin: 10px 0;
+}
+.viewFull-side .details ul li span {
+    margin: 0 10px;
+}
+.viewFull-side .course h4{
+    font-size: 21px;
+    margin: 30px 0 20px;
+}
+.viewFull-side .course ul {
+    padding: 0;
+}
+.viewFull-side .course ul li {
+    color: var(--body-font-color);
+    margin: 10px 0;
+}
+.viewFull-side .course ul li span {
+    margin: 0 10px;
+}
+/* === Viewteacher-details ==== */
+.Viewteacher-details {
+    background: var(--white-color);
+    padding: 22px;
+    border-radius: 3px;
+}
+
+.Viewteacher-details .nav-tabs .nav-link.active {
+    color: #5e3fd7;
+    border-color: #5e3fd7;
+    border-bottom: none;
+    border-top-width: 2px;
+    border-right-width: 2px;
+    border-left-width: 2px;
+    border-bottom-width: 0;
+}
+.Viewteacher-details .nav-tabs .nav-link {
+    color: var(--black-color);
+    font-weight: 600;
+}
+
+
+/* ======== Resume area css ======== */
+
+.resume-content {
+    display: flex;
+}
+.resume-content h6 {
+    margin: 0 35px 0 0;
+}
+.resume-content a {
+    color: green !important;
+    font-weight: 600;
+}
+.resume-content a i{
+    margin: 0 5px 0 0;
+}
+
+
+/* ====== Review ======= */
+
+.review-area .review-box {
+    background: var(--white-color);
+    box-shadow: 0 6px 21px rgba(21,3,89,.08);
+    padding: 25px;
+    text-align: center;
+    border-radius: 3px;
+}
+.review-area .review-box h1{
+    color: var(--heading-color);
+}
+.review-area .review-box a i {
+    color: #FFC014;
+    margin: 0 3px 10px;
+}
+.review-area .Review-list {
+    margin: 8px;
+}
+.review-area .Review-list .progress, .progress-stacked {
+    --bs-progress-bar-bg: #5e3fd7;
+    height: 8px;
+}
+.review-area .Review-list h6 {
+    margin: 0;
+}
+
+.review-area .Review-list a i {
+    color: #ffc014;
+    margin: 0 3px;
+}
+.review-imgComment {
+    display: flex;
+    margin: 40px 0;
+}
+.review-imgComment img {
+    width: 70px;
+    border-radius: 50%;
+    margin: 0 15px 0 0;
+}
+.review-imgComment h5 {
+    color: var(--heading-color);
+    font-size: 25px;
+    margin: 0;
+}
+.review-imgComment p {
+    margin: 0;
+}
+
+/* ==== Tutor-area ==== */
+.Tutor-area h4 {
+    color: var(--heading-color);
+}
+.Tutor-content {
+    margin: 40px 0;
+}
+.Tutor-content img {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+}
+.Tutor-content span {
+    margin: 0 20px 0 0;
+    color: var(--body-font-color);
+}
+.Tutor-content h5 {
+    margin: 10px 0;
+    color: var(--heading-color);
+}

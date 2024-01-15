@@ -1,0 +1,32 @@
+.multi-language .goog-te-gadget-simple img {
+    display: none;
+}
+
+.multi-language .VIpgJd-ZVi9od-l4eHX-hSRGPd img {
+    display: none;
+}
+a.VIpgJd-ZVi9od-l4eHX-hSRGPd {
+    display: none;
+}
+.multi-language .goog-te-gadget {
+    font-family: arial;
+    font-size: 0px;
+    color: #765ec2;
+    white-space: nowrap;
+}
+.multi-language select {
+    background: transparent;
+    border: none;
+    color: #fff !important;
+    font-weight: 500;
+    font-size: 15px;
+    font-family: 'Poppins', sans-serif;
+}
+.multi-language select:focus-visible {
+    outline: none;
+}
+
+.multi-language select option{
+    color: #000;
+    font-weight: 500;
+}

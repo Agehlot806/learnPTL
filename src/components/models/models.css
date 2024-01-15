@@ -1,0 +1,33 @@
+.modal-right {
+    margin-right: 0;
+    margin-left: auto;
+  }
+
+.teacher-tutorModel .modal-title {
+    font-size: 16px !important;
+}
+
+
+/* ======== Balance Model Area */
+
+.balance-area {
+    padding: 45px 15px;
+}
+.balance-area h6 {
+    margin: 0 0 25px;
+}
+.balance-model {
+    display: flex;
+}
+.balance-model img {
+    width: 65px;
+    height: 65px;
+    object-fit: cover;
+    border-radius: 50%;
+    margin: 0 10px 0 0;
+}
+.balance-model h3 {
+    font-size: 20px;
+    font-weight: 600;
+    margin: 0;
+}

@@ -1,0 +1,365 @@
+/* =================== Home Start css ======================= */
+.gradient-bg {
+    /* background: var(--gradient-banner-bg); */
+    height: 100%;
+    width: 100%;
+    background-blend-mode: overlay, normal, overlay, color-burn, screen, overlay, difference, difference, normal;
+    background-color: #cdc1ff;
+    background-image: linear-gradient(316deg, #cdc1ff 0%, #e5d9f2 74%);
+}
+
+.overlay-bg {
+    /* background: var(--gradient-overlay-bg); */
+    height: 100%;
+    width: 100%;
+    padding: 60px 0;
+}
+.come-for-learn-text {
+    font-weight: 600;
+    font-size: 10px;
+    line-height: 154.5%;
+    letter-spacing: .89em;
+    color: #000;
+    border-bottom: 1px solid rgba(255, 255, 255, .17);
+    width: 59%;
+    margin-bottom: 30px;
+}
+
+.come-for-learn-text span {
+    position: relative;
+    margin-right: 17px;
+}
+
+.come-for-learn-text span:after {
+    position: absolute;
+    content: "";
+    width: 7px;
+    height: 7px;
+    background-color: var(--orange-color);
+    border-radius: 50%;
+    top: 5px;
+    right: -7px;
+    -webkit-animation: flicker 3s linear infinite;
+    animation: flicker 3s linear infinite;
+}
+
+@keyframes flicker {
+
+    0%,
+    19.999%,
+    22%,
+    62.999%,
+    64%,
+    64.999%,
+    70%,
+    100% {
+        opacity: .99;
+        text-shadow: -1px -1px 0 rgba(255, 255, 255, .4), 1px -1px 0 rgba(255, 255, 255, .4), -1px 1px 0 rgba(255, 255, 255, .4), 1px 1px 0 rgba(255, 255, 255, .4), 0 -2px 8px, 0 0 2px, 0 0 5px #ff7e00, 0 0 15px #f44, 0 0 2px #ff7e00, 0 2px 3px #000;
+    }
+
+    20%,
+    21.999%,
+    63%,
+    63.999%,
+    65%,
+    69.999% {
+        opacity: .4;
+        text-shadow: none;
+    }
+}
+
+.home-heading {
+    font-weight: 300;
+    font-size: 65px;
+    line-height: 100.5%;
+    /* color: var(--white-color); */
+    color: var(--black-color);
+
+}
+
+.home-heading>span {
+    font-weight: 500;
+}
+
+.main-middle-text {
+    margin-right: 15px;
+}
+
+.home-content p {
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 154.5%;
+    color: rgba(255, 255, 255, .72);
+    color: currentcolor;
+}
+
+.home-img img {
+    width: 100%;
+}
+
+.card-homePosition {
+    position: relative;
+    top: -22px;
+}
+
+.home-points {
+    display: flex;
+    background-color: var(--white-color);
+    box-shadow: 0 6px 21px rgba(21, 3, 89, .08);
+    border-radius: 3px;
+    padding: 30px;
+    height: 100%;
+}
+
+.home-pointsContent {
+    margin: 0 0 0 25px;
+}
+
+.home-pointsContent h4 {
+    color: var(--heading-color);
+    font-weight: 600;
+    font-size: 32px;
+}
+
+.home-pointsArea {
+    position: relative;
+}
+
+.Course-main {
+    /* padding: 75px 0 0 !important; */
+}
+
+.filter-button {
+    color: var(--black-color) !important;
+    font-weight: 500;
+    margin: 0 0 15px;
+    border: none;
+}
+
+.filter-button::after {
+    content: '';
+    display: block;
+    width: 0;
+    height: 2px;
+    background: #000;
+    transition: width .3s;
+}
+
+.filter-button:hover::after {
+    width: 100%;
+    /* //transition: width .3s; */
+}
+
+.Tutors-card {
+    background: var(--white-color);
+    box-shadow: rgb(255 255 255) 0px 50px 100px -20px, rgb(255 255 255) 0px 30px 60px -30px, rgb(20 0 145) 0px 0px 6px 0px inset;
+    border-radius: 4px;
+    padding: 20px;
+    text-align: center;
+    height: 100%;
+    transition: .5s;
+}
+
+.Tutors-card:hover {
+    box-shadow: rgb(255 255 255) 0px 50px 100px -20px, rgb(20 0 146) 0px 30px 60px -30px, rgb(7 0 86) 0px 0px 6px 0px inset;
+}
+
+.Tutors-card img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin: 0 0 16px;
+    box-shadow: rgb(53 3 204) 0px 50px 100px -20px, rgb(255 255 255) 0px 30px 60px -30px, rgb(21 0 146) 0px 0px 6px 0px inset;
+}
+
+.Tutors-card h3 {
+    color: var(--heading-color);
+    font-size: 20px;
+    font-weight: 500;
+}
+
+.Tutors-card p {
+    margin: 0;
+    font-size: 12px;
+}
+
+.Tutors-card a i {
+    color: var(--star-color);
+    font-size: 18px;
+    margin: 5px 2px;
+}
+
+.Tutors-card .Tutors-membership img {
+    width: 30px;
+    height: 30px;
+    margin: 10px 3px;
+}
+
+.testimonial-item {
+    height: 100%;
+    margin: 0 25px;
+    border: 2px solid #8c77db;
+    padding: 20px;
+    border-radius: 20px;
+}
+
+.testimonial-text {
+    display: inline-flex;
+}
+
+.testimonial-text h6 {
+    color: var(--black-color);
+    font-size: 20px;
+    font-weight: 500;
+}
+
+.testimonial-text p {
+    color: var(--gray-color);
+}
+
+.testimonial-bottom-content p {
+    color: var(--gray-color);
+}
+
+.testimonial-text img {
+    margin: 5px 22px 0 0;
+    filter: brightness(1) invert(1);
+}
+
+.testimonial-item hr {
+    color: var(--white-color)fff;
+}
+
+.testimonial-bottom-content a i {
+    margin: 3px;
+    color: var(--star-color);
+}
+
+.custom-dot-list-style {
+    display: none !important;
+}
+
+.react-multiple-carousel__arrow {
+    display: none;
+}
+
+.Preply-works {
+    background: var(--white-color);
+    box-shadow: 0 1px 15px rgba(2, 2, 43, .07);
+    padding: 30px;
+    text-align: center;
+    height: 100%;
+}
+
+.Preply-works img {
+    width: 135px;
+    height: 135px;
+    object-fit: cover;
+    margin: 0 0 20px;
+    border-radius: 50%;
+}
+
+.Preply-works h3 {
+    color: var(--heading-color);
+}
+
+
+
+
+
+
+
+
+
+/* ====One to one consultation=== */
+
+
+img.teamimg {
+    margin: 8px 12px 0 0;
+}
+
+.faq-img img {
+    width: 100%;
+    height: 350px;
+    object-fit: cover;
+}
+
+.faq .accordion-button {
+    color: var(--black-color);
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.faq .accordion-button:focus {
+    outline: 0;
+    box-shadow: none;
+    background-color: #f3f3f3;
+    color: var(--theme-color);
+}
+
+/* =================== Home End css ======================= */
+
+
+
+
+/* Tutors By Language's */
+.home-tutor-banner {
+    padding: 50px 0;
+}
+
+.Tutors-Language {
+    box-shadow: rgba(136, 165, 191, 0.48) 6px 2px 16px 0px, rgba(255, 255, 255, 0.8) -6px -2px 16px 0px;
+    padding: 15px;
+    height: 100%;
+    margin: 0 10px 0 0;
+}
+
+.Tutors-Language h4 {
+    background-image: linear-gradient(316deg, #6247aa 0%, #a594f9 74%);
+    position: relative;
+    left: -35px;
+    color: #fff;
+    font-size: 22px;
+    font-weight: 700;
+    text-align: center;
+    width: 236px;
+    padding: 6px;
+}
+
+.Tutors-Language h4::after,
+.Tutors-Languageh4::before {
+    content: "";
+    border: 10px solid;
+    border-color: #a594f9 #a594f9 transparent transparent;
+    position: absolute;
+    left: 0;
+    bottom: -20px;
+}
+
+.Tutors-Language h6 {
+    margin: 0;
+    color: var(--body-font-color);
+}
+
+/*========== lessons-banner =========== */
+
+.lessons-banner {
+    background: var(--white-color);
+    text-align: center;
+    padding: 60px;
+    border-radius: 25px;
+    box-shadow: rgb(255 255 255) 0px 50px 100px -20px, rgb(255 255 255) 0px 30px 60px -30px, rgb(20 0 145) 0px 0px 6px 0px inset;
+}
+
+.lessons-banner h1 {
+    color: var(--heading-color);
+    font-size: 66px;
+    font-weight: 700;
+}
+
+.Becomeatutor-Homebg {
+    background: url(../../assets/images/banner/banner1.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
