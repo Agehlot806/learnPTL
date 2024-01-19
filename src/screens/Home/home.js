@@ -7,7 +7,7 @@ import Onetooneconsultation from '../../components/Home/one-to-one-consultation'
 import Topratedcourses from '../../components/Home/top-rated-courses';
 import HomeTestimonials from '../../components/Home/home-testimonials';
 import HomeFAQ from '../../components/Home/home-FAQ';
-import Howpreplyworks from '../../components/Home/how-preply-works';
+import HowLearnPTLworks from '../../components/Home/how-LearnPTL-works';
 import Banner from '../../components/Home/banner';
 import Lessonsbanner from '../../components/Home/lessons-banner';
 import Hometutorbanner from '../../components/Home/home-tutor-banner';
@@ -37,8 +37,8 @@ function Home() {
             {/* Testimonials Area */}
             <HomeTestimonials />
 
-            {/* How preply works Area*/}
-            <Howpreplyworks />
+            {/* How LearnPTL works Area*/}
+            <HowLearnPTLworks />
 
             {/* Lessons banner Area */}
             <Lessonsbanner />

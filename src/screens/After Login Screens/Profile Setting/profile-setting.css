@@ -1,3 +1,13 @@
+/* =========Account Area Css ================ */
+.profile-area {
+    background: var(--white-color);
+    padding: 20px;
+    border-radius: 20px;
+}
+.profile-content {
+    padding: 20px 40px;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+}
 .profile-area .nav-pills .nav-link.active {
     color: var(--white-color);
     background: linear-gradient(316deg, #6247aa 0%, #a594f9 74%);
@@ -12,25 +22,13 @@
 .profile-content h4 {
     color: var(--theme-color);
     font-weight: 600;
-    margin: 20px 0;
-}
-.profile-imgArea {
-    display: flex;
-}
-.profile-imgArea img {
-    width: 80px;
-    height: 80px;
-    border-radius: 50%;
-    object-fit: cover;
-    margin: 0 20px 0 0;
-}
-.profile-imgArea h6 {
-    color: var(--theme-color);
-}
-.profile-imgArea p {
-    margin: 0;
+    margin: 0 0 20px;
 }
 
+.profile-imgArea {
+    display: flex;
+    margin: 28px 0;
+}
 
 .profile-image {
     position: relative;
@@ -49,6 +47,7 @@
     min-width: 100px;
     border-radius: 50%;
 }
+
 .profile-image .file-uplode-btn {
     display: -webkit-box;
     display: -ms-flexbox;
@@ -66,14 +65,34 @@
     text-align: center;
     width: 36px;
     height: 36px;
-    -webkit-box-shadow: 0 0 10px rgba(179,168,168,.25);
-    box-shadow: 0 0 10px rgba(179,168,168,.25);
+    -webkit-box-shadow: 0 0 10px rgba(179, 168, 168, .25);
+    box-shadow: 0 0 10px rgba(179, 168, 168, .25);
     cursor: pointer;
     -webkit-transition: all .5s linear;
     transition: all .5s linear;
     background: var(--theme-color);
     border-radius: 50%;
 }
+
 .profile-image #fileuplode {
     display: none;
 }
+
+.profile-imgArea h6 {
+    color: var(--theme-color);
+}
+
+.profile-imgArea p {
+    margin: 0;
+}
+.profile-form label {
+    font-weight: 600;
+}
+
+.profile-content a img {
+    border: 1px solid var(--gray-color);
+    padding: 4px;
+    margin: 0 2px;
+}
+
+

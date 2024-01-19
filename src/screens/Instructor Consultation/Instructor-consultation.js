@@ -16,6 +16,7 @@ import Membership5 from '../../assets/images/icons/membership_5.png';
 import Footer from '../../directives/Footer/footer'
 import strings from '../../localzation';
 import Allfilter from '../../components/Filter/all-filter';
+import Allbg from '../../components/All bg Banner/all-bg';
 
 function Instructorconsultation() {
     const TypeOption = [
@@ -26,14 +27,9 @@ function Instructorconsultation() {
     return (
         <>
             <Header />
-            <div className='gradient-bg'>
-                <div className='overlay-bg'>
-                    <div className='all-bg'>
-                        <h1>Instructor Consultation</h1>
-                        <Link to='/'>Home</Link> <span>/ Instructor Consultation</span>
-                    </div>
-                </div>
-            </div>
+            
+            <Allbg title="Instructor Consultation" linkTo="/" linkText="Home" />
+
             <section className='section-padding'>
                 <Container>
                     <Allfilter

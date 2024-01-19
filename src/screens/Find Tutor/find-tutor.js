@@ -11,6 +11,7 @@ import Allfilter from '../../components/Filter/all-filter'
 import TeacherstutorModel from '../../components/models/teachers-tutor-model'
 import Button from '../../components/Button'
 import Getstarted from '../Home tutors/get-started'
+import Allbg from '../../components/All bg Banner/all-bg'
 
 
 function Findtutor() {
@@ -116,14 +117,9 @@ function Findtutor() {
     return (
         <>
             <Header />
-            <div className='gradient-bg'>
-                <div className='overlay-bg'>
-                    <div className='all-bg'>
-                        <h1>Find Tutor</h1>
-                        <Link>Home</Link> <span>/ Find Tutor</span>
-                    </div>
-                </div>
-            </div>
+            
+            <Allbg title="Find Tutor" linkTo="/" linkText="Home" />
+
             <Getstarted />
             <section className='section-padding'>
                 <Container>
@@ -161,7 +157,7 @@ function Findtutor() {
                                         <p>{renderTutorExprience(tutor.Exprience)}</p>
                                         <div>
                                             {[...Array(5)].map((_, i) => (
-                                                <a key={i}><i className="fa fa-star" /></a>
+                                                <a key={i}><i className="fa fa-star" style={{ color: '#ffc014', marginLeft: "4px" }}/></a>
                                             ))}
                                         </div>
                                         <div className='text-center'>

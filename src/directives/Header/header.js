@@ -56,9 +56,9 @@ function Header() {
                         <NavDropdown className='profile-icon' title={<img src={Img1} alt="Currency" />}>
                             <NavDropdown.Item><Link to="/find-tutor">Home</Link></NavDropdown.Item>
                             <NavDropdown.Item><Link to="/message">Messages</Link></NavDropdown.Item>
-                            <NavDropdown.Item><Link to="">My Lessons</Link></NavDropdown.Item>
+                            <NavDropdown.Item><Link to="/my-learning">My Learning</Link></NavDropdown.Item>
                             <NavDropdown.Item><Link to="/wishlist">Saved Tutor</Link></NavDropdown.Item>
-                            <NavDropdown.Item><Link to="">invite A Friend</Link></NavDropdown.Item>
+                            <NavDropdown.Item><Link to="/invite-a-friend">invite A Friend</Link></NavDropdown.Item>
                             <NavDropdown.Item><Link to="/profile-setting">Profile Setting</Link></NavDropdown.Item>
                             <NavDropdown.Item><Link to="">Help</Link></NavDropdown.Item>
                             <hr />

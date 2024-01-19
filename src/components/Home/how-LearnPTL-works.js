@@ -4,7 +4,7 @@ import Bassel1 from '../../assets/images/img/Bassel-1.avif'
 import Bassel2 from '../../assets/images/img/Bassel-2.avif'
 import Bassel3 from '../../assets/images/img/Bassel-3.avif'
 
-function Howpreplyworks() {
+function HowLearnPTLworks() {
     return (
         <section className='section-padding'>
             <Container>
@@ -13,21 +13,21 @@ function Howpreplyworks() {
                 </div>
                 <Row className='justify-content-center'>
                     <Col lg={4} sm={6} className='mb-4'>
-                        <div className='Preply-works'>
+                        <div className='LearnPTL-works'>
                             <img src={Bassel1} />
                             <h3>Find your tutor.</h3>
                             <p>We’ll connect you with a tutor who will motivate, challenge, and inspire you.</p>
                         </div>
                     </Col>
                     <Col lg={4} sm={6} className='mb-4'>
-                        <div className='Preply-works'>
+                        <div className='LearnPTL-works'>
                             <img src={Bassel2} />
                             <h3>Start learning.</h3>
                             <p>Your tutor will guide the way through your first lesson and help you plan your next steps.</p>
                         </div>
                     </Col>
                     <Col lg={4} sm={6} className='mb-4'>
-                        <div className='Preply-works'>
+                        <div className='LearnPTL-works'>
                             <img src={Bassel3} />
                             <h3>Speak. Read. Write. Repeat.</h3>
                             <p>Choose how many lessons you want to take each week and get ready to reach your goals!</p>
@@ -39,4 +39,4 @@ function Howpreplyworks() {
     )
 }
 
-export default Howpreplyworks
+export default HowLearnPTLworks

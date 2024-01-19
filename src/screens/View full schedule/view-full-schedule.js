@@ -7,19 +7,14 @@ import { Accordion, Col, Container, Row, Tab, Tabs } from 'react-bootstrap'
 import Img5 from '../../assets/images/img/img5.jpg'
 import Button from '../../components/Button'
 import strings from '../../localzation'
+import Allbg from '../../components/All bg Banner/all-bg'
 
 function Viewfullschedule() {
     return (
         <>
             <Header />
-            <div className='gradient-bg'>
-                <div className='overlay-bg'>
-                    <div className='all-bg'>
-                        <h1>View Full Schedule</h1>
-                        <Link to='/'>Home</Link> <span>/ View Full Schedule</span>
-                    </div>
-                </div>
-            </div>
+           
+            <Allbg title="View Full Schedule" linkTo="/" linkText="Home" />
 
             <section className='section-padding'>
                 <Container>
@@ -68,7 +63,7 @@ function Viewfullschedule() {
                                                         <h1>5.0</h1>
                                                         <div>
                                                             {[...Array(5)].map((_, i) => (
-                                                                <a key={i}><i className="fa fa-star" /></a>
+                                                                <a key={i}><i className="fa fa-star" style={{ color: '#ffc014', marginLeft: "4px" }}/></a>
                                                             ))}
                                                         </div>
                                                         <p>1 Reviews</p>
@@ -83,7 +78,7 @@ function Viewfullschedule() {
                                                             <Col lg={4}>
                                                                 <div>
                                                                     {[...Array(5)].map((_, i) => (
-                                                                        <a key={i}><i className="fa fa-star" /></a>
+                                                                        <a key={i}><i className="fa fa-star" style={{ color: '#ffc014', marginLeft: "4px" }}/></a>
                                                                     ))}
                                                                 </div>
                                                             </Col>
@@ -106,7 +101,7 @@ function Viewfullschedule() {
                                                             <Col lg={4}>
                                                                 <div>
                                                                     {[...Array(4)].map((_, i) => (
-                                                                        <a key={i}><i className="fa fa-star" /></a>
+                                                                        <a key={i}><i className="fa fa-star" style={{ color: '#ffc014', marginLeft: "4px" }}/></a>
                                                                     ))}
                                                                 </div>
                                                             </Col>
@@ -129,7 +124,7 @@ function Viewfullschedule() {
                                                             <Col lg={4}>
                                                                 <div>
                                                                     {[...Array(3)].map((_, i) => (
-                                                                        <a key={i}><i className="fa fa-star" /></a>
+                                                                        <a key={i}><i className="fa fa-star" style={{ color: '#ffc014', marginLeft: "4px" }}/></a>
                                                                     ))}
                                                                 </div>
                                                             </Col>
@@ -152,7 +147,7 @@ function Viewfullschedule() {
                                                             <Col lg={4}>
                                                                 <div>
                                                                     {[...Array(2)].map((_, i) => (
-                                                                        <a key={i}><i className="fa fa-star" /></a>
+                                                                        <a key={i}><i className="fa fa-star" style={{ color: '#ffc014', marginLeft: "4px" }}/></a>
                                                                     ))}
                                                                 </div>
                                                             </Col>
@@ -175,7 +170,7 @@ function Viewfullschedule() {
                                                             <Col lg={4}>
                                                                 <div>
                                                                     {[...Array(1)].map((_, i) => (
-                                                                        <a key={i}><i className="fa fa-star" /></a>
+                                                                        <a key={i}><i className="fa fa-star" style={{ color: '#ffc014', marginLeft: "4px" }}/></a>
                                                                     ))}
                                                                 </div>
                                                             </Col>
@@ -200,7 +195,7 @@ function Viewfullschedule() {
                                                     <h5>Will Smith</h5>
                                                     <p>1 year ago</p>
                                                     {[...Array(5)].map((_, i) => (
-                                                        <a key={i}><i className="fa fa-star" /></a>
+                                                        <a key={i}><i className="fa fa-star" style={{ color: '#ffc014', marginLeft: "4px" }}/></a>
                                                     ))}
                                                     <p>Isabella is an excellent tutor, i really enjoy lessons with her. She is friendly, funny, beautiful, smart, really easy to work with her and makes me so comfortable to talk. If i dont understand something, she explains things to me in an understandable manner. Her communication skills are very good. Thank you Isabella!</p>
                                                 </div>
@@ -216,7 +211,7 @@ function Viewfullschedule() {
                                                 <h5>Will Smith</h5>
                                                 <p>1 year ago</p>
                                                 {[...Array(5)].map((_, i) => (
-                                                    <a key={i}><i className="fa fa-star" /></a>
+                                                    <a key={i}><i className="fa fa-star" style={{ color: '#ffc014', marginLeft: "4px" }}/></a>
                                                 ))}
                                                 <p>Isabella is an excellent tutor, i really enjoy lessons with her. She is friendly, funny, beautiful, smart, really easy to work with her and makes me so comfortable to talk. If i dont understand something, she explains things to me in an understandable manner. </p>
                                             </div>

@@ -19,7 +19,7 @@ function Notification(props) {
                 <Modal.Body className='mt-5 text-center'>
                 <i className="fa fa-bell-o mb-2" style={{ fontSize: '30px' }}/>
                     <h4>Don't miss out on updates!</h4>
-                    <p>Keep an eye on this feed for updates about your learning journey on Preply</p>
+                    <p>Keep an eye on this feed for updates about your learning journey on LearnPTL</p>
                 </Modal.Body>
             </Modal>
         </>

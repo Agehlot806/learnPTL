@@ -12,7 +12,7 @@ function Hometutorbanner() {
                         <div className='home-tutor-banner'>
                             <div className='text-center main-heading'>
                                 <h1>{strings.Becomeatutor}</h1>
-                                <p>Earn money sharing your expert knowledge with students. Sign up to start <br /> tutoring  online with Preply.</p>
+                                <p>Earn money sharing your expert knowledge with students. Sign up to start <br /> tutoring  online with LearnPTL.</p>
                                 <Button className="theme-button1 mt-1" hoverColor="theme-button1" label={strings.Becomeatutor} icon="fa fa-long-arrow-right" iconPosition="right" />
                             </div>
                         </div>

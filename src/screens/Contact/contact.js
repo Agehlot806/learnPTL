@@ -6,19 +6,14 @@ import Footer from '../../directives/Footer/footer'
 import { Link } from 'react-router-dom'
 import { Col, Container, Row } from 'react-bootstrap'
 import strings from '../../localzation'
+import Allbg from '../../components/All bg Banner/all-bg';
 
 function Contact() {
     return (
         <>
             <Header />
-            <div className='gradient-bg'>
-                <div className='overlay-bg'>
-                    <div className='all-bg'>
-                        <h1>Contact Us</h1>
-                        <Link to='/'>Home</Link> <span>/ Contact Us</span>
-                    </div>
-                </div>
-            </div>
+          
+            <Allbg title="Contact Us" linkTo="/" linkText="Home"/>
 
             <section className='section-padding'>
                 <Container>

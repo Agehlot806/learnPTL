@@ -3,19 +3,13 @@ import Header from '../../directives/Header/header'
 import Footer from '../../directives/Footer/footer'
 import { Link } from 'react-router-dom'
 import { Col, Container, Row } from 'react-bootstrap'
+import Allbg from '../../components/All bg Banner/all-bg'
 
 function Alltutors() {
     return (
         <>
             <Header />
-            <div className='gradient-bg'>
-                <div className='overlay-bg'>
-                    <div className='all-bg'>
-                        <h1>All Tutors Language</h1>
-                        <Link to='/'>Home</Link> <span>/ All Tutors Language</span>
-                    </div>
-                </div>
-            </div>
+            <Allbg title="All Tutors Language" linkTo="/" linkText="Home"/>
             <section className='section-padding'>
                 <Container>
                     <Row>

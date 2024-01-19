@@ -19,6 +19,10 @@ import Viewfullschedule from "../screens/View full schedule/view-full-schedule";
 import Message from "../screens/After Login Screens/messages/message";
 import Wishlist from "../screens/After Login Screens/Wishlist/wishlist";
 import Profilesetting from "../screens/After Login Screens/Profile Setting/profile-setting";
+import Forgotpassword from "../screens/Forgot password/Forgot-password";
+import Mylearning from "../screens/After Login Screens/My Learning/my-learning";
+import Mycourse from "../screens/After Login Screens/My Learning/my-course";
+import InviteAFriend from "../screens/After Login Screens/invite A Friend/invite-A-Friend";
 
 
 // ScrollToTop component
@@ -41,6 +45,7 @@ function NavRoutes() {
           <Route exact path="/" element={< Home />} />
           <Route exact path="/login" element={< Login />} />
           <Route exact path="/sign-up" element={< Signup />} />
+          <Route exact path="/forgot-password" element={< Forgotpassword />} />
           <Route exact path="/become-a-tutor" element={< BecomeATutor />} />
           <Route exact path="/find-tutor" element={< Findtutor />} />
           <Route exact path="/instructor-consultation" element={< Instructorconsultation />} />
@@ -58,8 +63,11 @@ function NavRoutes() {
 
           {/* ===== After Login screens =============== */}
           <Route exact path="/message" element={< Message />} />
+          <Route exact path="/my-learning" element={< Mylearning />} />
+          <Route exact path="/my-course" element={< Mycourse />} />
           <Route exact path="/wishlist" element={< Wishlist />} />
           <Route exact path="/profile-setting" element={< Profilesetting />} />
+          <Route exact path="/invite-a-friend" element={< InviteAFriend />} />
 
 
           {/*  Book schedule Model */}

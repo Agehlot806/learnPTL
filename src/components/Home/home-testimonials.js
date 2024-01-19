@@ -59,7 +59,7 @@ function HomeTestimonials(props) {
                             </div>
                             <div>
                                 <h6>Filip</h6>
-                                <p >English learner on Preply</p>
+                                <p >English learner on LearnPTL</p>
                             </div>
                         </div>
                         <hr />
@@ -82,7 +82,7 @@ function HomeTestimonials(props) {
                             </div>
                             <div>
                                 <h6>Justyna</h6>
-                                <p >English learner on Preply</p>
+                                <p >English learner on LearnPTL</p>
                             </div>
                         </div>
                         <hr />
@@ -105,7 +105,7 @@ function HomeTestimonials(props) {
                             </div>
                             <div>
                                 <h6>Filip</h6>
-                                <p >English learner on Preply</p>
+                                <p >English learner on LearnPTL</p>
                             </div>
                         </div>
                         <hr />
@@ -128,7 +128,7 @@ function HomeTestimonials(props) {
                             </div>
                             <div>
                                 <h6>Ismael</h6>
-                                <p >English learner on Preply</p>
+                                <p >English learner on LearnPTL</p>
                             </div>
                         </div>
                         <hr />

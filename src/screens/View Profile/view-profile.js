@@ -22,6 +22,7 @@ import Meeting from '../../assets/images/icons/meeting.png';
 import Star from '../../assets/images/icons/star.png';
 import Web from '../../assets/images/icons/web.png';
 import Bookschedule from '../../components/models/book-schedule';
+import Allbg from '../../components/All bg Banner/all-bg'
 
 function Viewprofile() {
     const [modalShow, setModalShow] = React.useState(false);
@@ -30,14 +31,8 @@ function Viewprofile() {
     return (
         <>
             <Header />
-            <div className='gradient-bg'>
-                <div className='overlay-bg'>
-                    <div className='all-bg'>
-                        <h1>About Instructor</h1>
-                        <Link to='/'>Home</Link> <span>/ About Instructor</span>
-                    </div>
-                </div>
-            </div>
+           
+            <Allbg title="About Instructor" linkTo="/" linkText="Home" />
 
             <section className='section-padding'>
                 <Container>

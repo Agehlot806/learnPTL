@@ -280,4 +280,29 @@ input:focus-visible {
     margin: 0;
 }
 
-
+.form-check-input:checked {
+    background-color: var(--theme-color);
+    border-color: #a594f9;
+}
+.progress-bar {
+    background-color: var(--theme-color);
+}
+.progress, .progress-stacked {
+    --bs-progress-height: 8px;
+}
+.accordion-button:focus {
+    border-color: none;
+    box-shadow: none;
+}
+.accordion-button:not(.collapsed) {
+    background-image: linear-gradient(316deg, #cdc1ff 0%, #e5d9f2 74%);
+}
+.accordion-item {
+    margin: 20px 0;
+}
+.accordion {
+    --bs-accordion-btn-icon: url(../images/icons/chevron.png);
+}
+.accordion-button:not(.collapsed)::after {
+    background-image: auto;
+}

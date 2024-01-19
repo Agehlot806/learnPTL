@@ -73,7 +73,7 @@ function Wishlist() {
                     <p>{renderTutorExprience(tutor.Exprience)}</p>
                     <div>
                       {[...Array(5)].map((_, i) => (
-                        <a key={i}><i className="fa fa-star" /></a>
+                        <a key={i}><i className="fa fa-star" style={{ color: '#ffc014', marginLeft: "4px" }}/></a>
                       ))}
                     </div>
                     <div className='text-center'>

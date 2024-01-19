@@ -24,6 +24,7 @@ let strings = new LocalizedStrings({
         BookSchedule: "Book Schedule",
         ViewProfile: "View Profile",
         ViewAll: "View All",
+        View: "View",
         MakePayment: "Make Payment",
         Filter: "Filter",
         Continue:"Continue",
@@ -35,6 +36,7 @@ let strings = new LocalizedStrings({
         Becomeatutor: "Become a tutor",
         Booktriallesson: "Book trial lesson",
         SaveChanges: "Save Changes",
+
     },
 });
 export default strings;

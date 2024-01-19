@@ -7,19 +7,14 @@ import { Col, Container, Form, InputGroup, Row } from 'react-bootstrap'
 import Blog1 from '../../assets/images/img/blog1.jpg';
 import Blog2 from '../../assets/images/img/blog2.jpg';
 import Blog3 from '../../assets/images/img/blog3.jpg';
+import Allbg from '../../components/All bg Banner/all-bg'
 
 function Blogdetails() {
     return (
         <>
             <Header />
-            <div className='gradient-bg'>
-                <div className='overlay-bg'>
-                    <div className='all-bg'>
-                        <h1>Blog Details</h1>
-                        <Link to='/'>Home</Link> <span>/ Blog Details</span>
-                    </div>
-                </div>
-            </div>
+        
+            <Allbg title="Blog Details" linkTo="/" linkText="Home"/>
 
             <section className='section-padding'>
                 <Container>
