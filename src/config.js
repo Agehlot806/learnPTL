@@ -1,1 +1,1 @@
-export const BASE_URL = "https://storyfy.techpanda.art/api";
+export const BASE_URL = "https://storyfy.webzproject.shop";
