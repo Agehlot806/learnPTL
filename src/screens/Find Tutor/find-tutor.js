@@ -10,8 +10,8 @@ import Footer from '../../directives/Footer/footer'
 import Allfilter from '../../components/Filter/all-filter'
 import TeacherstutorModel from '../../components/models/teachers-tutor-model'
 import Button from '../../components/Button'
-import Getstarted from '../Home tutors/get-started'
 import Allbg from '../../components/All bg Banner/all-bg'
+import FindgetStarted from '../Home tutors/find-getStarted'
 
 
 function Findtutor() {
@@ -120,7 +120,7 @@ function Findtutor() {
             
             <Allbg title="Find Tutor" linkTo="/" linkText="Home" />
 
-            <Getstarted />
+            <FindgetStarted />
             <section className='section-padding'>
                 <Container>
                     <Allfilter

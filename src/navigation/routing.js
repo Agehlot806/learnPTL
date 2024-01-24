@@ -23,6 +23,7 @@ import Forgotpassword from "../screens/Forgot password/Forgot-password";
 import Mylearning from "../screens/After Login Screens/My Learning/my-learning";
 import Mycourse from "../screens/After Login Screens/My Learning/my-course";
 import InviteAFriend from "../screens/After Login Screens/invite A Friend/invite-A-Friend";
+import FindgetStarted from "../screens/Home tutors/find-getStarted";
 
 
 // ScrollToTop component
@@ -55,6 +56,7 @@ function NavRoutes() {
           <Route exact path="/faq" element={< Faq />} />
           <Route exact path="/contact" element={< Contact />} />
           <Route exact path="/get-started" element={< Getstarted />} />
+          <Route exact path="/find-getStarted" element={< FindgetStarted />} />
           <Route exact path="/all-tutors" element={< Alltutors />} />
           <Route exact path="/view-full-schedule" element={< Viewfullschedule />} />
 

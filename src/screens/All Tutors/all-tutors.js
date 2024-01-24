@@ -14,7 +14,7 @@ function Alltutors() {
                 <Container>
                     <Row>
                         <Col lg={3} sm={3} xs={6} className='mb-4'>
-                            <Link to="/find-tutors">
+                            <Link to="/find-getStarted">
                                 <div className="Tutors-Language">
                                     <h4>English tutors</h4>
                                     <Row>

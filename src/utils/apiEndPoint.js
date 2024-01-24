@@ -1,7 +1,7 @@
 export const ApiEndPoints = {
 
-  //   REGISTRATION API
-  REGISTRATION_API: "REGISTRATION_API",
+  // REGISTRATION API
+  REGISTRATION_API: "/register",
 
   // LOGIN API
   LOGIN_API: '/login',

@@ -30,7 +30,7 @@ function Tutorsbylanguage() {
 
                         <Row>
                             <Col lg={3} sm={4} xs={6} className='mb-4'>
-                                <Link to="/get-started">
+                                <Link to="/find-getStarted">
                                     <div className="Tutors-Language">
                                         <h4>English tutors</h4>
                                         <Row>
@@ -44,7 +44,7 @@ function Tutorsbylanguage() {
                                 </Link>
                             </Col>
                             <Col lg={3} sm={4} xs={6} className='mb-4'>
-                                <Link to="/get-started">
+                                <Link to="/find-getStarted">
                                     <div className="Tutors-Language">
                                         <h4>Spanish tutors</h4>
                                         <Row>
@@ -59,7 +59,7 @@ function Tutorsbylanguage() {
                                 </Link>
                             </Col>
                             <Col lg={3} sm={4} xs={6} className='mb-4'>
-                                <Link to="/get-started">
+                                <Link to="/find-getStarted">
                                     <div className="Tutors-Language">
                                         <h4>French tutors</h4>
                                         <Row>
@@ -74,7 +74,7 @@ function Tutorsbylanguage() {
                                 </Link>
                             </Col>
                             <Col lg={3} sm={4} xs={6} className='mb-4'>
-                                <Link to="/get-started">
+                                <Link to="/find-getStarted">
                                     <div className="Tutors-Language">
                                         <h4>German tutors</h4>
                                         <Row>
@@ -89,7 +89,7 @@ function Tutorsbylanguage() {
                                 </Link>
                             </Col>
                             <Col lg={3} sm={4} xs={6} className='mb-4'>
-                                <Link to="/get-started">
+                                <Link to="/find-getStarted">
                                     <div className="Tutors-Language">
                                         <h4>Italian tutors</h4>
                                         <Row>
@@ -104,7 +104,7 @@ function Tutorsbylanguage() {
                                 </Link>
                             </Col>
                             <Col lg={3} sm={4} xs={6} className='mb-4'>
-                                <Link to="/get-started">
+                                <Link to="/find-getStarted">
                                     <div className="Tutors-Language">
                                         <h4>Chinese tutors</h4>
                                         <Row>
@@ -119,7 +119,7 @@ function Tutorsbylanguage() {
                                 </Link>
                             </Col>
                             <Col lg={3} sm={4} xs={6} className='mb-4'>
-                                <Link to="/get-started">
+                                <Link to="/find-getStarted">
                                     <div className="Tutors-Language">
                                         <h4>Arabic tutors</h4>
                                         <Row>
@@ -134,7 +134,7 @@ function Tutorsbylanguage() {
                                 </Link>
                             </Col>
                             <Col lg={3} sm={4} xs={6} className='mb-4'>
-                                <Link to="/get-started">
+                                <Link to="/find-getStarted">
                                     <div className="Tutors-Language">
                                         <h4>Japanese tutors</h4>
                                         <Row>
