@@ -9,11 +9,9 @@ import Button from "../../components/Button";
 import { useDispatch, useSelector } from "react-redux";
 import { userLogin } from "../../redux/action/actionCreators";
 import { toast } from "react-toastify";
-import { useNavigate } from "react-router-dom";
 
 function Login() {
-  const navigate = useNavigate();
-  // const auth = useSelector((state) => state.auth);
+  //   const auth = useSelector((state) => state.auth);
   const [showPassword, setShowPassword] = useState(false);
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.auth);
@@ -41,14 +39,11 @@ function Login() {
 
   useEffect(() => {
     if (user?.success) {
-      localStorage.setItem("token", user.token);
-      localStorage.setItem("userid", user.userid);
       toast.success(user.message);
-      navigate("/");
     } else if (user?.success === false) {
       toast.error(user.message);
     }
-  }, [user, navigate]);
+  }, [user]);
 
   return (
     <>

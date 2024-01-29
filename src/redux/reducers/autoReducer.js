@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+// autoReducer file
 import {
   LOGIN_SUCCESS,
   LOGIN_FAILURE,
@@ -6,7 +6,9 @@ import {
   SET_AUTH_TOKEN,
   REMOVE_AUTH_TOKEN,
   REGISTER_SUCCESS,
-  REGISTER_FAILURE
+  REGISTER_FAILURE,
+  FETCH_LATEST_SUCCESS,
+  FETCH_LATEST_FAILURE,
 } from "../action/actionTypes";
 
 const initialState = {
@@ -14,8 +16,8 @@ const initialState = {
   user: null,
   token: null,
   users: null,
+  products: null,
 };
-
 
 const authReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -38,8 +40,6 @@ const authReducer = (state = initialState, action) => {
     case LOGOUT:
       // toast.info("Logged out successfully.");s
       return initialState;
-
-
 
     case REGISTER_SUCCESS:
       return {
