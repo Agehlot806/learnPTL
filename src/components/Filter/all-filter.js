@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Accordion, Col, Form, Row } from "react-bootstrap";
 import Button from "../../components/Button";
 import strings from "../../localzation";
@@ -48,6 +48,51 @@ function Allfilter(props) {
     );
   };
 
+  const [selectedTutorCategory, setSelectedTutorCategory] = useState("");
+  const [selectedTutorCountry, setSelectedTutorCountry] = useState("");
+  const [selectedTutorSpeak, setSelectedTutorSpeak] = useState("");
+  const [selectedTutorSpecialties, setSelectedTutorSpecialties] = useState("");
+
+  // Function to handle tutor category selection
+  const handleTutorCategorySelect = (category) => {
+    setSelectedTutorCategory(category);
+  };
+  const handleTutorCountrySelect = (country) => {
+    setSelectedTutorCountry(country);
+  };
+  const handleTutorSpeakSelect = (speak) => {
+    setSelectedTutorSpeak(speak);
+  };
+  const handleTutorSpecialtiesSelect = (specialties) => {
+    setSelectedTutorSpecialties(specialties);
+  };
+
+  // Filter products based on selected tutor category
+  useEffect(() => {
+    const filteredProducts = props.products
+      ? props.products.filter(
+          (product) => product.categories === selectedTutorCategory
+        ) &&
+        props.products.filter(
+          (product) => product.country === selectedTutorCountry
+        ) &&
+        props.products.filter(
+          (product) => product.speak === selectedTutorSpeak
+        ) &&
+        props.products.filter(
+          (product) => product.specialties === selectedTutorSpecialties
+        )
+      : [];
+    props.onFilterChange(filteredProducts); // Pass filtered products to the parent component
+  }, [
+    selectedTutorCategory,
+    selectedTutorCountry,
+    selectedTutorSpeak,
+    selectedTutorSpecialties,
+    props.products,
+    props.onFilterChange,
+  ]);
+  // console.log("filteredProducts: ", filteredProducts);
   return (
     <div className="filter-All">
       <Button
@@ -67,6 +112,8 @@ function Allfilter(props) {
                     {Array.isArray(props?.iwanttolearnList) &&
                       props?.iwanttolearnList.map((option, index) => (
                         <div key={index} className="form-group form-check">
+                          onClick=
+                          {() => handleTutorCategorySelect(option.tutors)}
                           <input
                             type="checkbox"
                             className="form-check-input"
@@ -103,7 +150,13 @@ function Allfilter(props) {
                   <div className="filter-options">
                     {Array.isArray(props?.countryOptions) &&
                       props.countryOptions.map((option, index) => (
-                        <div key={index} className="form-group form-check">
+                        <div
+                          key={index}
+                          className="form-group form-check"
+                          onClick={() =>
+                            handleTutorCountrySelect(option.country)
+                          }
+                        >
                           <input
                             type="checkbox"
                             className="form-check-input"
@@ -130,7 +183,13 @@ function Allfilter(props) {
                   <div className="filter-options">
                     {Array.isArray(props?.specialtiesOptions) &&
                       props.specialtiesOptions.map((option, index) => (
-                        <div key={index} className="form-group form-check">
+                        <div
+                          key={index}
+                          className="form-group form-check"
+                          onClick={() =>
+                            handleTutorSpecialtiesSelect(option.specialties)
+                          }
+                        >
                           <input
                             type="checkbox"
                             className="form-check-input"
@@ -157,7 +216,11 @@ function Allfilter(props) {
                   <div className="filter-options">
                     {Array.isArray(props?.alsoSpeaksOptions) &&
                       props.alsoSpeaksOptions.map((option, index) => (
-                        <div key={index} className="form-group form-check">
+                        <div
+                          key={index}
+                          className="form-group form-check"
+                          onClick={() => handleTutorSpeakSelect(option.speak)}
+                        >
                           <input
                             type="checkbox"
                             className="form-check-input"
@@ -335,6 +398,15 @@ function Allfilter(props) {
             )}
           </Col>
         </Row>
+        {/* Display filtered products */}
+        {/* {filteredProducts.map((product) => (
+          <div key={product.id}>
+            console.log('aja: ', product);
+            <h1>new</h1>
+            <h4>{product.name}</h4>
+          </div>
+        ))} */}
+        {/* Display other product details */}
         <Sortby />
       </Accordion>
     </div>

@@ -37,6 +37,17 @@ function Findtutor() {
   //   const { createspeaker } = useSelector((state) => state.createspeaker);
 
   console.log("ratings: ", ratings);
+  const [filteredProducts, setFilteredProducts] = useState([]);
+  const [currentItems, setCurrentItems] = useState([]);
+  // Function to receive filtered products from Allfilter component
+  const handleFilterChange = (filtered, products) => {
+    // setFilteredProducts(filtered);
+    if (filteredProducts == tutors) {
+      setFilteredProducts(products);
+    } else {
+      setFilteredProducts(filtered);
+    }
+  };
 
   useEffect(() => {
     dispatch(fetchLatest(products));
@@ -182,9 +193,20 @@ function Findtutor() {
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
   //   const currentItems = products.slice(indexOfFirstItem, indexOfLastItem);
-  const currentItems = products
-    ? products.slice(indexOfFirstItem, indexOfLastItem)
-    : [];
+  // const  currentItems = products
+  //   ? products.slice(indexOfFirstItem, indexOfLastItem)
+  //   : [];
+  const paginatedItems = currentItems.slice(indexOfFirstItem, indexOfLastItem);
+
+  useEffect(() => {
+    // Initially set the current items to products
+    setCurrentItems(products);
+  }, [products]);
+
+  useEffect(() => {
+    // Update current items when filters change
+    setCurrentItems(filteredProducts.length > 0 ? filteredProducts : products);
+  }, [filteredProducts, products]);
 
   const paginate = (pageNumber) => {
     setCurrentPage(pageNumber);
@@ -211,18 +233,39 @@ function Findtutor() {
             Specialties={"Specialties"}
             nativeSpeaker={"Native Speaker"}
             tutorcategories={"Tutor Categories"}
+            onFilterChange={handleFilterChange}
+            products={products}
+            filteredProducts={filteredProducts}
           />
         </Container>
       </section>
       <section className="section-padding">
         <Container>
           <div className="filter-cards">
+            {/* <label>
+              Filter 1
+              <input
+                type="checkbox"
+                checked={filter1}
+                onChange={handleFilter1Change}
+              />
+            </label>
+
+            <label>
+              Filter 2
+              <input
+                type="checkbox"
+                checked={filter2}
+                onChange={handleFilter2Change}
+              />
+            </label>
+
+            <ul>{generateItemList()}</ul> */}
             <Row>
-              {currentItems &&
-                currentItems.map((tutor, index) => (
+              {paginatedItems &&
+                paginatedItems.map((tutor, index) => (
                   <Col lg={4} className="mb-4">
                     <div className="course-cards" key={tutor?.id}>
-                      {/* <img src={https://storyfy.webzproject.shop/uploads/ +tutor?.image} alt={tutor?.name} /> */}
                       <img
                         src={
                           "https://storyfy.webzproject.shop/uploads/" +
