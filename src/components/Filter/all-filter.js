@@ -111,9 +111,13 @@ function Allfilter(props) {
                   <div className="filter-options">
                     {Array.isArray(props?.iwanttolearnList) &&
                       props?.iwanttolearnList.map((option, index) => (
-                        <div key={index} className="form-group form-check">
-                          onClick=
-                          {() => handleTutorCategorySelect(option.tutors)}
+                        <div
+                          key={index}
+                          className="form-group form-check"
+                          onClick={() =>
+                            handleTutorCategorySelect(option.tutors)
+                          }
+                        >
                           <input
                             type="checkbox"
                             className="form-check-input"
