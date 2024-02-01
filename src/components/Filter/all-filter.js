@@ -71,27 +71,20 @@ function Allfilter(props) {
   useEffect(() => {
     const filteredProducts = props.products
       ? props.products.filter(
-          (product) => product.categories === selectedTutorCategory
-        ) &&
+          (product) => product.categories == selectedTutorCategory
+        ) ||
         props.products.filter(
-          (product) => product.country === selectedTutorCountry
-        ) &&
+          (product) => product.country == selectedTutorCountry
+        ) ||
         props.products.filter(
-          (product) => product.speak === selectedTutorSpeak
-        ) &&
+          (product) => product.speak == selectedTutorSpeak
+        ) ||
         props.products.filter(
-          (product) => product.specialties === selectedTutorSpecialties
+          (product) => product.specialties == selectedTutorSpecialties
         )
       : [];
     props.onFilterChange(filteredProducts); // Pass filtered products to the parent component
-  }, [
-    selectedTutorCategory,
-    selectedTutorCountry,
-    selectedTutorSpeak,
-    selectedTutorSpecialties,
-    props.products,
-    props.onFilterChange,
-  ]);
+  }, [props.products, props.onFilterChange]);
   // console.log("filteredProducts: ", filteredProducts);
   return (
     <div className="filter-All">

@@ -24,7 +24,7 @@ import Mylearning from "../screens/After Login Screens/My Learning/my-learning";
 import Mycourse from "../screens/After Login Screens/My Learning/my-course";
 import InviteAFriend from "../screens/After Login Screens/invite A Friend/invite-A-Friend";
 import FindgetStarted from "../screens/Home tutors/find-getStarted";
-
+import RegisterTutore from "../screens/Become a tutor/Register-tutore";
 
 // ScrollToTop component
 const ScrollToTop = () => {
@@ -41,40 +41,44 @@ function NavRoutes() {
   return (
     <>
       <BrowserRouter>
-      <ScrollToTop /> {/* Add ScrollToTop component here */}
+        <ScrollToTop /> {/* Add ScrollToTop component here */}
         <Routes>
-          <Route exact path="/" element={< Home />} />
-          <Route exact path="/login" element={< Login />} />
-          <Route exact path="/sign-up" element={< Signup />} />
-          <Route exact path="/forgot-password" element={< Forgotpassword />} />
-          <Route exact path="/become-a-tutor" element={< BecomeATutor />} />
-          <Route exact path="/find-tutor" element={< Findtutor />} />
-          <Route exact path="/instructor-consultation" element={< Instructorconsultation />} />
-          <Route exact path="/view-profile" element={< Viewprofile />} />
-          <Route exact path="/blog" element={< Blog />} />
-          <Route exact path="/blog-details" element={< Blogdetails />} />
-          <Route exact path="/faq" element={< Faq />} />
-          <Route exact path="/contact" element={< Contact />} />
-          <Route exact path="/get-started" element={< Getstarted />} />
-          <Route exact path="/find-getStarted" element={< FindgetStarted />} />
-          <Route exact path="/all-tutors" element={< Alltutors />} />
-          <Route exact path="/view-full-schedule" element={< Viewfullschedule />} />
-
-
-
+          <Route exact path="/" element={<Home />} />
+          <Route exact path="/login" element={<Login />} />
+          <Route exact path="/sign-up" element={<Signup />} />
+          <Route exact path="/forgot-password" element={<Forgotpassword />} />
+          <Route exact path="/become-a-tutor" element={<BecomeATutor />} />
+          <Route exact path="/register-a-tutor" element={<RegisterTutore />} />
+          <Route exact path="/find-tutor" element={<Findtutor />} />
+          <Route
+            exact
+            path="/instructor-consultation"
+            element={<Instructorconsultation />}
+          />
+          <Route exact path="/view-profile" element={<Viewprofile />} />
+          <Route exact path="/blog" element={<Blog />} />
+          <Route exact path="/blog-details" element={<Blogdetails />} />
+          <Route exact path="/faq" element={<Faq />} />
+          <Route exact path="/contact" element={<Contact />} />
+          <Route exact path="/get-started" element={<Getstarted />} />
+          <Route exact path="/find-getStarted" element={<FindgetStarted />} />
+          <Route exact path="/all-tutors" element={<Alltutors />} />
+          <Route
+            exact
+            path="/view-full-schedule"
+            element={<Viewfullschedule />}
+          />
 
           {/* ===== After Login screens =============== */}
-          <Route exact path="/message" element={< Message />} />
-          <Route exact path="/my-learning" element={< Mylearning />} />
-          <Route exact path="/my-course" element={< Mycourse />} />
-          <Route exact path="/wishlist" element={< Wishlist />} />
-          <Route exact path="/profile-setting" element={< Profilesetting />} />
-          <Route exact path="/invite-a-friend" element={< InviteAFriend />} />
-
+          <Route exact path="/message" element={<Message />} />
+          <Route exact path="/my-learning" element={<Mylearning />} />
+          <Route exact path="/my-course" element={<Mycourse />} />
+          <Route exact path="/wishlist" element={<Wishlist />} />
+          <Route exact path="/profile-setting" element={<Profilesetting />} />
+          <Route exact path="/invite-a-friend" element={<InviteAFriend />} />
 
           {/*  Book schedule Model */}
-          <Route exact path="/book-schedule" element={< Bookschedule />} />
-
+          <Route exact path="/book-schedule" element={<Bookschedule />} />
         </Routes>
       </BrowserRouter>
     </>

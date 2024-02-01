@@ -1,0 +1,63 @@
+/* Register-tutor.css */
+
+.registermenu {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  background-color: #f4f4f8;
+  justify-content: center;
+  align-items: center;
+}
+
+.registermenu li {
+  margin-right: 5px; /* Add right margin for spacing */
+  font-size: 16px; /* Set font size */
+}
+
+.registermenu li a {
+  text-decoration: none; /* Remove underline from links */
+  color: black; /* Set text color */
+  cursor: pointer;
+  margin-right: 10px;
+}
+.registermenu li a :hover {
+  color: #fff;
+}
+.registermenu li span {
+  margin-right: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+
+  border-radius: 4px;
+}
+.registermenu li span:hover {
+  background-color: #000;
+}
+.registermenu li i {
+  margin-right: 30px;
+}
+/* container  */
+.col-set {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.addlang {
+  text-decoration: underline;
+  color: #000;
+  cursor: pointer;
+}
+.check_box {
+  cursor: pointer;
+}
+.text-fieldhover :hover {
+  border-color: #000 2px solid;
+}
+/* tip images */
+.tipImages {
+  width: 100%;
+  height: auto;
+}
