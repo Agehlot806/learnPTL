@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./Register-tutor.css";
 import { Col, Container, Form, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
@@ -10,8 +10,22 @@ import tipimgtwo from "../../assets/images/signup/tipsImage3.png";
 import Accordion from "react-bootstrap/Accordion";
 import VideoRecorder from "../../components/Video_Recorder/Video-recorder";
 // import { VideoRecorder } from "react-video-recorder";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  fetchCountryShow,
+  fetchSpeakShow,
+} from "../../redux/action/actionCreators";
 
 const RegisterTutore = () => {
+  const dispatch = useDispatch();
+  const { countrys } = useSelector((state) => state.countrys);
+  const { speaks } = useSelector((state) => state.speaks);
+  console.log("countrys: ", countrys);
+
+  useEffect(() => {
+    dispatch(fetchCountryShow(countrys));
+    dispatch(fetchSpeakShow(speaks));
+  }, [dispatch]);
   // State to track the current step
   const [currentStep, setCurrentStep] = useState(1);
 
@@ -212,9 +226,11 @@ const RegisterTutore = () => {
                     <Form.Label>Country of origin</Form.Label>
                     <Form.Select aria-label="Choose Country...">
                       <option>Choose Country...</option>
-                      <option value="1">One</option>
-                      <option value="2">Two</option>
-                      <option value="3">Three</option>
+                      {countrys.map((country) => (
+                        <option key={country.id} value={country.id}>
+                          {country.country}
+                        </option>
+                      ))}
                     </Form.Select>
                   </Form.Group>
                   <Row>
@@ -230,7 +246,7 @@ const RegisterTutore = () => {
                       <Form.Group className="mb-3">
                         <Form.Label>Level</Form.Label>
                         <Form.Select aria-label="Choose Level...">
-                          <option>Choose Country...</option>
+                          <option>Choose Level...</option>
                           <option value="1">One</option>
                           <option value="2">Two</option>
                           <option value="3">Three</option>
@@ -242,10 +258,12 @@ const RegisterTutore = () => {
                   <Form.Group className="mb-3 mt-3" controlId="formBasicEmail">
                     <Form.Label>Subject taught</Form.Label>
                     <Form.Select aria-label="Choose Subject...">
-                      <option>Choose Country...</option>
-                      <option value="1">One</option>
-                      <option value="2">Two</option>
-                      <option value="3">Three</option>
+                      <option>Choose Subject taught...</option>
+                      {speaks.map((speak) => (
+                        <option key={speak.id} value={speak.id}>
+                          {speak.speak}
+                        </option>
+                      ))}
                     </Form.Select>
                   </Form.Group>
                   <Form.Group className="mb-3" controlId="formBasicEmail">
@@ -446,9 +464,11 @@ const RegisterTutore = () => {
                         <Form.Label>Subject</Form.Label>
                         <Form.Select aria-label="Choose Subject...">
                           <option>Choose Subject...</option>
-                          <option value="1">One</option>
-                          <option value="2">Two</option>
-                          <option value="3">Three</option>
+                          {speaks.map((speak) => (
+                            <option key={speak.id} value={speak.id}>
+                              {speak.speak}
+                            </option>
+                          ))}
                         </Form.Select>
                       </Form.Group>
                       <Form.Group
