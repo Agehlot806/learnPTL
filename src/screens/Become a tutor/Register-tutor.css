@@ -15,6 +15,7 @@
 .registermenu li {
   margin-right: 5px; /* Add right margin for spacing */
   font-size: 16px; /* Set font size */
+  font-weight: 600;
 }
 
 .registermenu li a {
@@ -46,9 +47,10 @@
   align-items: center;
 }
 .addlang {
-  text-decoration: underline;
-  color: #000;
+  text-decoration: none;
+  color: #7d66ca;
   cursor: pointer;
+  font-weight: 600;
 }
 .check_box {
   cursor: pointer;
@@ -196,7 +198,7 @@
 /* certificate */
 .Diplomaarea {
   background-color: #f4f4f8;
-  padding: 25px;
+  /* padding: 25px; */
 }
 .description {
   color: #000;
@@ -209,4 +211,91 @@
   background-color: #cce2ff;
   margin-top: 20px;
   padding: 20px;
+}
+.dragg {
+  text-align: center;
+  margin-top: 50px;
+}
+
+.drop-zone {
+  border: 2px dashed #cccccc;
+  padding: 20px;
+  cursor: pointer;
+}
+
+.drop-zone.dragging {
+  background-color: #f2f2f2;
+}
+
+.file-input {
+  display: none;
+}
+
+label {
+  cursor: pointer;
+}
+
+p {
+  margin: 10px 0;
+}
+
+/* Soniya css */
+.tutor-registepone {
+  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
+    rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+  padding: 23px;
+  border-radius: 6px;
+  margin: 40px 0 0;
+}
+
+.tutor-registepone h1 {
+  font-weight: 600;
+  font-size: 34px;
+}
+.tutor-registepone label {
+  font-weight: 500;
+}
+
+.video-btnss button {
+  border: none;
+  padding: 10px;
+  margin: 20px 8px 20px 0;
+  width: 150px;
+  border-radius: 50px;
+  background: #a594f94d;
+  font-weight: 600;
+}
+.video-btnss video {
+  width: 100%;
+  border: 1px solid #ccc;
+}
+.tutor-registepone.video-mainArea input {
+  width: 100%;
+  height: 40px;
+  border-radius: 7px;
+  border: 1px solid #ccc;
+  padding: 12px;
+}
+.tutor-registepone.video-mainArea h5 {
+  margin: 20px 0;
+  font-weight: 600;
+}
+.video-btnss h2 {
+  font-weight: 600;
+  font-size: 26px;
+  margin: 0 0 20px;
+}
+.do-no ul li {
+  list-style-type: disc;
+  margin: 16px 0;
+}
+.video-req {
+  background: #ece2ff;
+  padding: 20px;
+  margin: 20px 0;
+}
+a.add-slottime {
+  text-decoration: underline;
+  color: #000;
+  font-weight: 600;
 }

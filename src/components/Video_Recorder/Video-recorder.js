@@ -64,8 +64,8 @@ const VideoRecorder = () => {
   };
 
   return (
-    <div>
-      <video ref={videoRef} autoPlay playsInline muted={isAudioMuted} />
+    <div className="video-btnss">
+      <video ref={videoRef} autoPlay playsInline muted={isAudioMuted} /> <br />
       {!isRecording ? (
         <button onClick={startRecording}>Start Recording</button>
       ) : (
