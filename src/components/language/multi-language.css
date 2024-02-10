@@ -30,3 +30,60 @@ a.VIpgJd-ZVi9od-l4eHX-hSRGPd {
     color: #000;
     font-weight: 500;
 }
+
+/* new */
+/* #traducoes {
+    position: absolute;
+    top: 9px;
+    right: 5px;
+  } */
+  
+  /* .goog-te-gadget {
+    font-size: 19px !important;
+  }
+  
+  .goog-te-gadget-simple {
+    background-color: transparent !important;
+    border: none !important;
+  }
+  
+  .goog-te-gadget-icon {
+    display: none !important;
+  } */
+
+
+  /* .VIpgJd-ZVi9od-ORHb {
+    background-color: transparent !important;
+    overflow: hidden !important;
+    display: none !important;
+    visibility: hidden !important;
+}
+.VIpgJd-ZVi9od-ORHb-OEVmcd {
+    border: none !important;
+    border-bottom: 1px solid transparent !important;
+    box-shadow: none !important;
+} */
+.goog-te-gadget-simple {
+    background-color: #6f6f6ffc;
+     border-left: 0pxsolid#d5d5d5;
+      border-top: 0pxsolid#9b9b9b;
+       border-bottom: 0pxsolid#e8e8e8;
+      border-right: 0pxsolid#d5d5d5;
+     font-size: 7pt;
+    display: inline-block;
+   cursor: pointer;
+     margin-top: 11px;
+    zoom: 1;
+   display: inline;
+   }
+   .goog-te-gadget-icon {
+     margin-left: 2px;
+      width: 1px;
+     height: 0px;
+    border: none;
+   vertical-align: middle;
+   }
+   body > .skiptranslate > iframe.skiptranslate {
+    display: none !important;
+    visibility: hidden !important;
+   }

@@ -291,7 +291,7 @@ function Allfilter(props) {
                     <hr />
                     <Row>
                       <Col lg={8}>
-                        <h6>Only professional tutors</h6>
+                        <h6>Only Experience tutors</h6>
                         <p>
                           Only show tutors with a teaching certificate or
                           relevant education

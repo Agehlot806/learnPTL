@@ -3,33 +3,35 @@ import './multi-language.css'
 
 
 const Multilang = () => {
-    // const googleTranslateElementInit = () => {
-    //     new window.google.translate.TranslateElement(
-    //         {
-    //             pageLanguage: "en",
-    //             autoDisplay: true,
-    //             layout: window.google.translate.TranslateElement.InlineLayout.SIMPLE
-    //         },
-    //         "google_translate_element"
-    //     );
-    // };
 
-    // useEffect(() => {
-    //     const googleTranslateElementInit = () => {
-    //       new window.google.translate.TranslateElement({ pageLanguage: 'en' }, 'google_translate_element');
-    //     };
-    //     // Create and append the script element
-    //     const script = document.createElement('script');
-    //     script.type = 'text/javascript';
-    //     script.src = '//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit';
-    //     document.head.appendChild(script);
-    //     // Cleanup: remove the script when the component is unmounted
-    //     return () => {
-    //       document.head.removeChild(script);
-    //     };
-    //   }, []);
-    useEffect(() => {
-const loadGoogleTranslateScript = () => {
+  // const googleTranslateElementInit = () => {
+  //     new window.google.translate.TranslateElement(
+  //         {
+  //             pageLanguage: "en",
+  //             autoDisplay: true,
+  //             layout: window.google.translate.TranslateElement.InlineLayout.SIMPLE
+  //         },
+  //         "google_translate_element"
+  //     );
+  // };
+
+  // useEffect(() => {
+  //     const googleTranslateElementInit = () => {
+  //       new window.google.translate.TranslateElement({ pageLanguage: 'en' }, 'google_translate_element');
+  //     };
+  //     // Create and append the script element
+  //     const script = document.createElement('script');
+  //     script.type = 'text/javascript';
+  //     script.src = '//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit';
+  //     document.head.appendChild(script);
+  //     // Cleanup: remove the script when the component is unmounted
+  //     return () => {
+  //       document.head.removeChild(script);
+  //     };
+  //   }, []);
+  
+  useEffect(() => {
+    const loadGoogleTranslateScript = () => {
       // Create and append the script element
       const script = document.createElement('script');
       script.type = 'text/javascript';
@@ -39,7 +41,7 @@ const loadGoogleTranslateScript = () => {
         setTimeout(() => {
           if (window.google && window.google.translate) {
             new window.google.translate.TranslateElement(
-              { pageLanguage: 'en', autoDisplay: true, },
+              { pagelanguage: 'en', autoDisplay: false, },
               'google_translate_element'
             );
           } else {
@@ -58,11 +60,13 @@ const loadGoogleTranslateScript = () => {
       }
     };
   }, []);
-    return (
-        <div className='multi-language'>
-            <div id="google_translate_element"></div>
-        </div>
-    )
+  return (
+    <div className='mylang'>
+      <div className='multi-language'>
+        <div id="google_translate_element"></div>
+      </div>
+    </div>
+  )
 }
 
 export default Multilang

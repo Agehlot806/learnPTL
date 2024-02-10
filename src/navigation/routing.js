@@ -25,6 +25,7 @@ import Mycourse from "../screens/After Login Screens/My Learning/my-course";
 import InviteAFriend from "../screens/After Login Screens/invite A Friend/invite-A-Friend";
 import FindgetStarted from "../screens/Home tutors/find-getStarted";
 import RegisterTutore from "../screens/Become a tutor/Register-tutore";
+import Checkout from "../screens/After Login Screens/checkout Slot/checkout";
 
 // ScrollToTop component
 const ScrollToTop = () => {
@@ -76,6 +77,7 @@ function NavRoutes() {
           <Route exact path="/wishlist" element={<Wishlist />} />
           <Route exact path="/profile-setting" element={<Profilesetting />} />
           <Route exact path="/invite-a-friend" element={<InviteAFriend />} />
+          <Route exact path="/checkout" element={<Checkout />} />
 
           {/*  Book schedule Model */}
           <Route exact path="/book-schedule" element={<Bookschedule />} />

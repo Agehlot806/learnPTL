@@ -95,6 +95,10 @@
     --bs-progress-bar-bg: #5e3fd7;
     height: 8px;
 }
+.Review-list .progress-bar {
+    position: inherit;
+    height: 8px;
+}
 .review-area .Review-list h6 {
     margin: 0;
 }
@@ -136,4 +140,36 @@
 .Tutor-content h5 {
     margin: 10px 0;
     color: var(--heading-color);
+}
+
+.Schedule-box h3 {
+    font-weight: 600;
+    font-size: 25px;
+    margin: 40px 0 15px;
+}
+
+.Schedule-box .nav-tabs .nav-link.active {
+    background: #5e3fd7;
+    border-bottom: none;
+    border: 2px solid #5e3fd7;
+    color: #fff;
+}
+.Schedule-box .nav-tabs {
+    --bs-nav-tabs-border-width: var(--bs-border-width);
+    --bs-nav-tabs-border-color: none;
+}
+
+.Schedule-box .nav-item {
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+    margin: 4px;
+    border-radius: 4px;
+}
+.slot-time-content h6 {
+    text-align: center;
+    border: 2px solid #80808024;
+    border-radius: 50px;
+    padding: 10px;
+}
+.slot-time-content h6 a{
+    color: #000;
 }
