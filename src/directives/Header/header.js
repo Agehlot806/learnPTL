@@ -26,10 +26,10 @@ function Header() {
                 <Navbar.Collapse id="navbarScroll">
 
                     <Nav className="nav-menus ms-auto my-2 my-lg-0">
-                        <Nav.Link><Link to="/find-tutor">Find tutors</Link></Nav.Link>
+                        <Nav.Link><Link to="/get-started">Find tutors</Link></Nav.Link>
                         <Nav.Link><Link to="/become-a-tutor"> {strings.Becomeatutor}</Link></Nav.Link>
                         <Nav.Link><Link to='/contact'>Contact</Link></Nav.Link>
-                        {/* <Multilang /> */}
+                        <Nav.Link><Multilang /></Nav.Link>
                         <NavDropdown title="Currency" id="">
                             <NavDropdown.Item href="">USD</NavDropdown.Item>
                             <NavDropdown.Item href="">UAH</NavDropdown.Item>

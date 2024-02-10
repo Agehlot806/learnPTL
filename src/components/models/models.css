@@ -31,3 +31,19 @@
     font-weight: 600;
     margin: 0;
 }
+
+.send-message img {
+    width: 100px;
+    margin: 20px 0;
+    border-radius: 3px;
+}
+.send-message {
+    padding: 0 60px 40px;
+}
+.pro-next-btn button {
+    border: none;
+    padding: 10px;
+    margin: 10px;
+    width: 100px;
+    border-radius: 4px;
+}

@@ -6,8 +6,11 @@ import { persistor, store } from './store/configureStore';
 import { PersistGate } from 'redux-persist/integration/react';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { useTranslation } from "react-i18next";
 
 function App() {
+  const { t } = useTranslation();
+ 
   return (
 
     <>
@@ -26,7 +29,7 @@ function App() {
       />
       <Provider store={store}>
         <PersistGate loading={null} persistor={persistor}>
-          <NavRoutes />
+         <NavRoutes />
         </PersistGate>
       </Provider>
       <ToastContainer />

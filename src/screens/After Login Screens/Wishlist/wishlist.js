@@ -8,9 +8,16 @@ import TeacherstutorModel from '../../../components/models/teachers-tutor-model'
 import Img5 from '../../../assets/images/img/img5.jpg'
 import Img6 from '../../../assets/images/img/img6.jpg'
 import Img7 from '../../../assets/images/img/img7.jpg'
+import SendMessage from '../../../components/models/send-message'
+import BookscheduleSlot from '../../../components/models/Book-scheduleSlot'
 
 function Wishlist() {
   const [modalShow, setModalShow] = useState(false);
+  const handleShow = () => setModalShow(true);
+  const handleClose = () => setModalShow(false);
+  const [sendMessagesadd, setsendMessagesadd] = React.useState(false);
+  const [bookTrial, setBookTrial] = React.useState(false);
+
   const allFindTutor = [
     { title: "Valentino M.", image: Img7, Exprience: "Certified TEFL Tutor & Native English Speaker with teaching experience from Florida Atlantic University Greetings! My name is Valentino" },
     { title: "Johnny Depp", image: Img5, Exprience: "Certified TEFL Tutor & Native English Speaker with teaching experience from Florida Atlantic University Greetings! My name is Valentino" },
@@ -76,10 +83,25 @@ function Wishlist() {
                         <a key={i}><i className="fa fa-star" style={{ color: '#ffc014', marginLeft: "4px" }}/></a>
                       ))}
                     </div>
-                    <div className='text-center'>
-                      <Button className="theme-button1 mt-1" hoverColor="theme-button1" label="Book Trial Lesson" />
-                      <Button className="theme-button1 mt-1" hoverColor="theme-button1" label="Send Message" />
-                    </div>
+                    <div className="text-center">
+                        <Button
+                          className="theme-button1 mt-1"
+                          hoverColor="theme-button1"
+                          label="Book Trial Lesson"
+                          onClick={() => setBookTrial(true)}
+                        />
+                        <BookscheduleSlot show={bookTrial} onHide={() => setBookTrial(false)} />
+                        <Button
+                          className="theme-button1 mt-1"
+                          hoverColor="theme-button1"
+                          label="Send Message"
+                          onClick={() => setsendMessagesadd(true)}
+                        />
+                        <SendMessage
+                            show={sendMessagesadd}
+                            onHide={() => setsendMessagesadd(false)}
+                        />
+                      </div>
 
                   </div>
                 </Col>

@@ -11,7 +11,7 @@ import Allfilter from "../../components/Filter/all-filter";
 import TeacherstutorModel from "../../components/models/teachers-tutor-model";
 import Button from "../../components/Button";
 import Allbg from "../../components/All bg Banner/all-bg";
-import FindgetStarted from "../Home tutors/find-getStarted";
+// import FindgetStarted from "../Home tutors/find-getStarted";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import {
@@ -24,6 +24,8 @@ import {
   fetchSpecialtiesShow,
 } from "../../redux/action/actionCreators";
 import { fetchTutorsShow } from "../../redux/action/actionCreators";
+import SendMessage from "../../components/models/send-message";
+import BookscheduleSlot from "../../components/models/Book-scheduleSlot";
 
 function Findtutor() {
   const dispatch = useDispatch();
@@ -212,13 +214,19 @@ function Findtutor() {
     setCurrentPage(pageNumber);
   };
 
+
+  const handleShow = () => setModalShow(true);
+  const handleClose = () => setModalShow(false);
+  const [sendMessagesadd, setsendMessagesadd] = React.useState(false);
+  const [bookTrial, setBookTrial] = React.useState(false);
+
   return (
     <>
       <Header />
 
-      <Allbg title="Find Tutor" linkTo="/" linkText="Home" />
+      <Allbg title="All Tutor" linkTo="/" linkText="Home" />
 
-      <FindgetStarted />
+      {/* <FindgetStarted /> */}
       <section className="section-padding">
         <Container>
           <Allfilter
@@ -266,6 +274,7 @@ function Findtutor() {
                 paginatedItems.map((tutor, index) => (
                   <Col lg={4} className="mb-4">
                     <div className="course-cards" key={tutor?.id}>
+                      <Link to="" ></Link>
                       <img
                         src={
                           "https://storyfy.webzproject.shop/uploads/" +
@@ -309,11 +318,18 @@ function Findtutor() {
                           className="theme-button1 mt-1"
                           hoverColor="theme-button1"
                           label="Book Trial Lesson"
+                          onClick={() => setBookTrial(true)}
                         />
+                        <BookscheduleSlot show={bookTrial} onHide={() => setBookTrial(false)} />
                         <Button
                           className="theme-button1 mt-1"
                           hoverColor="theme-button1"
                           label="Send Message"
+                          onClick={() => setsendMessagesadd(true)}
+                        />
+                        <SendMessage
+                            show={sendMessagesadd}
+                            onHide={() => setsendMessagesadd(false)}
                         />
                       </div>
                     </div>

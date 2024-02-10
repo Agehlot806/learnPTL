@@ -306,3 +306,8 @@ input:focus-visible {
 .accordion-button:not(.collapsed)::after {
     background-image: auto;
 }
+
+.my-learningList .progress-bar {
+    position: inherit;
+    height: 8px;
+}

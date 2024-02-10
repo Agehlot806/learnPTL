@@ -4,7 +4,7 @@ import '../Home tutors/get-started.css'
 import { Container, Row, Col, Form } from "react-bootstrap";
 import Button from "../../components/Button";
 import strings from "../../localzation";
-import { Link } from "react-router-dom";
+import { Link ,useNavigate} from "react-router-dom";
 import Goals from "../../assets/images/img/goals.webp";
 import Au from "../../assets/images/icons/au.svg";
 import Ca from "../../assets/images/icons/ca.svg";
@@ -12,10 +12,19 @@ import In from "../../assets/images/icons/in.svg";
 import Us from "../../assets/images/icons/us.svg";
 import Uk from "../../assets/images/icons/uk.svg";
 import Pricefilter from "../../components/price-filter";
+import shape6 from "../../assets/images/img/shape6.webp";
+import shape4 from "../../assets/images/img/shape4.webp";
+import Img3 from "../../assets/images/img/img3.webp";
+import Logo from "../../assets/images/logo.png";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchSpeakShow } from "../../redux/action/actionCreators";
+import Header from "../../directives/Header/header";
+import Footer from "../../directives/Footer/footer";
 
 function Getstarted() {
     const [step, setStep] = useState(1);
-
+    const { speaks } = useSelector((state) => state.speaks);
+    const navigate = useNavigate(); 
     const nextStep = () => {
         setStep((prevStep) => prevStep + 1);
     };
@@ -26,21 +35,91 @@ function Getstarted() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        navigate("/find-tutor");
     };
 
     return (
         <>
-            <section >
+            <section>
                 <div className="Getstarted-form-area ">
                     <Form>
-                     
                         {step === 1 && (
+                            <>
+                            <Header />
+                            <div className="section-padding">
+                                <Container>
+                                    <Row>
+                                        <Col lg={6} sm={6}>
+                                            <div className="iconcoin-mask-bg-wrap iconcoin-mask-bg-wrap-1 mb-4 mb-lg-0">
+                                                <img
+                                                    className="ico-image-sm top_image_bounce"
+                                                    src={shape6}
+                                                    alt="img"
+                                                />
+                                                <img className="ico-shape-image" src={shape4} alt="img" />
+                                                <div className="thumb top_image_bounce">
+                                                    <img src={Img3} alt="img" />
+                                                </div>
+                                            </div>
+                                        </Col>
+                                        <Col lg={6} sm={6}>
+                                            <div className="find-tutors">
+                                                <div className="text-center">
+                                                    <img src={Logo} alt="logo" />
+                                                </div>
+                                                <div className="main-heading">
+                                                    <h1>Find the right tutor for you.</h1>
+                                                    <p>
+                                                        Tell us how you’d like to learn to get a personalized choice
+                                                        of tutors
+                                                    </p>
+                                                </div>
+                                                <Row className="mb-4">
+                                                    <Col lg={7}>
+                                                        <Form.Group>
+                                                            <Form.Label>What do you want to learn?</Form.Label>
+                                                            <Form.Select defaultValue="Choose...">
+                                                                <option>Choose...</option>
+                                                                {speaks.map((speak) => (
+                                                                    <option key={speak.id} value={speak.speak}>
+                                                                        {speak.speak}
+                                                                    </option>
+                                                                ))}
+                                                            </Form.Select>
+                                                        </Form.Group>
+                                                    </Col>
+                                                    <Col lg={5} className="align-self-center mt-4">
+                                                        <Link to="/get-started">
+                                                            <Button
+                                                                onClick={nextStep}
+                                                                className="theme-button1 mt-1"
+                                                                hoverColor="theme-button1"
+                                                                label="Get Started"
+                                                                icon="fa fa-long-arrow-right"
+                                                                iconPosition="right"
+                                                            />
+                                                        </Link>
+                                                    </Col>
+                                                </Row>
+                                                <Link to="">
+                                                    I want to choose from 17,222 Tutors{" "}
+                                                    <i className="fa fa-long-arrow-right" />
+                                                </Link>
+                                            </div>
+                                        </Col>
+                                    </Row>
+                                </Container>
+                            </div>
+                            <Footer />
+                            </>
+                        )}
+                        {step === 2 && (
                             <Row>
                                 <Col lg={6} className="">
-                                <div className='full-screen'>
-                                <div className='all-overlay-bg'>
+                                    <div className='full-screen'>
+                                        <div className='all-overlay-bg'>
                                             <div className="get-start-bg">
-                                                {/* <Button onClick={prevStep} className='white-button' icon="fa fa-arrow-left" iconPosition="left" label={strings.back}></Button> */}
+                                                <Button onClick={prevStep} className='white-button' icon="fa fa-arrow-left" iconPosition="left" label={strings.back}></Button>
                                                 <div class="typewriter-area">
                                                     <div class="typewriter">What's your goal?</div>
                                                 </div>
@@ -144,11 +223,11 @@ function Getstarted() {
                                 </Col>
                             </Row>
                         )}
-                        {step === 2 && (
+                        {step === 3 && (
                             <Row>
                                 <Col lg={6} className="">
-                                     <div className='full-screen'>
-                                <div className='all-overlay-bg'>
+                                    <div className='full-screen'>
+                                        <div className='all-overlay-bg'>
                                             <div className="get-start-bg">
                                                 <Button onClick={prevStep} className='white-button' icon="fa fa-arrow-left" iconPosition="left" label={strings.back}></Button>
                                                 <div class="typewriter-area">
@@ -227,11 +306,11 @@ function Getstarted() {
                                 </Col>
                             </Row>
                         )}
-                        {step === 3 && (
+                        {step === 4 && (
                             <Row>
                                 <Col lg={6} className="">
-                                     <div className='full-screen'>
-                                <div className='all-overlay-bg'>
+                                    <div className='full-screen'>
+                                        <div className='all-overlay-bg'>
                                             <div className="get-start-bg">
                                                 <Button onClick={prevStep} className='white-button' icon="fa fa-arrow-left" iconPosition="left" label={strings.back}></Button>
                                                 <div class="typewriter-area">
@@ -373,11 +452,11 @@ function Getstarted() {
                             //     </Col>
                             // </Row>
                         )}
-                        {step === 4 && (
+                        {step === 5 && (
                             <Row>
                                 <Col lg={6} className="">
-                                     <div className='full-screen'>
-                                <div className='all-overlay-bg'>
+                                    <div className='full-screen'>
+                                        <div className='all-overlay-bg'>
                                             <div className="get-start-bg">
                                                 <Button onClick={prevStep} className='white-button' icon="fa fa-arrow-left" iconPosition="left" label={strings.back}></Button>
                                                 <div class="typewriter-area">
@@ -483,11 +562,11 @@ function Getstarted() {
                                 </Col>
                             </Row>
                         )}
-                        {step === 5 && (
+                        {step === 6 && (
                             <Row>
                                 <Col lg={6} className="">
-                                     <div className='full-screen'>
-                                <div className='all-overlay-bg'>
+                                    <div className='full-screen'>
+                                        <div className='all-overlay-bg'>
                                             <div className="get-start-bg">
                                                 <Button onClick={prevStep} className='white-button' icon="fa fa-arrow-left" iconPosition="left" label={strings.back}></Button>
                                                 <div class="typewriter-area">
@@ -517,207 +596,207 @@ function Getstarted() {
                                                 </Col>
                                             </Row>
                                             <div className="day-timeScroll">
-                                            <Row>
-                                                <h3>Day time</h3>
-                                                <Col lg={4} sm={4}>
-                                                    <div className="selectTime-list">
-                                                    <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fillRule="evenodd" d="M13 4a1 1 0 1 0-2 0v2a1 1 0 1 0 2 0V4Zm5.293 2.293a1 1 0 1 1 1.414 1.414l-1 1a1 1 0 1 1-1.414-1.414l1-1ZM1 18a1 1 0 0 1 1-1h4.342a6 6 0 1 1 11.316 0H22a1 1 0 1 1 0 2H2a1 1 0 0 1-1-1Zm14.465-1a4 4 0 1 0-6.93 0h6.93ZM21 12a1 1 0 1 0 0 2h1a1 1 0 1 0 0-2h-1ZM1 13a1 1 0 0 1 1-1h1a1 1 0 1 1 0 2H2a1 1 0 0 1-1-1Zm3.293-6.707a1 1 0 0 1 1.414 0l1 1a1 1 0 0 1-1.414 1.414l-1-1a1 1 0 0 1 0-1.414Z" clipRule="evenodd" /></svg>
-                                                        <Row>
-                                                            <Col lg={6} sm={6}>
-                                                                <h6>9-12</h6>
-                                                            </Col>
-                                                            <Col lg={6} sm={6}>
-                                                                <Form.Check type="checkbox" />
-                                                            </Col>
-                                                        </Row>
-                                                    </div>
-                                                </Col>
-                                                <Col lg={4} sm={4}>
-                                                    <div className="selectTime-list">
-                                                    <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fillRule="evenodd" d="M12 1a1 1 0 0 1 1 1v2a1 1 0 1 1-2 0V2a1 1 0 0 1 1-1Zm7.707 4.707-1 1a1 1 0 1 1-1.414-1.414l1-1a1 1 0 1 1 1.414 1.414ZM19 13a1 1 0 0 1 1-1h2a1 1 0 1 1 0 2h-2a1 1 0 0 1-1-1ZM2 12a1 1 0 1 0 0 2h2a1 1 0 1 0 0-2H2Zm3.707-7.707a1 1 0 0 0-1.414 1.414l1 1a1 1 0 0 0 1.414-1.414l-1-1Zm11.586 14.414 1 1a1 1 0 0 0 1.414-1.414l-1-1a1 1 0 0 0-1.414 1.414ZM13 22a1 1 0 1 1-2 0v-2a1 1 0 1 1 2 0v2Zm-7.293-2.293 1-1a1 1 0 1 0-1.414-1.414l-1 1a1 1 0 1 0 1.414 1.414ZM12 6a6 6 0 1 0 0 12 6 6 0 0 0 0-12Zm-4 6a4 4 0 1 1 8 0 4 4 0 0 1-8 0Z" clipRule="evenodd" /></svg>
-                                                        <Row>
-                                                            <Col lg={6} sm={6}>
-                                                                <h6>12-15</h6>
-                                                            </Col>
-                                                            <Col lg={6} sm={6}>
-                                                                <Form.Check type="checkbox" />
-                                                            </Col>
-                                                        </Row>
-                                                    </div>
-                                                </Col>
-                                                <Col lg={4} sm={4}>
-                                                    <div className="selectTime-list">
-                                                    <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fillRule="evenodd" d="M12 1a1 1 0 0 1 1 1v2a1 1 0 1 1-2 0V2a1 1 0 0 1 1-1Zm7.707 4.707-1 1a1 1 0 1 1-1.414-1.414l1-1a1 1 0 1 1 1.414 1.414ZM19 13a1 1 0 0 1 1-1h2a1 1 0 1 1 0 2h-2a1 1 0 0 1-1-1ZM2 12a1 1 0 1 0 0 2h2a1 1 0 1 0 0-2H2Zm3.707-7.707a1 1 0 0 0-1.414 1.414l1 1a1 1 0 0 0 1.414-1.414l-1-1Zm11.586 14.414 1 1a1 1 0 0 0 1.414-1.414l-1-1a1 1 0 0 0-1.414 1.414ZM13 22a1 1 0 1 1-2 0v-2a1 1 0 1 1 2 0v2Zm-7.293-2.293 1-1a1 1 0 1 0-1.414-1.414l-1 1a1 1 0 1 0 1.414 1.414ZM12 6a6 6 0 1 0 0 12 6 6 0 0 0 0-12Zm-4 6a4 4 0 1 1 8 0 4 4 0 0 1-8 0Z" clipRule="evenodd" /></svg>
-                                                        <Row>
-                                                            <Col lg={6} sm={6}>
-                                                                <h6>15-18</h6>
-                                                            </Col>
-                                                            <Col lg={6} sm={6}>
-                                                                <Form.Check type="checkbox" />
-                                                            </Col>
-                                                        </Row>
-                                                    </div>
-                                                </Col>
-                                            </Row>
-                                           
-                                            <Row>
-                                                <h3>Evening and night</h3>
-                                                <Col lg={4} sm={4}>
-                                                    <div className="selectTime-list">
-                                                <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fillRule="evenodd" d="M13 5a1 1 0 1 0-2 0v1.5a1 1 0 1 0 2 0V5Zm5.293 3.293a1 1 0 1 1 1.414 1.414l-.5.5a1 1 0 0 1-1.414-1.414l.5-.5ZM2 14a1 1 0 1 0 0 2h20a1 1 0 1 0 0-2h-3.344c-.909-2.882-3.524-5-6.656-5-3.132 0-5.747 2.118-6.656 5H2Zm5.48 0h9.04c-.809-1.788-2.545-3-4.52-3-1.975 0-3.711 1.212-4.52 3ZM7 18a1 1 0 1 0 0 2h10a1 1 0 1 0 0-2H7ZM4.293 8.293a1 1 0 0 1 1.414 0l.5.5a1 1 0 0 1-1.414 1.414l-.5-.5a1 1 0 0 1 0-1.414Z" clipRule="evenodd" /></svg>
-                                                        <Row>
-                                                            <Col lg={6} sm={6}>
-                                                                <h6>18-21</h6>
-                                                            </Col>
-                                                            <Col lg={6} sm={6}>
-                                                                <Form.Check type="checkbox" />
-                                                            </Col>
-                                                        </Row>
-                                                    </div>
-                                                </Col>
-                                                <Col lg={4} sm={4}>
-                                                    <div className="selectTime-list">
-                                                    <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fillRule="evenodd" d="M8 4a3.333 3.333 0 0 0-3.056 2 3 3 0 0 0 .1 6h5.623a2.667 2.667 0 0 0 .613-5.262A3.334 3.334 0 0 0 8 4ZM6.672 7.209a1.334 1.334 0 1 1 2.644.339 1 1 0 0 0 1.204 1.135.667.667 0 1 1 .146 1.317H5a1 1 0 1 1 .338-1.941 1 1 0 0 0 1.334-.85Zm9.995-.185a1 1 0 0 0-.937 1.516c.471.774.75 1.712.75 2.729 0 2.778-2.04 4.875-4.375 4.875-.336 0-.662-.042-.975-.121a1 1 0 0 0-1.113 1.468 7 7 0 1 0 6.65-10.467Zm1.813 4.245c0-.611-.074-1.204-.213-1.77a5.002 5.002 0 1 1-5.112 8.554c3.078-.545 5.325-3.443 5.325-6.784Z" clipRule="evenodd" /></svg>
-                                                        <Row>
-                                                            <Col lg={6} sm={6}>
-                                                                <h6>21-24</h6>
-                                                            </Col>
-                                                            <Col lg={6} sm={6}>
-                                                                <Form.Check type="checkbox" />
-                                                            </Col>
-                                                        </Row>
-                                                    </div>
-                                                </Col>
-                                                <Col lg={4} sm={4}>
-                                                    <div className="selectTime-list">
-                                                    <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fillRule="evenodd" d="M13.926 5.287A8.072 8.072 0 0 1 7.03 16.994a7 7 0 1 0 6.896-11.707Zm-2.15-2.286.16-.001a9 9 0 1 1-7.949 13.225 1 1 0 0 1 1.144-1.435 6.071 6.071 0 0 0 5.945-10.092 1 1 0 0 1 .7-1.697Z" clipRule="evenodd" /></svg>
-                                                        <Row>
-                                                            <Col lg={6} sm={6}>
-                                                                <h6>0-3</h6>
-                                                            </Col>
-                                                            <Col lg={6} sm={6}>
-                                                                <Form.Check type="checkbox" />
-                                                            </Col>
-                                                        </Row>
-                                                    </div>
-                                                </Col>
-                                            </Row>
-                                            <Row>
-                                                <h3>Morning</h3>
-                                                <Col lg={4} sm={4}>
-                                                    <div className="selectTime-list">
-                                                    <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fillRule="evenodd" d="M9 2a1 1 0 0 0 0 2h.382L8.106 6.553A1 1 0 0 0 9 8h2a1 1 0 1 0 0-2h-.382l1.276-2.553A1 1 0 0 0 11 2H9ZM3 7a1 1 0 0 1 1-1h2a1 1 0 0 1 .894 1.447L5.618 10H6a1 1 0 1 1 0 2H4a1 1 0 0 1-.894-1.447L4.382 8H4a1 1 0 0 1-1-1Zm13.033 1.335a7.188 7.188 0 0 1-5.975 10.143 6 6 0 1 0 5.975-10.143ZM13.91 6h.142a8 8 0 1 1-7.065 11.756 1 1 0 0 1 1.144-1.436 5.188 5.188 0 0 0 5.08-8.623 1 1 0 0 1 .7-1.696Z" clipRule="evenodd" /></svg>
-                                                        <Row>
-                                                            <Col lg={6} sm={6}>
-                                                                <h6>3-6</h6>
-                                                            </Col>
-                                                            <Col lg={6} sm={6}>
-                                                                <Form.Check type="checkbox" />
-                                                            </Col>
-                                                        </Row>
-                                                    </div>
-                                                </Col>
-                                                <Col lg={4} sm={4}>
-                                                    <div className="selectTime-list">
-                                                    <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fillRule="evenodd" d="M13 7.5a1 1 0 1 0-2 0v2a1 1 0 1 0 2 0v-2Zm5.707 2.793a1 1 0 0 1 0 1.414l-1 1a1 1 0 0 1-1.414-1.414l1-1a1 1 0 0 1 1.414 0ZM1 18a1 1 0 0 1 1-1h5.007A4.577 4.577 0 0 1 7 16.75C7 14.067 9.3 12 12 12s5 2.067 5 4.75c0 .084-.002.167-.007.25H22a1 1 0 1 1 0 2H2a1 1 0 0 1-1-1Zm13.988-1a2.55 2.55 0 0 0 .012-.25c0-1.459-1.281-2.75-3-2.75s-3 1.291-3 2.75c0 .084.004.168.012.25h5.976ZM5.293 9.293a1 1 0 0 1 1.414 0l1 1a1 1 0 1 1-1.414 1.414l-1-1a1 1 0 0 1 0-1.414Z" clipRule="evenodd" /></svg>
-                                                        <Row>
-                                                            <Col lg={6} sm={6}>
-                                                                <h6>6-9</h6>
-                                                            </Col>
-                                                            <Col lg={6} sm={6}>
-                                                                <Form.Check type="checkbox" />
-                                                            </Col>
-                                                        </Row>
-                                                    </div>
-                                                </Col>
-                                            </Row>
-                                            <Row>
-                                                <h3>Days</h3>
-                                                <Col lg={2} sm={2} className="mb-3">
-                                                    <div className="selectDay-list">
-                                                        <Row>
-                                                            <Col lg={6} sm={6}>
-                                                                <h5>Sun</h5>
-                                                            </Col>
-                                                            <Col lg={6} sm={6}>
-                                                                <Form.Check type="checkbox" />
-                                                            </Col>
-                                                        </Row>
-                                                    </div>
-                                                </Col>
-                                                <Col lg={2} sm={2} className="mb-3">
-                                                    <div className="selectDay-list">
-                                                        <Row>
-                                                            <Col lg={6} sm={6}>
-                                                                <h5>Mon</h5>
-                                                            </Col>
-                                                            <Col lg={6} sm={6}>
-                                                                <Form.Check type="checkbox" />
-                                                            </Col>
-                                                        </Row>
-                                                    </div>
-                                                </Col>
-                                                <Col lg={2} sm={2} className="mb-3">
-                                                    <div className="selectDay-list">
-                                                        <Row>
-                                                            <Col lg={6} sm={6}>
-                                                                <h5>Tue</h5>
-                                                            </Col>
-                                                            <Col lg={6} sm={6}>
-                                                                <Form.Check type="checkbox" />
-                                                            </Col>
-                                                        </Row>
-                                                    </div>
-                                                </Col>
-                                                <Col lg={2} sm={2} className="mb-3">
-                                                    <div className="selectDay-list">
-                                                        <Row>
-                                                            <Col lg={6} sm={6}>
-                                                                <h5>Wed</h5>
-                                                            </Col>
-                                                            <Col lg={6} sm={6}>
-                                                                <Form.Check type="checkbox" />
-                                                            </Col>
-                                                        </Row>
-                                                    </div>
-                                                </Col>
-                                                <Col lg={2} sm={2} className="mb-3">
-                                                    <div className="selectDay-list">
-                                                        <Row>
-                                                            <Col lg={6} sm={6}>
-                                                                <h5>Thu</h5>
-                                                            </Col>
-                                                            <Col lg={6} sm={6}>
-                                                                <Form.Check type="checkbox" />
-                                                            </Col>
-                                                        </Row>
-                                                    </div>
-                                                </Col>
-                                                <Col lg={2} sm={2} className="mb-3">
-                                                    <div className="selectDay-list">
-                                                        <Row>
-                                                            <Col lg={6} sm={6}>
-                                                                <h5>Fri</h5>
-                                                            </Col>
-                                                            <Col lg={6} sm={6}>
-                                                                <Form.Check type="checkbox" />
-                                                            </Col>
-                                                        </Row>
-                                                    </div>
-                                                </Col>
-                                                <Col lg={2} sm={2} className="mb-3">
-                                                    <div className="selectDay-list">
-                                                        <Row>
-                                                            <Col lg={6} sm={6}>
-                                                                <h5>Sat</h5>
-                                                            </Col>
-                                                            <Col lg={6} sm={6}>
-                                                                <Form.Check type="checkbox" />
-                                                            </Col>
-                                                        </Row>
-                                                    </div>
-                                                </Col>
-                                            </Row>
+                                                <Row>
+                                                    <h3>Day time</h3>
+                                                    <Col lg={4} sm={4}>
+                                                        <div className="selectTime-list">
+                                                            <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fillRule="evenodd" d="M13 4a1 1 0 1 0-2 0v2a1 1 0 1 0 2 0V4Zm5.293 2.293a1 1 0 1 1 1.414 1.414l-1 1a1 1 0 1 1-1.414-1.414l1-1ZM1 18a1 1 0 0 1 1-1h4.342a6 6 0 1 1 11.316 0H22a1 1 0 1 1 0 2H2a1 1 0 0 1-1-1Zm14.465-1a4 4 0 1 0-6.93 0h6.93ZM21 12a1 1 0 1 0 0 2h1a1 1 0 1 0 0-2h-1ZM1 13a1 1 0 0 1 1-1h1a1 1 0 1 1 0 2H2a1 1 0 0 1-1-1Zm3.293-6.707a1 1 0 0 1 1.414 0l1 1a1 1 0 0 1-1.414 1.414l-1-1a1 1 0 0 1 0-1.414Z" clipRule="evenodd" /></svg>
+                                                            <Row>
+                                                                <Col lg={6} sm={6}>
+                                                                    <h6>9-12</h6>
+                                                                </Col>
+                                                                <Col lg={6} sm={6}>
+                                                                    <Form.Check type="checkbox" />
+                                                                </Col>
+                                                            </Row>
+                                                        </div>
+                                                    </Col>
+                                                    <Col lg={4} sm={4}>
+                                                        <div className="selectTime-list">
+                                                            <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fillRule="evenodd" d="M12 1a1 1 0 0 1 1 1v2a1 1 0 1 1-2 0V2a1 1 0 0 1 1-1Zm7.707 4.707-1 1a1 1 0 1 1-1.414-1.414l1-1a1 1 0 1 1 1.414 1.414ZM19 13a1 1 0 0 1 1-1h2a1 1 0 1 1 0 2h-2a1 1 0 0 1-1-1ZM2 12a1 1 0 1 0 0 2h2a1 1 0 1 0 0-2H2Zm3.707-7.707a1 1 0 0 0-1.414 1.414l1 1a1 1 0 0 0 1.414-1.414l-1-1Zm11.586 14.414 1 1a1 1 0 0 0 1.414-1.414l-1-1a1 1 0 0 0-1.414 1.414ZM13 22a1 1 0 1 1-2 0v-2a1 1 0 1 1 2 0v2Zm-7.293-2.293 1-1a1 1 0 1 0-1.414-1.414l-1 1a1 1 0 1 0 1.414 1.414ZM12 6a6 6 0 1 0 0 12 6 6 0 0 0 0-12Zm-4 6a4 4 0 1 1 8 0 4 4 0 0 1-8 0Z" clipRule="evenodd" /></svg>
+                                                            <Row>
+                                                                <Col lg={6} sm={6}>
+                                                                    <h6>12-15</h6>
+                                                                </Col>
+                                                                <Col lg={6} sm={6}>
+                                                                    <Form.Check type="checkbox" />
+                                                                </Col>
+                                                            </Row>
+                                                        </div>
+                                                    </Col>
+                                                    <Col lg={4} sm={4}>
+                                                        <div className="selectTime-list">
+                                                            <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fillRule="evenodd" d="M12 1a1 1 0 0 1 1 1v2a1 1 0 1 1-2 0V2a1 1 0 0 1 1-1Zm7.707 4.707-1 1a1 1 0 1 1-1.414-1.414l1-1a1 1 0 1 1 1.414 1.414ZM19 13a1 1 0 0 1 1-1h2a1 1 0 1 1 0 2h-2a1 1 0 0 1-1-1ZM2 12a1 1 0 1 0 0 2h2a1 1 0 1 0 0-2H2Zm3.707-7.707a1 1 0 0 0-1.414 1.414l1 1a1 1 0 0 0 1.414-1.414l-1-1Zm11.586 14.414 1 1a1 1 0 0 0 1.414-1.414l-1-1a1 1 0 0 0-1.414 1.414ZM13 22a1 1 0 1 1-2 0v-2a1 1 0 1 1 2 0v2Zm-7.293-2.293 1-1a1 1 0 1 0-1.414-1.414l-1 1a1 1 0 1 0 1.414 1.414ZM12 6a6 6 0 1 0 0 12 6 6 0 0 0 0-12Zm-4 6a4 4 0 1 1 8 0 4 4 0 0 1-8 0Z" clipRule="evenodd" /></svg>
+                                                            <Row>
+                                                                <Col lg={6} sm={6}>
+                                                                    <h6>15-18</h6>
+                                                                </Col>
+                                                                <Col lg={6} sm={6}>
+                                                                    <Form.Check type="checkbox" />
+                                                                </Col>
+                                                            </Row>
+                                                        </div>
+                                                    </Col>
+                                                </Row>
+
+                                                <Row>
+                                                    <h3>Evening and night</h3>
+                                                    <Col lg={4} sm={4}>
+                                                        <div className="selectTime-list">
+                                                            <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fillRule="evenodd" d="M13 5a1 1 0 1 0-2 0v1.5a1 1 0 1 0 2 0V5Zm5.293 3.293a1 1 0 1 1 1.414 1.414l-.5.5a1 1 0 0 1-1.414-1.414l.5-.5ZM2 14a1 1 0 1 0 0 2h20a1 1 0 1 0 0-2h-3.344c-.909-2.882-3.524-5-6.656-5-3.132 0-5.747 2.118-6.656 5H2Zm5.48 0h9.04c-.809-1.788-2.545-3-4.52-3-1.975 0-3.711 1.212-4.52 3ZM7 18a1 1 0 1 0 0 2h10a1 1 0 1 0 0-2H7ZM4.293 8.293a1 1 0 0 1 1.414 0l.5.5a1 1 0 0 1-1.414 1.414l-.5-.5a1 1 0 0 1 0-1.414Z" clipRule="evenodd" /></svg>
+                                                            <Row>
+                                                                <Col lg={6} sm={6}>
+                                                                    <h6>18-21</h6>
+                                                                </Col>
+                                                                <Col lg={6} sm={6}>
+                                                                    <Form.Check type="checkbox" />
+                                                                </Col>
+                                                            </Row>
+                                                        </div>
+                                                    </Col>
+                                                    <Col lg={4} sm={4}>
+                                                        <div className="selectTime-list">
+                                                            <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fillRule="evenodd" d="M8 4a3.333 3.333 0 0 0-3.056 2 3 3 0 0 0 .1 6h5.623a2.667 2.667 0 0 0 .613-5.262A3.334 3.334 0 0 0 8 4ZM6.672 7.209a1.334 1.334 0 1 1 2.644.339 1 1 0 0 0 1.204 1.135.667.667 0 1 1 .146 1.317H5a1 1 0 1 1 .338-1.941 1 1 0 0 0 1.334-.85Zm9.995-.185a1 1 0 0 0-.937 1.516c.471.774.75 1.712.75 2.729 0 2.778-2.04 4.875-4.375 4.875-.336 0-.662-.042-.975-.121a1 1 0 0 0-1.113 1.468 7 7 0 1 0 6.65-10.467Zm1.813 4.245c0-.611-.074-1.204-.213-1.77a5.002 5.002 0 1 1-5.112 8.554c3.078-.545 5.325-3.443 5.325-6.784Z" clipRule="evenodd" /></svg>
+                                                            <Row>
+                                                                <Col lg={6} sm={6}>
+                                                                    <h6>21-24</h6>
+                                                                </Col>
+                                                                <Col lg={6} sm={6}>
+                                                                    <Form.Check type="checkbox" />
+                                                                </Col>
+                                                            </Row>
+                                                        </div>
+                                                    </Col>
+                                                    <Col lg={4} sm={4}>
+                                                        <div className="selectTime-list">
+                                                            <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fillRule="evenodd" d="M13.926 5.287A8.072 8.072 0 0 1 7.03 16.994a7 7 0 1 0 6.896-11.707Zm-2.15-2.286.16-.001a9 9 0 1 1-7.949 13.225 1 1 0 0 1 1.144-1.435 6.071 6.071 0 0 0 5.945-10.092 1 1 0 0 1 .7-1.697Z" clipRule="evenodd" /></svg>
+                                                            <Row>
+                                                                <Col lg={6} sm={6}>
+                                                                    <h6>0-3</h6>
+                                                                </Col>
+                                                                <Col lg={6} sm={6}>
+                                                                    <Form.Check type="checkbox" />
+                                                                </Col>
+                                                            </Row>
+                                                        </div>
+                                                    </Col>
+                                                </Row>
+                                                <Row>
+                                                    <h3>Morning</h3>
+                                                    <Col lg={4} sm={4}>
+                                                        <div className="selectTime-list">
+                                                            <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fillRule="evenodd" d="M9 2a1 1 0 0 0 0 2h.382L8.106 6.553A1 1 0 0 0 9 8h2a1 1 0 1 0 0-2h-.382l1.276-2.553A1 1 0 0 0 11 2H9ZM3 7a1 1 0 0 1 1-1h2a1 1 0 0 1 .894 1.447L5.618 10H6a1 1 0 1 1 0 2H4a1 1 0 0 1-.894-1.447L4.382 8H4a1 1 0 0 1-1-1Zm13.033 1.335a7.188 7.188 0 0 1-5.975 10.143 6 6 0 1 0 5.975-10.143ZM13.91 6h.142a8 8 0 1 1-7.065 11.756 1 1 0 0 1 1.144-1.436 5.188 5.188 0 0 0 5.08-8.623 1 1 0 0 1 .7-1.696Z" clipRule="evenodd" /></svg>
+                                                            <Row>
+                                                                <Col lg={6} sm={6}>
+                                                                    <h6>3-6</h6>
+                                                                </Col>
+                                                                <Col lg={6} sm={6}>
+                                                                    <Form.Check type="checkbox" />
+                                                                </Col>
+                                                            </Row>
+                                                        </div>
+                                                    </Col>
+                                                    <Col lg={4} sm={4}>
+                                                        <div className="selectTime-list">
+                                                            <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fillRule="evenodd" d="M13 7.5a1 1 0 1 0-2 0v2a1 1 0 1 0 2 0v-2Zm5.707 2.793a1 1 0 0 1 0 1.414l-1 1a1 1 0 0 1-1.414-1.414l1-1a1 1 0 0 1 1.414 0ZM1 18a1 1 0 0 1 1-1h5.007A4.577 4.577 0 0 1 7 16.75C7 14.067 9.3 12 12 12s5 2.067 5 4.75c0 .084-.002.167-.007.25H22a1 1 0 1 1 0 2H2a1 1 0 0 1-1-1Zm13.988-1a2.55 2.55 0 0 0 .012-.25c0-1.459-1.281-2.75-3-2.75s-3 1.291-3 2.75c0 .084.004.168.012.25h5.976ZM5.293 9.293a1 1 0 0 1 1.414 0l1 1a1 1 0 1 1-1.414 1.414l-1-1a1 1 0 0 1 0-1.414Z" clipRule="evenodd" /></svg>
+                                                            <Row>
+                                                                <Col lg={6} sm={6}>
+                                                                    <h6>6-9</h6>
+                                                                </Col>
+                                                                <Col lg={6} sm={6}>
+                                                                    <Form.Check type="checkbox" />
+                                                                </Col>
+                                                            </Row>
+                                                        </div>
+                                                    </Col>
+                                                </Row>
+                                                <Row>
+                                                    <h3>Days</h3>
+                                                    <Col lg={2} sm={2} className="mb-3">
+                                                        <div className="selectDay-list">
+                                                            <Row>
+                                                                <Col lg={6} sm={6}>
+                                                                    <h5>Sun</h5>
+                                                                </Col>
+                                                                <Col lg={6} sm={6}>
+                                                                    <Form.Check type="checkbox" />
+                                                                </Col>
+                                                            </Row>
+                                                        </div>
+                                                    </Col>
+                                                    <Col lg={2} sm={2} className="mb-3">
+                                                        <div className="selectDay-list">
+                                                            <Row>
+                                                                <Col lg={6} sm={6}>
+                                                                    <h5>Mon</h5>
+                                                                </Col>
+                                                                <Col lg={6} sm={6}>
+                                                                    <Form.Check type="checkbox" />
+                                                                </Col>
+                                                            </Row>
+                                                        </div>
+                                                    </Col>
+                                                    <Col lg={2} sm={2} className="mb-3">
+                                                        <div className="selectDay-list">
+                                                            <Row>
+                                                                <Col lg={6} sm={6}>
+                                                                    <h5>Tue</h5>
+                                                                </Col>
+                                                                <Col lg={6} sm={6}>
+                                                                    <Form.Check type="checkbox" />
+                                                                </Col>
+                                                            </Row>
+                                                        </div>
+                                                    </Col>
+                                                    <Col lg={2} sm={2} className="mb-3">
+                                                        <div className="selectDay-list">
+                                                            <Row>
+                                                                <Col lg={6} sm={6}>
+                                                                    <h5>Wed</h5>
+                                                                </Col>
+                                                                <Col lg={6} sm={6}>
+                                                                    <Form.Check type="checkbox" />
+                                                                </Col>
+                                                            </Row>
+                                                        </div>
+                                                    </Col>
+                                                    <Col lg={2} sm={2} className="mb-3">
+                                                        <div className="selectDay-list">
+                                                            <Row>
+                                                                <Col lg={6} sm={6}>
+                                                                    <h5>Thu</h5>
+                                                                </Col>
+                                                                <Col lg={6} sm={6}>
+                                                                    <Form.Check type="checkbox" />
+                                                                </Col>
+                                                            </Row>
+                                                        </div>
+                                                    </Col>
+                                                    <Col lg={2} sm={2} className="mb-3">
+                                                        <div className="selectDay-list">
+                                                            <Row>
+                                                                <Col lg={6} sm={6}>
+                                                                    <h5>Fri</h5>
+                                                                </Col>
+                                                                <Col lg={6} sm={6}>
+                                                                    <Form.Check type="checkbox" />
+                                                                </Col>
+                                                            </Row>
+                                                        </div>
+                                                    </Col>
+                                                    <Col lg={2} sm={2} className="mb-3">
+                                                        <div className="selectDay-list">
+                                                            <Row>
+                                                                <Col lg={6} sm={6}>
+                                                                    <h5>Sat</h5>
+                                                                </Col>
+                                                                <Col lg={6} sm={6}>
+                                                                    <Form.Check type="checkbox" />
+                                                                </Col>
+                                                            </Row>
+                                                        </div>
+                                                    </Col>
+                                                </Row>
                                             </div>
                                             <Button onClick={nextStep} className="theme-button1 w-100 mt-1" hoverColor="theme-button1" label={strings.Continue} icon="fa fa-long-arrow-right" iconPosition="right" />
                                         </div>
@@ -725,11 +804,11 @@ function Getstarted() {
                                 </Col>
                             </Row>
                         )}
-                        {step === 6 && (
+                        {step === 7 && (
                             <Row>
                                 <Col lg={6} className="">
-                                     <div className='full-screen'>
-                                <div className='all-overlay-bg'>
+                                    <div className='full-screen'>
+                                        <div className='all-overlay-bg'>
                                             <div className="get-start-bg">
                                                 <Button onClick={prevStep} className='white-button' icon="fa fa-arrow-left" iconPosition="left" label={strings.back}></Button>
                                                 <div class="typewriter-area">
@@ -754,9 +833,9 @@ function Getstarted() {
                                                 </Col>
                                             </Row>
                                             <Pricefilter />
-                                            <Link to="find-tutor">
+                                            {/* <Link to="/find-tutor"> */}
                                                 <Button onClick={handleSubmit} className="theme-button1 w-100 mt-1" hoverColor="theme-button1" label={strings.submitbtn} icon="fa fa-long-arrow-right" iconPosition="right" />
-                                            </Link>
+                                            {/* </Link> */}
                                         </div>
                                     </section>
                                 </Col>

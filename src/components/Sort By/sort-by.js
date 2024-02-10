@@ -8,7 +8,7 @@ function Sortby() {
                 <h6>Sort By:</h6>
                
                     <select className="form-control">
-                        <option value="default">Sort By:</option>
+                        {/* <option value="default">Sort By:</option> */}
                         <option value="A-Z">Alphabetically, A-Z</option>
                         <option value="Z-A">Alphabetically, Z-A</option>
                         <option value="PriceLowToHigh">Price, Low to High</option>

@@ -90,7 +90,7 @@ function Profilesetting() {
                                                     </Row>
                                                     <Form.Group className="mb-3">
                                                         <Form.Label>Phone number</Form.Label>
-                                                        <Form.Control type='number' placeholder="+91" />
+                                                        <Form.Control type='number' placeholder="Enter Phone number" />
                                                     </Form.Group>
 
                                                     <Form.Group className="mb-3">

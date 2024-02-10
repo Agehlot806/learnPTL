@@ -1,19 +1,28 @@
-import React from 'react'
+import React, { useState } from 'react'
 import '../View full schedule/view-full-schedule.css'
 import Header from '../../directives/Header/header'
 import Footer from '../../directives/Footer/footer'
 import { Link } from 'react-router-dom'
-import { Accordion, Col, Container, Row, Tab, Tabs } from 'react-bootstrap'
+import { Accordion, Col, Container, OverlayTrigger, Row, Tab, Tabs, Tooltip } from 'react-bootstrap'
 import Img5 from '../../assets/images/img/img5.jpg'
 import Button from '../../components/Button'
 import strings from '../../localzation'
 import Allbg from '../../components/All bg Banner/all-bg'
+import Scheduleslot from '../../components/Schedule Slot/Schedule-slot'
+import BookscheduleSlot from '../../components/models/Book-scheduleSlot'
+import SendMessage from '../../components/models/send-message'
 
 function Viewfullschedule() {
+    const [modalShow, setModalShow] = useState(false);
+
+    const handleShow = () => setModalShow(true);
+    const handleClose = () => setModalShow(false);
+    const [sendMessagesadd, setsendMessagesadd] = React.useState(false);
+
     return (
         <>
             <Header />
-           
+
             <Allbg title="View Full Schedule" linkTo="/" linkText="Home" />
 
             <section className='section-padding'>
@@ -22,7 +31,7 @@ function Viewfullschedule() {
                         <Col lg={8}>
                             <div className='Viewteacher-details'>
                                 <Tabs
-                                    defaultActiveKey="About"
+                                    defaultActiveKey="Schedule"
                                     transition={false}
                                     className="mb-3"
                                 >
@@ -33,27 +42,7 @@ function Viewfullschedule() {
                                         </div>
                                     </Tab>
                                     <Tab eventKey="Schedule" title="Schedule">
-                                        <div className='curriculum-box'>
-                                            <Accordion defaultActiveKey="0">
-                                                <Accordion.Item eventKey="0">
-                                                    <Accordion.Header>new Home</Accordion.Header>
-                                                    <Accordion.Body>
-                                                        <Row>
-                                                            <Col lg={7}>
-                                                                <span><i class="fa fa-play-circle" /> Introduction</span>
-                                                            </Col>
-                                                            <Col lg={3}>
-                                                                <span>Preview</span>
-                                                            </Col>
-                                                            <Col lg={2}>
-                                                                <span>00:25</span>
-                                                            </Col>
-                                                        </Row>
-                                                    </Accordion.Body>
-                                                </Accordion.Item>
-
-                                            </Accordion>
-                                        </div>
+                                        <Scheduleslot />
                                     </Tab>
                                     <Tab eventKey="Review" title="Review">
                                         <div className='review-area'>
@@ -63,7 +52,7 @@ function Viewfullschedule() {
                                                         <h1>5.0</h1>
                                                         <div>
                                                             {[...Array(5)].map((_, i) => (
-                                                                <a key={i}><i className="fa fa-star" style={{ color: '#ffc014', marginLeft: "4px" }}/></a>
+                                                                <a key={i}><i className="fa fa-star" style={{ color: '#ffc014', marginLeft: "4px" }} /></a>
                                                             ))}
                                                         </div>
                                                         <p>1 Reviews</p>
@@ -78,7 +67,7 @@ function Viewfullschedule() {
                                                             <Col lg={4}>
                                                                 <div>
                                                                     {[...Array(5)].map((_, i) => (
-                                                                        <a key={i}><i className="fa fa-star" style={{ color: '#ffc014', marginLeft: "4px" }}/></a>
+                                                                        <a key={i}><i className="fa fa-star" style={{ color: '#ffc014', marginLeft: "4px" }} /></a>
                                                                     ))}
                                                                 </div>
                                                             </Col>
@@ -101,7 +90,7 @@ function Viewfullschedule() {
                                                             <Col lg={4}>
                                                                 <div>
                                                                     {[...Array(4)].map((_, i) => (
-                                                                        <a key={i}><i className="fa fa-star" style={{ color: '#ffc014', marginLeft: "4px" }}/></a>
+                                                                        <a key={i}><i className="fa fa-star" style={{ color: '#ffc014', marginLeft: "4px" }} /></a>
                                                                     ))}
                                                                 </div>
                                                             </Col>
@@ -124,7 +113,7 @@ function Viewfullschedule() {
                                                             <Col lg={4}>
                                                                 <div>
                                                                     {[...Array(3)].map((_, i) => (
-                                                                        <a key={i}><i className="fa fa-star" style={{ color: '#ffc014', marginLeft: "4px" }}/></a>
+                                                                        <a key={i}><i className="fa fa-star" style={{ color: '#ffc014', marginLeft: "4px" }} /></a>
                                                                     ))}
                                                                 </div>
                                                             </Col>
@@ -147,7 +136,7 @@ function Viewfullschedule() {
                                                             <Col lg={4}>
                                                                 <div>
                                                                     {[...Array(2)].map((_, i) => (
-                                                                        <a key={i}><i className="fa fa-star" style={{ color: '#ffc014', marginLeft: "4px" }}/></a>
+                                                                        <a key={i}><i className="fa fa-star" style={{ color: '#ffc014', marginLeft: "4px" }} /></a>
                                                                     ))}
                                                                 </div>
                                                             </Col>
@@ -170,7 +159,7 @@ function Viewfullschedule() {
                                                             <Col lg={4}>
                                                                 <div>
                                                                     {[...Array(1)].map((_, i) => (
-                                                                        <a key={i}><i className="fa fa-star" style={{ color: '#ffc014', marginLeft: "4px" }}/></a>
+                                                                        <a key={i}><i className="fa fa-star" style={{ color: '#ffc014', marginLeft: "4px" }} /></a>
                                                                     ))}
                                                                 </div>
                                                             </Col>
@@ -195,7 +184,7 @@ function Viewfullschedule() {
                                                     <h5>Will Smith</h5>
                                                     <p>1 year ago</p>
                                                     {[...Array(5)].map((_, i) => (
-                                                        <a key={i}><i className="fa fa-star" style={{ color: '#ffc014', marginLeft: "4px" }}/></a>
+                                                        <a key={i}><i className="fa fa-star" style={{ color: '#ffc014', marginLeft: "4px" }} /></a>
                                                     ))}
                                                     <p>Isabella is an excellent tutor, i really enjoy lessons with her. She is friendly, funny, beautiful, smart, really easy to work with her and makes me so comfortable to talk. If i dont understand something, she explains things to me in an understandable manner. Her communication skills are very good. Thank you Isabella!</p>
                                                 </div>
@@ -211,7 +200,7 @@ function Viewfullschedule() {
                                                 <h5>Will Smith</h5>
                                                 <p>1 year ago</p>
                                                 {[...Array(5)].map((_, i) => (
-                                                    <a key={i}><i className="fa fa-star" style={{ color: '#ffc014', marginLeft: "4px" }}/></a>
+                                                    <a key={i}><i className="fa fa-star" style={{ color: '#ffc014', marginLeft: "4px" }} /></a>
                                                 ))}
                                                 <p>Isabella is an excellent tutor, i really enjoy lessons with her. She is friendly, funny, beautiful, smart, really easy to work with her and makes me so comfortable to talk. If i dont understand something, she explains things to me in an understandable manner. </p>
                                             </div>
@@ -238,7 +227,7 @@ function Viewfullschedule() {
                                                     </div>
                                                 </Tab>
                                                 <Tab eventKey="Work experience" title="Work experience">
-                                                <div className='resume-content'>
+                                                    <div className='resume-content'>
                                                         <div>
                                                             <h6>2021 — 2022</h6>
                                                         </div>
@@ -258,7 +247,7 @@ function Viewfullschedule() {
                                                     </div>
                                                 </Tab>
                                                 <Tab eventKey="Certifications" title="Certifications">
-                                                <div className='resume-content'>
+                                                    <div className='resume-content'>
                                                         <div>
                                                             <h6>2022 — 2022</h6>
                                                         </div>
@@ -272,7 +261,6 @@ function Viewfullschedule() {
                                             </Tabs>
                                         </div>
                                     </Tab>
-
                                     <Tab eventKey="Tutor" title="Tutor">
                                         <div className='Tutor-area'>
                                             <h4>Meet Your Tutor</h4>
@@ -337,10 +325,15 @@ function Viewfullschedule() {
                                         </li>
                                     </ul>
                                 </div>
-                                <Button className="theme-button1 mt-1 w-100" hoverColor="theme-button1" label={strings.enrollthecourse} />
+                                <Button onClick={handleShow} className="theme-button1 mt-1 w-100" hoverColor="theme-button1" label="Book a trial lesson" />
+                                <BookscheduleSlot show={modalShow} onHide={handleClose} />
                                 <div className='d-flex justify-content-center'>
                                     <Button className="plan-button mt-3" label={strings.addtowishlist} icon="fa fa-heart-o" iconPosition="left" />
-                                    <Button className="plan-button mt-3" label={strings.sharecourse} icon="fa fa-share-alt" iconPosition="left" />
+                                    <Button onClick={() => setsendMessagesadd(true)} className="plan-button mt-3" label="Send Message" icon="fa fa-commenting-o" iconPosition="left" />
+                                    <SendMessage
+                            show={sendMessagesadd}
+                            onHide={() => setsendMessagesadd(false)}
+                        />
 
                                 </div>
                                 <div className='course'>
