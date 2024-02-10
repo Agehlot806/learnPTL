@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./Register-tutor.css";
-import { Col, Container, Form, Row } from "react-bootstrap";
+import { Alert, Col, Container, Form, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import strings from "../../localzation";
 import Button from "../../components/Button";
@@ -1073,7 +1073,7 @@ const RegisterTutore = () => {
                       A correct timezone is essential to coordinate lessons with
                       international students
                     </p>
-                    <Form>
+                    <Form className="ava-slottime">
                       <Form.Group className="mb-3">
                         <Form.Label>Choose your timezone</Form.Label>
                         <Form.Select aria-label="Choose your timezone...">
@@ -1438,60 +1438,6 @@ const RegisterTutore = () => {
                       >
                         Add another timeslot
                       </Link>
-                      <Form.Group className="mb-3" controlId="formBasicEmail">
-                        <Form.Label>Country of origin</Form.Label>
-                        <Form.Select aria-label="Choose Country...">
-                          <option>Choose Country...</option>
-                          {countrys.map((country) => (
-                            <option key={country.id} value={country.id}>
-                              {country.country}
-                            </option>
-                          ))}
-                        </Form.Select>
-                      </Form.Group>
-                      <Row>
-                        <Col>
-                          <Form.Group className="mb-3">
-                            <Form.Label>Languages spoken</Form.Label>
-                            <Form.Select disabled>
-                              <option>Disabled select</option>
-                            </Form.Select>
-                          </Form.Group>
-                        </Col>
-                        <Col>
-                          <Form.Group className="mb-3">
-                            <Form.Label>Level</Form.Label>
-                            <Form.Select aria-label="Choose Level...">
-                              <option>Choose Country...</option>
-                              <option value="1">One</option>
-                              <option value="2">Two</option>
-                              <option value="3">Three</option>
-                            </Form.Select>
-                          </Form.Group>
-                        </Col>
-                      </Row>
-                      <Link className="addlang">add another language</Link>
-                      <Form.Group
-                        className="mb-3 mt-3"
-                        controlId="formBasicEmail"
-                      >
-                        <Form.Label>Subject taught</Form.Label>
-                        <Form.Select aria-label="Choose Subject...">
-                          <option>Choose Country...</option>
-                          <option value="1">One</option>
-                          <option value="2">Two</option>
-                          <option value="3">Three</option>
-                        </Form.Select>
-                      </Form.Group>
-                      <Form.Group className="mb-3" controlId="formBasicEmail">
-                        <Form.Label>Phone Number (Optional)</Form.Label>
-                        <Form.Control type="email" placeholder="Enter email" />
-                      </Form.Group>
-                      <Form.Check aria-label="option 1">
-                        <Form.Check.Input className="check_box" />
-                        <Form.Check.Label>{`
-  I confirm I’m over 18`}</Form.Check.Label>
-                      </Form.Check>
                     </Form>
                     {/* after click on step 2 next button step one hide and display step 3 data */}
                     <Row>
@@ -1520,81 +1466,120 @@ const RegisterTutore = () => {
               {currentStep === 8 && (
                 <Col lg={7}>
                   <div className="tutor-registepone">
-                    <h1>Pricing</h1>
+                    <h1>Set your hourly base rate</h1>
                     <p>
-                      Start creating your public tutor profile. Your progress
-                      will be automatically saved as you complete each section.
-                      You can return at any time to finish your registration.
+                      To get more students to your profile, we recommend a base
+                      price of $6 per hour for new tutors in your subject and
+                      with your experience level.
                     </p>
-                    <Form>
+                    <Form className="a">
                       <Form.Group className="mb-3" controlId="formBasicEmail">
-                        <Form.Label>First Name</Form.Label>
+                        <Form.Label>Price in USD only</Form.Label>
                         <Form.Control
                           className="text-fieldhover"
-                          type="email"
+                          type="text"
                           placeholder="Enter email"
                         />
                       </Form.Group>
-                      <Form.Group className="mb-3" controlId="formBasicEmail">
-                        <Form.Label>Last Name</Form.Label>
-                        <Form.Control type="email" placeholder="Enter email" />
-                      </Form.Group>
-
-                      <Form.Group className="mb-3" controlId="formBasicEmail">
-                        <Form.Label>Country of origin</Form.Label>
-                        <Form.Select aria-label="Choose Country...">
-                          <option>Choose Country...</option>
-                          {countrys.map((country) => (
-                            <option key={country.id} value={country.id}>
-                              {country.country}
-                            </option>
-                          ))}
-                        </Form.Select>
-                      </Form.Group>
-                      <Row>
-                        <Col>
-                          <Form.Group className="mb-3">
-                            <Form.Label>Languages spoken</Form.Label>
-                            <Form.Select disabled>
-                              <option>Disabled select</option>
-                            </Form.Select>
-                          </Form.Group>
-                        </Col>
-                        <Col>
-                          <Form.Group className="mb-3">
-                            <Form.Label>Level</Form.Label>
-                            <Form.Select aria-label="Choose Level...">
-                              <option>Choose Country...</option>
-                              <option value="1">One</option>
-                              <option value="2">Two</option>
-                              <option value="3">Three</option>
-                            </Form.Select>
-                          </Form.Group>
-                        </Col>
-                      </Row>
-                      <Link className="addlang">add another language</Link>
-                      <Form.Group
-                        className="mb-3 mt-3"
-                        controlId="formBasicEmail"
-                      >
-                        <Form.Label>Subject taught</Form.Label>
-                        <Form.Select aria-label="Choose Subject...">
-                          <option>Choose Country...</option>
-                          <option value="1">One</option>
-                          <option value="2">Two</option>
-                          <option value="3">Three</option>
-                        </Form.Select>
-                      </Form.Group>
-                      <Form.Group className="mb-3" controlId="formBasicEmail">
-                        <Form.Label>Phone Number (Optional)</Form.Label>
-                        <Form.Control type="email" placeholder="Enter email" />
-                      </Form.Group>
-                      <Form.Check aria-label="option 1">
-                        <Form.Check.Input className="check_box" />
-                        <Form.Check.Label>{`
-  I confirm I’m over 18`}</Form.Check.Label>
-                      </Form.Check>
                     </Form>
+
+                    <div classname="pricing-alrt">
+                      <Alert variant="warning">
+                        Change your base rate in settings after approval
+                      </Alert>
+                    </div>
+                    <Accordion defaultActiveKey="0" className="learn-comm">
+                      <Accordion.Item eventKey="0">
+                        <Accordion.Header>LearnPTL commission</Accordion.Header>
+                        <Accordion.Body>
+                          <p>
+                            We use the funds for getting more students and for
+                            constant improvements of our learning platform
+                          </p>
+                          <ul>
+                            <li>
+                              For every trial lesson with a new student Preply’s
+                              commission is 100%
+                            </li>
+                            <li>
+                              For all the subsequent lessons, Preply charges a
+                              percentage (18%-33%) of the hourly rate
+                            </li>
+                            <li>
+                              The more hours you teach, the lower your rate of
+                              commission will be
+                            </li>
+                          </ul>
+                          <div className="Completed-hours">
+                            <div className="completed-lst">
+                              <div>
+                                <p>Completed hours</p>
+                              </div>
+                              <div>
+                                <p>Commission rate</p>
+                              </div>
+                            </div>
+                            <div className="completed-lst">
+                              <div>
+                                <h6>0 - 20 hours</h6>
+                              </div>
+                              <div>
+                                <h6>
+                                  <strong>33%</strong>
+                                </h6>
+                              </div>
+                            </div>
+                            <div className="completed-lst">
+                              <div>
+                                <h6>21 - 50 hours</h6>
+                              </div>
+                              <div>
+                                <h6>
+                                  <strong>28%</strong>
+                                </h6>
+                              </div>
+                            </div>
+                            <div className="completed-lst">
+                              <div>
+                                <h6>51 - 200 hours</h6>
+                              </div>
+                              <div>
+                                <h6>
+                                  <strong>25%</strong>
+                                </h6>
+                              </div>
+                            </div>
+                            <div className="completed-lst">
+                              <div>
+                                <h6>201 - 400 hours</h6>
+                              </div>
+                              <div>
+                                <h6>
+                                  <strong>22%</strong>
+                                </h6>
+                              </div>
+                            </div>
+                            <div className="completed-lst">
+                              <div>
+                                <h6>400+ hours</h6>
+                              </div>
+                              <div>
+                                <h6>
+                                  <strong>18%</strong>
+                                </h6>
+                              </div>
+                            </div>
+                          </div>
+                        </Accordion.Body>
+                      </Accordion.Item>
+                    </Accordion>
+                    <div classname="pricing-alrt">
+                      <Alert variant="warning">
+                        Students can subscribe to monthly or yearly plans based
+                        on the frequency of lessons they’ll take. Automatic
+                        recurring payment takes place every 28 days.
+                      </Alert>
+                    </div>
                     {/* after click on step 2 next button step one hide and display step 3 data */}
                     <Row>
                       <Col>
@@ -1609,8 +1594,7 @@ const RegisterTutore = () => {
                         <Button
                           className="theme-button1 w-100 mt-3"
                           hoverColor="theme-button1"
-                          label={strings.next}
-                          onClick={handleNext}
+                          label="Complete Registration"
                         />
                       </Col>
                     </Row>

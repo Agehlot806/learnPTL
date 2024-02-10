@@ -299,3 +299,18 @@ a.add-slottime {
   color: #000;
   font-weight: 600;
 }
+form.ava-slottime h5 {
+  margin: 22px 0;
+}
+.learn-comm ul li {
+  list-style-type: disc;
+}
+.completed-lst {
+  display: flex;
+  justify-content: space-between;
+  margin: 10px 0;
+}
+.Completed-hours {
+  background: #a5a8b126;
+  padding: 20px;
+}

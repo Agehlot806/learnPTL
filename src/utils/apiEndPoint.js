@@ -5,7 +5,7 @@ export const ApiEndPoints = {
   // LOGIN API
   LOGIN_API: "/login",
 
-  // FORGET PASSWORD
+  // FORGET PASSWORD Demo
   FORGET_PASSWORD_API: "FORGETPASSWORDAPI",
 
   // Latest Api Find Tutor API
