@@ -237,6 +237,7 @@ const RegisterTutore = () => {
   const addTimeSlotSunday = () => {
     setSunday([...Sunday, { from: "09:00", to: "09:00" }]);
   };
+  
   return (
     <>
       <Header />
@@ -557,6 +558,7 @@ const RegisterTutore = () => {
                         teaching certification later.
                       </p>
                     )}
+                    <div>
                     <Form>
                       <Form.Check aria-label="option 1">
                         <Form.Check.Input
@@ -687,6 +689,7 @@ const RegisterTutore = () => {
                         />
                       </div>
                     )}
+                    </div>
                     <Link className="addlang">add another Certificate</Link>
                     {/* after click on step 2 next button step one hide and display step 3 data */}
                     <Row>
@@ -789,20 +792,32 @@ const RegisterTutore = () => {
                             <Form.Group className="mb-3">
                               <Form.Label>Years of study</Form.Label>
                               <Row>
-                                <Col>
-                                  <Form.Select aria-label="Choose Years of study...">
+                              <Col>
+                                  <Form.Select
+                                    aria-label="Choose Years of study..."
+                                    value={selectedYear}
+                                    onChange={handleYearChange}
+                                  >
                                     <option>Choose Years of study...</option>
-                                    <option value="1">One</option>
-                                    <option value="2">Two</option>
-                                    <option value="3">Three</option>
+                                    {years.map((year) => (
+                                      <option key={year} value={year}>
+                                        {year}
+                                      </option>
+                                    ))}
                                   </Form.Select>
                                 </Col>
                                 <Col>
-                                  <Form.Select aria-label="Choose Years of study...">
+                                  <Form.Select
+                                    aria-label="Choose Years of study..."
+                                    value={selectedYear}
+                                    onChange={handleYearChange}
+                                  >
                                     <option>Choose Years of study...</option>
-                                    <option value="1">One</option>
-                                    <option value="2">Two</option>
-                                    <option value="3">Three</option>
+                                    {years.map((year) => (
+                                      <option key={year} value={year}>
+                                        {year}
+                                      </option>
+                                    ))}
                                   </Form.Select>
                                 </Col>
                               </Row>
@@ -825,7 +840,7 @@ const RegisterTutore = () => {
                           className="theme-button1 w-100 mt-3"
                           hoverColor="theme-button1"
                           label={strings.uploadPhoto}
-                          // onClick={handleBack}
+                        // onClick={handleBack}
                         />
                       </div>
                     )}
@@ -1077,10 +1092,12 @@ const RegisterTutore = () => {
                       <Form.Group className="mb-3">
                         <Form.Label>Choose your timezone</Form.Label>
                         <Form.Select aria-label="Choose your timezone...">
-                          <option>Choose Country...</option>
-                          <option value="1">One</option>
-                          <option value="2">Two</option>
-                          <option value="3">Three</option>
+                        <option>Choose Country...</option>
+                          {countrys.map((country) => (
+                            <option key={country.id} value={country.id}>
+                              {country.country}
+                            </option>
+                          ))}
                         </Form.Select>
                       </Form.Group>
                       <h4>Set your availability</h4>

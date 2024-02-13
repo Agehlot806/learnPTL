@@ -64,8 +64,25 @@ const VideoRecorder = () => {
   };
 
   return (
+    // <div className="video-btnss">
+    //   <video ref={videoRef} autoPlay playsInline muted={isAudioMuted} /> <br />
+    //   {!isRecording ? (
+    //     <button onClick={startRecording}>Start Recording</button>
+    //   ) : (
+    //     <button onClick={stopRecording}>Stop Recording</button>
+    //   )}
+    //   <button onClick={toggleAudio}>
+    //     {isAudioMuted ? "Unmute Audio" : "Mute Audio"}
+    //   </button>
+    //   {recordedBlob && (
+    //     <div>
+    //       <h2>Recorded Video Preview</h2>
+    //       <video ref={recordedVideoRef} controls />
+    //     </div>
+    //   )}
+    // </div>
     <div className="video-btnss">
-      <video ref={videoRef} autoPlay playsInline muted={isAudioMuted} /> <br />
+      {!recordedBlob && <video ref={videoRef} autoPlay playsInline muted={isAudioMuted} />} <br />
       {!isRecording ? (
         <button onClick={startRecording}>Start Recording</button>
       ) : (
