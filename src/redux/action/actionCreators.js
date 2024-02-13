@@ -156,7 +156,7 @@ export const tutorsShowSuccess = (tutors) => async (dispatch) => ({
 });
 
 export const fetchTutorsShow = (tutors) => async (dispatch) => {
-  console.log("user11111", tutors);
+  console.log("usertutors", tutors);
   try {
     await axios
       .get(`${BASE_URL}${ApiEndPoints.TUTORS_SHOW}`, tutors)

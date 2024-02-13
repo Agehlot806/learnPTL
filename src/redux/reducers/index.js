@@ -2,7 +2,7 @@
 import { combineReducers } from "redux";
 import authReducer from "./autoReducer";
 import productReducer from "./ProductReducer";
-import tutorReducer from "./SpeakShowReducer";
+import tutorReducer from "./TutorsShowReducer";
 import specialtiesReducer from "./SpecialtiesShowReducer";
 import speakReducer from "./SpeakShowReducer";
 import countryReducer from "./CountryShowReducer";
