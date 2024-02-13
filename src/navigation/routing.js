@@ -39,6 +39,7 @@ const ScrollToTop = () => {
 };
 
 function NavRoutes() {
+  
   return (
     <>
       <BrowserRouter>
