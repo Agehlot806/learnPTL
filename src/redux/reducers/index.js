@@ -14,6 +14,7 @@ import blogDetailsReducer from "./BlogDetailsReducer";
 import SlotShowReducer from "./SlotShowReducer";
 import LevelShowReducer from "./LevelShowReducer";
 import CertificationShowReducer from "./CertificationReducer";
+import TutorCountReducer from "./TutorCountReducer";
 
 const rootReducer = combineReducers({
   // Add other reducers here if needed
@@ -30,7 +31,8 @@ const rootReducer = combineReducers({
   blogdetails : blogDetailsReducer,
   slotshow: SlotShowReducer,
   levelshow: LevelShowReducer,
-  certificationshow: CertificationShowReducer
+  certificationshow: CertificationShowReducer,
+  tutorsshowcount: TutorCountReducer
 });
 
 export default rootReducer;

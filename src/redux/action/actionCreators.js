@@ -35,7 +35,9 @@ import {
   FETCH_LEVEL_SUCCESS,
   FETCH_LEVEL_FAILURE,
   FETCH_CERTIFICATION_SUCCESS,
-  FETCH_CERTIFICATION_FAILURE
+  FETCH_CERTIFICATION_FAILURE,
+  FETCH_TUTORCOUNT_SUCCESS,
+  FETCH_TUTORCOUNT_FAILURE
 } from "./actionTypes";
 import { BASE_URL } from "../../config";
 import { ApiEndPoints } from "../../utils/apiEndPoint";
@@ -705,4 +707,43 @@ export const fetchcertificationShow = (certificationshow) => async (dispatch) =>
 
 export const certificationshowFailure = () => ({
   type: FETCH_CERTIFICATION_FAILURE,
+});
+
+
+// tutors Show count api code
+export const tutorcountSuccess = (tutorsshowcount) => async (dispatch) => ({
+  type: FETCH_TUTORCOUNT_SUCCESS,
+  payload: tutorsshowcount,
+});
+
+export const fetchtutorcount = (tutors) => async (dispatch) => {
+  try {
+    await axios
+      .get(`${BASE_URL}${ApiEndPoints.tutorsShowcount}`, tutors)
+      .then((response) => {
+        console.log("tutorsshowcount", response);
+        dispatch({
+          type: FETCH_TUTORCOUNT_SUCCESS,
+          payload: response?.data?.tutors,
+        });
+      })
+      .catch((error) => {
+        console.log("error in login", error?.response?.data?.tutors);
+        dispatch({
+          type: FETCH_TUTORCOUNT_FAILURE,
+          payload: error?.response?.data?.tutors,
+        });
+      });
+  } catch (error) {
+    console.log("error in login", error?.response?.data?.tutors);
+
+    dispatch({
+      type: FETCH_TUTORCOUNT_FAILURE,
+      payload: error.response.data.tutors,
+    });
+  }
+};
+
+export const tutorcountFailure = () => ({
+  type: BLOGDETAILS_FAILURE,
 });

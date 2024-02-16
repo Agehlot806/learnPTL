@@ -47,5 +47,8 @@ export const ApiEndPoints = {
   // certificationshow Api
   certificationShow: "/certificationshow",
 
+  // tutorsshowcount Api
+  tutorsShowcount: "/tutorsshowcount",
+
 };
 
