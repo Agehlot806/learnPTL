@@ -12,34 +12,44 @@ import {
 
 function Allfilter(props) {
   const dispatch = useDispatch();
-  const [superTutorsSwitch, setSuperTutorsSwitch] = useState(false);
-  const [professionalTutorsSwitch, setProfessionalTutorsSwitch] =
-    useState(false);
-  const [nativeSpeakerSwitch, setNativeSpeakerSwitch] = useState(false);
-
+  const [highestPrice, setHighestPrice] = useState(0);
+  console.log("highestPrice: ", highestPrice);
+  useEffect(() => {
+    if (props.products && props.products) {
+      let maxPrice = 0;
+      props.products.forEach((product) => {
+        const price = parseFloat(product.price);
+        if (price > maxPrice) {
+          maxPrice = price;
+        }
+      });
+      setHighestPrice(maxPrice);
+    }
+  }, [props.products]);
   const handleSwitchClickone = (checked) => {
-    setSuperTutorsSwitch(checked);
+    props.setSuperTutorsSwitch(checked);
     dispatch(
       fetchCreateTutorCategory({
         user_id: 1,
         superTutors: checked,
-        professionalTutors: professionalTutorsSwitch,
+        professionalTutors: props.professionalTutorsSwitch,
       })
     );
   };
 
   const handleSwitchChangetwo = (checked) => {
-    setProfessionalTutorsSwitch(checked);
+    props.setProfessionalTutorsSwitch(checked);
     dispatch(
       fetchCreateTutorCategory({
         user_id: 1,
-        superTutors: superTutorsSwitch,
+        superTutors: props.superTutorsSwitch,
         professionalTutors: checked,
       })
     );
   };
   const handleSwitchChangeSpeaker = (checked) => {
-    setNativeSpeakerSwitch(checked);
+    console.log("handleSwitchChangeSpeaker: ", checked);
+    props.setNativeSpeakerSwitch(checked);
     dispatch(
       fetchCreateSpeaker({
         user_id: 1,
@@ -47,45 +57,20 @@ function Allfilter(props) {
       })
     );
   };
+  // -----------------------------------------------
+  const handleSwitchChangeSpeakerNew = (isChecked) => {
+    props.setSpeakerChecked(isChecked);
+  };
+  //   superTutorsChecked
 
-  const [selectedTutorCategory, setSelectedTutorCategory] = useState("");
-  const [selectedTutorCountry, setSelectedTutorCountry] = useState("");
-  const [selectedTutorSpeak, setSelectedTutorSpeak] = useState("");
-  const [selectedTutorSpecialties, setSelectedTutorSpecialties] = useState("");
+  // professionalTutorsChecked
 
-  // Function to handle tutor category selection
-  const handleTutorCategorySelect = (category) => {
-    setSelectedTutorCategory(category);
+  const handleSuperTutorsSwitch = (isChecked) => {
+    props.setSuperTutorsChecked(isChecked);
   };
-  const handleTutorCountrySelect = (country) => {
-    setSelectedTutorCountry(country);
+  const handleProfessionalTutors = (isChecked) => {
+    props.setProfessionalTutorsChecked(isChecked);
   };
-  const handleTutorSpeakSelect = (speak) => {
-    setSelectedTutorSpeak(speak);
-  };
-  const handleTutorSpecialtiesSelect = (specialties) => {
-    setSelectedTutorSpecialties(specialties);
-  };
-
-  // Filter products based on selected tutor category
-  useEffect(() => {
-    const filteredProducts = props.products
-      ? props.products.filter(
-          (product) => product.categories == selectedTutorCategory
-        ) ||
-        props.products.filter(
-          (product) => product.country == selectedTutorCountry
-        ) ||
-        props.products.filter(
-          (product) => product.speak == selectedTutorSpeak
-        ) ||
-        props.products.filter(
-          (product) => product.specialties == selectedTutorSpecialties
-        )
-      : [];
-    props.onFilterChange(filteredProducts); // Pass filtered products to the parent component
-  }, [props.products, props.onFilterChange]);
-  // console.log("filteredProducts: ", filteredProducts);
   return (
     <div className="filter-All">
       <Button
@@ -107,14 +92,21 @@ function Allfilter(props) {
                         <div
                           key={index}
                           className="form-group form-check"
-                          onClick={() =>
-                            handleTutorCategorySelect(option.tutors)
-                          }
+                          // onClick={() =>
+                          //   handleTutorCategorySelect(option.tutors)
+                          // }
                         >
+                          {console.log("option.tutors: ", option.tutors)}
                           <input
                             type="checkbox"
                             className="form-check-input"
-                            id={`checkbox_${index}`}
+                            checked={props.selectedTutors.includes(
+                              option.tutors
+                            )}
+                            onChange={() =>
+                              props.handleTutorsCheckboxChange(option.tutors)
+                            }
+                            // id={`checkbox_${index}`}
                           />
                           <label
                             className="form-check-label"
@@ -134,7 +126,8 @@ function Allfilter(props) {
               <Accordion.Item eventKey="3">
                 <Accordion.Header>{props.Price}</Accordion.Header>
                 <Accordion.Body>
-                  <Pricefilter />
+                  <Pricefilter price={40} firstprice={0} />
+                  {/* <Pricefilter price={highestPrice} firstprice={0} /> */}
                 </Accordion.Body>
               </Accordion.Item>
             )}
@@ -150,14 +143,20 @@ function Allfilter(props) {
                         <div
                           key={index}
                           className="form-group form-check"
-                          onClick={() =>
-                            handleTutorCountrySelect(option.country)
-                          }
+                          // onClick={() =>
+                          //   handleTutorCountrySelect(option.country)
+                          // }
                         >
                           <input
                             type="checkbox"
                             className="form-check-input"
-                            id={`checkbox_${index}`}
+                            // id={`checkbox_${index}`}
+                            checked={props.selectedCountry.includes(
+                              option.country
+                            )}
+                            onChange={() =>
+                              props.handleCountryCheckboxChange(option.country)
+                            }
                           />
                           <label
                             className="form-check-label"
@@ -183,14 +182,22 @@ function Allfilter(props) {
                         <div
                           key={index}
                           className="form-group form-check"
-                          onClick={() =>
-                            handleTutorSpecialtiesSelect(option.specialties)
-                          }
+                          // onClick={() =>
+                          //   handleTutorSpecialtiesSelect(option.specialties)
+                          // }
                         >
                           <input
                             type="checkbox"
                             className="form-check-input"
-                            id={`checkbox_${index}`}
+                            checked={props.selectedSpecialties.includes(
+                              option.specialties
+                            )}
+                            onChange={() =>
+                              props.handleSpecialtiesCheckboxChange(
+                                option.specialties
+                              )
+                            }
+                            // id={`checkbox_${index}`}
                           />
                           <label
                             className="form-check-label"
@@ -216,12 +223,19 @@ function Allfilter(props) {
                         <div
                           key={index}
                           className="form-group form-check"
-                          onClick={() => handleTutorSpeakSelect(option.speak)}
+                          // onClick={() => handleTutorSpeakSelect(option.speak)}
                         >
                           <input
                             type="checkbox"
                             className="form-check-input"
-                            id={`checkbox_${index}`}
+                            checked={props.selectedSpeaks.includes(
+                              option.speak
+                            )}
+                            onChange={() =>
+                              props.handleSpeakCheckboxChange(option.speak)
+                            }
+
+                            // id={`checkbox_${index}`}
                           />
                           <label
                             className="form-check-label"
@@ -243,23 +257,43 @@ function Allfilter(props) {
                 <Accordion.Body>
                   <div className="filter-options">
                     <Row>
-                      <Col lg={8}>
-                        <h6>Only English native speakers</h6>
-                        <p>
-                          We will only show tutors who teach in their native
-                          language
-                        </p>
-                      </Col>
-                      <Col lg={4}>
-                        <Form.Check
-                          type="switch"
-                          onChange={(e) =>
-                            handleSwitchChangeSpeaker(e.target.checked)
-                          }
-                          id="nativeSpeakerSwitch"
-                          checked={nativeSpeakerSwitch}
-                        />
-                      </Col>
+                      <>
+                        <Col lg={2}>
+                          <input
+                            type="checkbox"
+                            className="form-check-input"
+                            onChange={(e) =>
+                              handleSwitchChangeSpeakerNew(e.target.checked)
+                            }
+                            checked={props.speakerChecked}
+                          />
+                        </Col>
+                        <Col lg={10}>
+                          <h6>Native speakers</h6>
+                        </Col>
+
+                        {props.speakerChecked && (
+                          <>
+                            <Col lg={8}>
+                              <h6>Only English native speakers</h6>
+                              <p>
+                                We will only show tutors who teach in their
+                                native language
+                              </p>
+                            </Col>
+                            <Col lg={4}>
+                              <Form.Check
+                                type="switch"
+                                onChange={(e) =>
+                                  handleSwitchChangeSpeaker(e.target.checked)
+                                }
+                                id="nativeSpeakerSwitch"
+                                checked={props.nativeSpeakerSwitch}
+                              />
+                            </Col>
+                          </>
+                        )}
+                      </>
                     </Row>
                   </div>
                 </Accordion.Body>
@@ -273,40 +307,80 @@ function Allfilter(props) {
                 <Accordion.Body>
                   <div className="filter-options">
                     <Row>
-                      <Col lg={8}>
-                        <h6>Only Super tutors</h6>
-                        <p>Only show highly rated and experienced tutors</p>
-                      </Col>
-                      <Col lg={4}>
-                        <Form.Check
-                          type="switch"
-                          onClick={(e) =>
-                            handleSwitchClickone(e.target.checked)
-                          }
-                          id="superTutorsSwitch"
-                          checked={superTutorsSwitch}
-                        />
-                      </Col>
+                      <>
+                        <Col lg={2}>
+                          <input
+                            type="checkbox"
+                            className="form-check-input"
+                            onChange={(e) =>
+                              handleSuperTutorsSwitch(e.target.checked)
+                            }
+                            checked={props.superTutorsChecked}
+                          />
+                        </Col>
+                        <Col lg={10}>
+                          <h6>Only Super tutors</h6>
+                        </Col>
+                        {props.superTutorsChecked && (
+                          <>
+                            <Col lg={8}>
+                              <h6>Super tutors</h6>
+                              <p>
+                                Only show highly rated and experienced tutors
+                              </p>
+                            </Col>
+                            <Col lg={4}>
+                              <Form.Check
+                                type="switch"
+                                onClick={(e) =>
+                                  handleSwitchClickone(e.target.checked)
+                                }
+                                id="superTutorsSwitch"
+                                checked={props.superTutorsSwitch}
+                              />
+                            </Col>
+                          </>
+                        )}
+                      </>
                     </Row>
                     <hr />
                     <Row>
-                      <Col lg={8}>
-                        <h6>Only Experience tutors</h6>
-                        <p>
-                          Only show tutors with a teaching certificate or
-                          relevant education
-                        </p>
-                      </Col>
-                      <Col lg={4}>
-                        <Form.Check
-                          type="switch"
-                          onChange={(e) =>
-                            handleSwitchChangetwo(e.target.checked)
-                          }
-                          id="professionalTutorsSwitch"
-                          checked={professionalTutorsSwitch}
-                        />
-                      </Col>
+                      <>
+                        <Col lg={2}>
+                          <input
+                            type="checkbox"
+                            className="form-check-input"
+                            onChange={(e) =>
+                              handleProfessionalTutors(e.target.checked)
+                            }
+                            checked={props.professionalTutorsChecked}
+                          />
+                        </Col>
+                        <Col lg={10}>
+                          <h6>Only Experience tutors</h6>
+                        </Col>
+                        {props.professionalTutorsChecked && (
+                          <>
+                            <Col lg={8}>
+                              <h6>Experience tutors</h6>
+                              <p>
+                                Only show tutors with a teaching certificate or
+                                relevant education
+                              </p>
+                            </Col>
+                            <Col lg={4}>
+                              <Form.Check
+                                type="switch"
+                                onChange={(e) =>
+                                  handleSwitchChangetwo(e.target.checked)
+                                }
+                                id="professionalTutorsSwitch"
+                                checked={props.professionalTutorsSwitch}
+                              />
+                            </Col>
+                          </>
+                        )}
+                      </>
                     </Row>
                   </div>
                 </Accordion.Body>

@@ -31,25 +31,30 @@ function Findtutor() {
   const dispatch = useDispatch();
   const { products } = useSelector((state) => state.products);
   const { tutors } = useSelector((state) => state.tutors);
+  console.log("tutors: ", tutors);
   const { specialties } = useSelector((state) => state.specialties);
   const { speaks } = useSelector((state) => state.speaks);
   const { countrys } = useSelector((state) => state.countrys);
   const { ratings } = useSelector((state) => state.ratings);
+  const { speaker } = useSelector((state) => state.createspeaker);
+  console.log("speakerrr: ", speaker);
+  const [nativeSpeakerSwitch, setNativeSpeakerSwitch] = useState(false);
+  const [speakerChecked, setSpeakerChecked] = useState(false);
+  const [superTutorsSwitch, setSuperTutorsSwitch] = useState(false);
+  const [superTutorsChecked, setSuperTutorsChecked] = useState(false);
+  console.log("superTutorsChecked: ", superTutorsChecked);
+  const [professionalTutorsSwitch, setProfessionalTutorsSwitch] =
+    useState(false);
+  const [professionalTutorsChecked, setProfessionalTutorsChecked] =
+    useState(false);
+  console.log("professionalTutorsChecked: ", professionalTutorsChecked);
+
+  console.log("nativeSpeakerSwitch: ", nativeSpeakerSwitch);
+
   //   const { createtutor } = useSelector((state) => state.createtutor);
   //   const { createspeaker } = useSelector((state) => state.createspeaker);
 
-  console.log("ratings: ", ratings);
-  const [filteredProducts, setFilteredProducts] = useState([]);
   const [currentItems, setCurrentItems] = useState([]);
-  // Function to receive filtered products from Allfilter component
-  const handleFilterChange = (filtered, products) => {
-    // setFilteredProducts(filtered);
-    if (filteredProducts == tutors) {
-      setFilteredProducts(products);
-    } else {
-      setFilteredProducts(filtered);
-    }
-  };
 
   useEffect(() => {
     dispatch(fetchLatest(products));
@@ -76,52 +81,6 @@ function Findtutor() {
   const [modalShow, setModalShow] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 6; // Number of items per page
-
-  const iwanttolearnList = [
-    { optionName: "English tutors" },
-    { optionName: "Spanish tutors" },
-    { optionName: "French tutors" },
-    { optionName: "German tutors" },
-    { optionName: "Chinese tutors" },
-  ];
-
-  const countryOptions = [
-    { optionName: "India" },
-    { optionName: "United States of America" },
-    { optionName: "United Kingdom" },
-    { optionName: "Canada" },
-    { optionName: "Australia" },
-    { optionName: "Afghanistan" },
-    { optionName: "Åland Islands" },
-    { optionName: "Eritrea" },
-    { optionName: "Ghana" },
-    { optionName: "Maldives" },
-    { optionName: "New Zealand" },
-    { optionName: "Sri Lanka" },
-  ];
-
-  const alsoSpeaksOptions = [
-    { optionName: "Albanian" },
-    { optionName: "Hindi" },
-    { optionName: "English" },
-    { optionName: "Chinese (Mandarin)" },
-    { optionName: "Farsi" },
-    { optionName: "Italian" },
-    { optionName: "Punjabi" },
-    { optionName: "Russian" },
-    { optionName: "Tamil" },
-  ];
-
-  const specialtiesOptions = [
-    { optionName: "Business English" },
-    { optionName: "English for beginners" },
-    { optionName: "English for kids" },
-    { optionName: "English for traveling" },
-    { optionName: "English Literature" },
-    { optionName: "Australian English" },
-    { optionName: "English for ADHD students" },
-    { optionName: "Ap english language & composition" },
-  ];
 
   const allFindTutor = [
     {
@@ -194,32 +153,117 @@ function Findtutor() {
 
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  //   const currentItems = products.slice(indexOfFirstItem, indexOfLastItem);
-  // const  currentItems = products
-  //   ? products.slice(indexOfFirstItem, indexOfLastItem)
+  //   const currentItems = products?.slice(indexOfFirstItem, indexOfLastItem);
+  // const currentItems = products
+  //   ? products?.slice(indexOfFirstItem, indexOfLastItem)
   //   : [];
-  const paginatedItems = currentItems.slice(indexOfFirstItem, indexOfLastItem);
+  const paginatedItems = currentItems?.slice(indexOfFirstItem, indexOfLastItem);
 
   useEffect(() => {
     // Initially set the current items to products
     setCurrentItems(products);
   }, [products]);
 
-  useEffect(() => {
-    // Update current items when filters change
-    setCurrentItems(filteredProducts.length > 0 ? filteredProducts : products);
-  }, [filteredProducts, products]);
-
   const paginate = (pageNumber) => {
     setCurrentPage(pageNumber);
   };
-
 
   const handleShow = () => setModalShow(true);
   const handleClose = () => setModalShow(false);
   const [sendMessagesadd, setsendMessagesadd] = React.useState(false);
   const [bookTrial, setBookTrial] = React.useState(false);
+  const [selectedSpeaks, setSelectedSpeaks] = useState([]);
+  const [selectedCountry, setSelectedCountry] = useState([]);
+  const [selectedTutors, setSelectedTutors] = useState([]);
+  const [selectedSpecialties, setSelectedSpecialties] = useState([]);
+  const handleSpeakCheckboxChange = (speakId) => {
+    // Toggle the selected state of the clicked speak
+    setSelectedSpeaks((prevSelected) => {
+      if (prevSelected.includes(speakId)) {
+        return prevSelected.filter((id) => id !== speakId);
+      } else {
+        return [...prevSelected, speakId];
+      }
+    });
+  };
+  const handleCountryCheckboxChange = (country) => {
+    // Toggle the selected state of the clicked country
+    console.log("country", country);
+    setSelectedCountry((prevSelected) => {
+      if (prevSelected.includes(country)) {
+        return prevSelected.filter((item) => item !== country);
+      } else {
+        return [...prevSelected, country];
+      }
+    });
+  };
+  const handleTutorsCheckboxChange = (tutors) => {
+    // Toggle the selected state of the clicked country
+    console.log("tutors", tutors);
+    setSelectedTutors((prevSelected) => {
+      if (prevSelected.includes(tutors)) {
+        return prevSelected.filter((item) => item !== tutors);
+      } else {
+        return [...prevSelected, tutors];
+      }
+    });
+  };
+  const handleSpecialtiesCheckboxChange = (specialties) => {
+    // Toggle the selected state of the clicked country
+    console.log("specialties", specialties);
+    setSelectedSpecialties((prevSelected) => {
+      if (prevSelected.includes(specialties)) {
+        return prevSelected.filter((item) => item !== specialties);
+      } else {
+        return [...prevSelected, specialties];
+      }
+    });
+  };
 
+  const filteredProducts = products?.filter((product) => {
+    // Check if the product meets the conditions for each filter
+    const speaksCondition =
+      selectedSpeaks.length === 0 || selectedSpeaks.includes(product.speak);
+    const tutorsCondition =
+      selectedTutors.length === 0 ||
+      selectedTutors.includes(product.categories);
+    const specialtiesCondition =
+      selectedSpecialties.length === 0 ||
+      selectedSpecialties.includes(product.specialties);
+    const countryCondition =
+      selectedCountry.length === 0 || selectedCountry.includes(product.country);
+
+    // Apply additional conditions based on speakerChecked and nativeSpeakerSwitch
+    const speakerCondition =
+      (speakerChecked && nativeSpeakerSwitch && product.speaker === 1) ||
+      (!speakerChecked && true) ||
+      (!nativeSpeakerSwitch && product.speaker === 0);
+
+    // Apply additional conditions based on superTutorsChecked and superTutorsSwitch
+    const superTutorsCondition =
+      (superTutorsChecked && superTutorsSwitch && product.Supertutors === 1) ||
+      (!superTutorsChecked && true) ||
+      (!superTutorsSwitch && product.Supertutors === 0);
+
+    // Apply additional conditions based on professionalTutorsChecked and professionalTutorsSwitch
+    const professionalTutorsCondition =
+      (professionalTutorsChecked &&
+        professionalTutorsSwitch &&
+        product.professionaltutors === 1) ||
+      (!professionalTutorsChecked && true) ||
+      (!professionalTutorsSwitch && product.professionaltutors === 0);
+
+    // Return true only if all conditions are met
+    return (
+      speaksCondition &&
+      tutorsCondition &&
+      specialtiesCondition &&
+      countryCondition &&
+      speakerCondition &&
+      superTutorsCondition &&
+      professionalTutorsCondition
+    );
+  });
   return (
     <>
       <Header />
@@ -241,40 +285,46 @@ function Findtutor() {
             Specialties={"Specialties"}
             nativeSpeaker={"Native Speaker"}
             tutorcategories={"Tutor Categories"}
-            onFilterChange={handleFilterChange}
+            // onFilterChange={handleFilterChange}
             products={products}
-            filteredProducts={filteredProducts}
+            // setFilteredProducts={setFilteredProducts}
+            // filteredProducts={filteredProducts}
+            // new
+            nativeSpeakerSwitch={nativeSpeakerSwitch}
+            setNativeSpeakerSwitch={setNativeSpeakerSwitch}
+            speakerChecked={speakerChecked}
+            setSpeakerChecked={setSpeakerChecked}
+            //
+            superTutorsChecked={superTutorsChecked}
+            setSuperTutorsChecked={setSuperTutorsChecked}
+            professionalTutorsChecked={professionalTutorsChecked}
+            setProfessionalTutorsChecked={setProfessionalTutorsChecked}
+            //
+            superTutorsSwitch={superTutorsSwitch}
+            setSuperTutorsSwitch={setSuperTutorsSwitch}
+            professionalTutorsSwitch={professionalTutorsSwitch}
+            setProfessionalTutorsSwitch={setProfessionalTutorsSwitch}
+            //
+            selectedSpeaks={selectedSpeaks}
+            selectedCountry={selectedCountry}
+            selectedTutors={selectedTutors}
+            selectedSpecialties={selectedSpecialties}
+            handleSpecialtiesCheckboxChange={handleSpecialtiesCheckboxChange}
+            handleSpeakCheckboxChange={handleSpeakCheckboxChange}
+            handleCountryCheckboxChange={handleCountryCheckboxChange}
+            handleTutorsCheckboxChange={handleTutorsCheckboxChange}
           />
         </Container>
       </section>
       <section className="section-padding">
         <Container>
           <div className="filter-cards">
-            {/* <label>
-              Filter 1
-              <input
-                type="checkbox"
-                checked={filter1}
-                onChange={handleFilter1Change}
-              />
-            </label>
-
-            <label>
-              Filter 2
-              <input
-                type="checkbox"
-                checked={filter2}
-                onChange={handleFilter2Change}
-              />
-            </label>
-
-            <ul>{generateItemList()}</ul> */}
             <Row>
-              {paginatedItems &&
-                paginatedItems.map((tutor, index) => (
+              {filteredProducts &&
+                filteredProducts.map((tutor, index) => (
                   <Col lg={4} className="mb-4">
                     <div className="course-cards" key={tutor?.id}>
-                      <Link to="" ></Link>
+                      <Link to=""></Link>
                       <img
                         src={
                           "https://storyfy.webzproject.shop/uploads/" +
@@ -300,6 +350,8 @@ function Findtutor() {
                         </Col>
                       </Row>
                       <p>{renderTutorExprience(tutor?.description)}</p>
+                      <p>{tutor?.review} review</p>
+                      <p>{tutor?.price}</p>
                       <div>
                         {[...Array(5)].map((_, i) => (
                           <a key={i}>
@@ -320,7 +372,10 @@ function Findtutor() {
                           label="Book Trial Lesson"
                           onClick={() => setBookTrial(true)}
                         />
-                        <BookscheduleSlot show={bookTrial} onHide={() => setBookTrial(false)} />
+                        <BookscheduleSlot
+                          show={bookTrial}
+                          onHide={() => setBookTrial(false)}
+                        />
                         <Button
                           className="theme-button1 mt-1"
                           hoverColor="theme-button1"
@@ -328,8 +383,8 @@ function Findtutor() {
                           onClick={() => setsendMessagesadd(true)}
                         />
                         <SendMessage
-                            show={sendMessagesadd}
-                            onHide={() => setsendMessagesadd(false)}
+                          show={sendMessagesadd}
+                          onHide={() => setsendMessagesadd(false)}
                         />
                       </div>
                     </div>
