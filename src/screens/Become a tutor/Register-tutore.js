@@ -53,6 +53,7 @@ const RegisterTutore = () => {
     Schedule: '',
 
   })
+  const [step1Completed, setStep1Completed] = useState(false);
   useEffect(() => {
     dispatch(fetchCountryShow(countrys));
     dispatch(fetchSpeakShow(speaks));
@@ -112,6 +113,7 @@ const RegisterTutore = () => {
       case 1:
         if (validateStep1()) {
           setCurrentStep(currentStep + 1);
+          setStep1Completed(true);
         }
         break;
       case 2:
@@ -439,19 +441,19 @@ const RegisterTutore = () => {
   /////tarun/////
 
   const [inputFields, setInputFields] = useState([{
-    fullName: '',
-    emailAddress: '',
-    salary: '',
+    teachingcertification: '',
     subject: '',
-    certificate: ''
+    certificate: '',
+    description: '',
+    selectedYearend: ''
   }]);
   const addInputField = () => {
     setInputFields([...inputFields, {
-      fullName: '',
-      emailAddress: '',
-      salary: '',
+      teachingcertification: '',
       subject: '',
       certificate: '',
+      description: '',  
+      selectedYearend: ''
     }])
   }
   const removeInputFields = (index) => {
@@ -479,10 +481,10 @@ const RegisterTutore = () => {
 
         <div>
           <ul className="registermenu">
-            <li>
+            <li >
               <a>
                 {" "}
-                <span>1</span>About
+                <span className={step1Completed ? 'completed' : ''}>1</span>About
               </a>
               <i class="fa fa-angle-right" aria-hidden="true"></i>
             </li>
@@ -833,176 +835,179 @@ const RegisterTutore = () => {
                     {contacts.map((contact, index) => (
                       <div key={index} className="mt-4">
                         <Form>
-                          <div className="d-flex justify-content-between">
-                            <Form.Check aria-label="option 1">
-                              <Form.Check.Input
-                                className="check_box"
-                                onChange={toggleVisibility}
-                                checked={!isVisible}
-                              />
-                              <Form.Check.Label>
-                                {`I don’t have any teaching certification yet`}
-                              </Form.Check.Label>
-                            </Form.Check>
-                            {index > 0 && (
-                              <Link onClick={() => removeContact(index)}>
-                                <i className="fa fa-times-circle-o" />
-                              </Link>
-                            )}
-                          </div>
                           {
                             inputFields.map((data, index) => {
-                              const { subject } = data;
+                              const { teachingcertification, subject, certificate, description, issuedby, country, selectedYear, selectedYearend, uploadPhoto } = data;
                               return (
-                                <div className="row" key={index}>
-                                  <div className="col-10">
-                                    <Form.Group
-                                      className="mb-3 mt-3"
-                                      controlId="formBasicEmail"
-                                      value={contact.desiredValue}
-                                      onChange={(e) => handleFieldChange(index, 'name', e.target.value)}
-                                    >
-                                      <Form.Label>Subject</Form.Label>
-                                      <Form.Select aria-label="Choose Subject..." onChange={(evnt) => handleChangetarun(index, evnt)} value={subject} name="subject">
-                                        <option>Choose Subject...</option>
-                                        {speaks?.map((speak) => (
-                                          <option key={speak?.id} value={speak?.id}>
-                                            {speak?.speak}
-                                          </option>
-                                        ))}
-                                      </Form.Select>
-                                    </Form.Group>
-                                   
+                                <>
+                                  <div className="d-flex justify-content-between">
+                                    <Form.Check aria-label="option 1">
+                                      <Form.Check.Input
+                                        className="check_box"
+                                        onChange={toggleVisibility}
+                                        checked={!isVisible}
+                                        onInput={(evnt) => handleChangetarun(index, evnt)}
+                                        value={teachingcertification} name="teachingcertification"
+                                      />
+                                      <Form.Check.Label>
+                                        {`I don’t have any teaching certification yet`}
+                                      </Form.Check.Label>
+                                    </Form.Check>
+                                    {index > 0 && (
+                                      <Link onClick={() => removeContact(index)}>
+                                        <i className="fa fa-times-circle-o" />
+                                      </Link>
+                                    )}
                                   </div>
-                                  <div className="col-2">
-                                    {(inputFields.length !== 1) ? <button className="btn btn-outline-danger" onClick={removeInputFields}>Remove</button> : ''}
-                                  </div>
-                                </div>
+                                  {isVisible && (
+                                    <div className="row" key={index}>
+                                      <div className="col-12">
+                                        <Form.Group
+                                          className="mb-3 mt-3"
+                                          controlId="formBasicEmail"
+                                          value={contact.desiredValue}
+                                          onChange={(e) => handleFieldChange(index, 'name', e.target.value)}
+                                        >
+                                          <Form.Label>Subject</Form.Label>
+                                          <Form.Select aria-label="Choose Subject..."
+                                            onChange={(evnt) => handleChangetarun(index, evnt)}
+                                            value={subject} name="subject">
+                                            <option>Choose Subject...</option>
+                                            {speaks?.map((speak) => (
+                                              <option key={speak?.id} value={speak?.name}>
+                                                {speak?.speak}
+                                              </option>
+                                            ))}
+                                          </Form.Select>
+                                        </Form.Group>
+                                        <Form.Group
+                                          className="mb-3 mt-3"
+                                          controlId="formBasicEmail"
+                                        >
+                                          <Form.Label>Certificate</Form.Label>
+                                          <Form.Select aria-label="Choose Certificate..."
+                                            onChange={(evnt) => handleChangetarun(index, evnt)}
+                                            value={certificate} name="certificate">
+                                            <option>Choose Certificate...</option>
+                                            {certificationshow.map((item) => (
+                                              <option key={item?.id} value={item?.name}>
+                                                {item?.certification}
+                                              </option>
+                                            ))}
+                                          </Form.Select>
+                                        </Form.Group>
+                                        <Form.Group
+                                          className="mb-3"
+                                          controlId="formBasicEmail"
+                                        >
+                                          <Form.Label>Description</Form.Label>
+                                          <Form.Control
+                                            className="text-fieldhover"
+                                            type="text"
+                                            placeholder="Description"
+                                            onChange={(evnt) => handleChangetarun(index, evnt)}
+                                            value={description} name="description"
+                                          />
+                                        </Form.Group>
+                                        <Form.Group
+                                          className="mb-3"
+                                          controlId="formBasicEmail"
+                                        >
+                                          <Form.Label>Issued by</Form.Label>
+                                          <Form.Control
+                                            type="text"
+                                            placeholder="Issued by"
+                                            onChange={(evnt) => handleChangetarun(index, evnt)}
+                                            value={issuedby} name="issuedby"
+                                          />
+                                        </Form.Group>
+                                        <Form.Group
+                                          className="mb-3"
+                                          controlId="formBasicEmail"
+                                        >
+                                          <Form.Label>Country of origin</Form.Label>
+                                          <Form.Select aria-label="Choose Country..."
+                                            onChange={(evnt) => handleChangetarun(index, evnt)}
+                                            value={country} name="country">
+                                            <option>Choose Country...</option>
+                                            {countrys?.map((country) => (
+                                              <option key={country.id} value={country.id}>
+                                                {country.country}
+                                              </option>
+                                            ))}
+                                          </Form.Select>
+                                        </Form.Group>
+                                        <Row>
+                                          <Form.Group className="mb-3">
+                                            <Form.Label>Years of study</Form.Label>
+                                            <Row>
+                                              <Col>
+                                                <Form.Select
+                                                  aria-label="Choose Years of study..."
+                                                  value={selectedYear}
+                                                  onChange={handleYearChange}
+                                                  onInput={(evnt) => handleChangetarun(index, evnt)}
+                                                  name="selectedYear"
+                                                >
+                                                  <option>Choose Years of study...</option>
+                                                  {years.map((year) => (
+                                                    <option key={year} value={year}>
+                                                      {year}
+                                                    </option>
+                                                  ))}
+                                                </Form.Select>
+                                              </Col>
+                                              <Col>
+                                                <Form.Select
+                                                  aria-label="Choose Years of study..."
+                                                  value={selectedYearend}
+                                                  onChange={handleYearChange}
+                                                  onInput={(evnt) => handleChangetarun(index, evnt)}
+                                                  name="selectedYearend"
+                                                >
+                                                  <option>Choose Years of study...</option>
+                                                  {years.map((year) => (
+                                                    <option key={year} value={year}>
+                                                      {year}
+                                                    </option>
+                                                  ))}
+                                                </Form.Select>
+                                              </Col>
+                                            </Row>
+                                          </Form.Group>
+                                        </Row>
+                                        <div className="Diplomaarea">
+                                          <h1>Get a 'Diploma verified' badge</h1>
+                                          <p>
+                                            Upload your diploma to boost your credibility! Our
+                                            team will review it and add the badge to your profile.
+                                            Once reviewed, your files will be deleted.
+                                          </p>
+                                          <p>JPG or PNG format; maximum size of 20MB.</p>
+                                        </div>
+                                        <Form.Group
+                                          className="mb-3"
+                                          controlId="formBasicEmail"
+                                        >
+                                          <Form.Label>{strings.uploadPhoto}</Form.Label>
+                                          <Form.Control
+                                            type="file"
+                                            placeholder={strings.uploadPhoto}
+                                            onChange={(evnt) => handleChangetarun(index, evnt)}
+                                            value={uploadPhoto} name="uploadPhoto"
+                                          />
+                                        </Form.Group>
+                                      </div>
+                                      <div className="col-2">
+                                        {(inputFields.length !== 1) ? <button className="btn btn-outline-danger" onClick={removeInputFields}>Remove</button> : ''}
+                                      </div>
+                                    </div>
+                                  )}
+                                </>
                               )
                             })
                           }
-                          {isVisible && (
-                            <>
-                              {" "}
-                              <Form.Group
-                                className="mb-3 mt-3"
-                                controlId="formBasicEmail"
-                                value={contact.desiredValue}
-                                onChange={(e) => handleFieldChange(index, 'name', e.target.value)}
-                              >
-                                <Form.Label>Subject</Form.Label>
-                                <Form.Select aria-label="Choose Subject...">
-                                  <option>Choose Subject...</option>
-                                  {speaks?.map((speak) => (
-                                    <option key={speak?.id} value={speak?.id}>
-                                      {speak?.speak}
-                                    </option>
-                                  ))}
-                                </Form.Select>
-                              </Form.Group>
-                              <Form.Group
-                                className="mb-3 mt-3"
-                                controlId="formBasicEmail"
-                              >
-                                <Form.Label>Certificate</Form.Label>
-                                <Form.Select aria-label="Choose Certificate..." >
-                                  {certificationshow.map((item) => (
-                                    <option key={item?.id} value={item?.id}>
-                                      {item?.certification}
-                                    </option>
-                                  ))}
-                                </Form.Select>
-                              </Form.Group>
-                              <Form.Group
-                                className="mb-3"
-                                controlId="formBasicEmail"
-                              >
-                                <Form.Label>Description</Form.Label>
-                                <Form.Control
-                                  className="text-fieldhover"
-                                  type="text"
-                                  placeholder="Description"
-                                />
-                              </Form.Group>
-                              <Form.Group
-                                className="mb-3"
-                                controlId="formBasicEmail"
-                              >
-                                <Form.Label>Issued by</Form.Label>
-                                <Form.Control
-                                  type="text"
-                                  placeholder="Issued by
-"
-                                />
-                              </Form.Group>
-                              <Form.Group
-                                className="mb-3"
-                                controlId="formBasicEmail"
-                              >
-                                <Form.Label>Country of origin</Form.Label>
-                                <Form.Select aria-label="Choose Country...">
-                                  <option>Choose Country...</option>
-                                  {countrys?.map((country) => (
-                                    <option key={country.id} value={country.id}>
-                                      {country.country}
-                                    </option>
-                                  ))}
-                                </Form.Select>
-                              </Form.Group>
-                              <Row>
-                                <Form.Group className="mb-3">
-                                  <Form.Label>Years of study</Form.Label>
-                                  <Row>
-                                    <Col>
-                                      <Form.Select
-                                        aria-label="Choose Years of study..."
-                                        value={selectedYear}
-                                        onChange={handleYearChange}
-                                      >
-                                        <option>Choose Years of study...</option>
-                                        {years.map((year) => (
-                                          <option key={year} value={year}>
-                                            {year}
-                                          </option>
-                                        ))}
-                                      </Form.Select>
-                                    </Col>
-                                    <Col>
-                                      <Form.Select
-                                        aria-label="Choose Years of study..."
-                                        value={selectedYear}
-                                        onChange={handleYearChange}
-                                      >
-                                        <option>Choose Years of study...</option>
-                                        {years.map((year) => (
-                                          <option key={year} value={year}>
-                                            {year}
-                                          </option>
-                                        ))}
-                                      </Form.Select>
-                                    </Col>
-                                  </Row>
-                                </Form.Group>
-                              </Row>
-                            </>
-                          )}
                         </Form>
-                        {isVisible && (
-                          <div className="Diplomaarea">
-                            <h1>Get a 'Diploma verified' badge</h1>
-                            <p>
-                              Upload your diploma to boost your credibility! Our
-                              team will review it and add the badge to your profile.
-                              Once reviewed, your files will be deleted.
-                            </p>
-                            <p>JPG or PNG format; maximum size of 20MB.</p>
-                            <Button
-                              className="theme-button1 w-100 mt-3"
-                              hoverColor="theme-button1"
-                              label={strings.uploadPhoto}
-                            />
-                          </div>
-                        )}
                       </div>
                     ))}
                     <Link className="addlang" onClick={addContact}>add another Certificate</Link>

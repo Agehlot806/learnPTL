@@ -319,3 +319,8 @@ form.ava-slottime h5 {
   font-size: 30px;
   color: #000;
 }
+
+.completed {
+  background-color: black;
+  color: white; 
+}
