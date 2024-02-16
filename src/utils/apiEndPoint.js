@@ -10,7 +10,8 @@ export const ApiEndPoints = {
 
   // Latest Api Find Tutor API
   Latest_API: "/latest",
-
+  // post
+  LatestNew_API: "/latest/new",
   // filter findTutor TUTORS SHOW API
   TUTORS_SHOW: "/tutorsshow",
 
