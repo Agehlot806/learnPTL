@@ -9,6 +9,8 @@ import {
   REGISTER_FAILURE,
   FETCH_LATEST_SUCCESS,
   FETCH_LATEST_FAILURE,
+  TUTORSREGISTER_SUCCESS,
+  TUTORSREGISTER_FAILURE,
 } from "../action/actionTypes";
 
 const initialState = {
@@ -17,6 +19,7 @@ const initialState = {
   token: null,
   users: null,
   products: null,
+  tutorsusers: null,
 };
 
 const authReducer = (state = initialState, action) => {
@@ -65,6 +68,20 @@ const authReducer = (state = initialState, action) => {
       return {
         ...state,
         token: null,
+      };
+
+    case TUTORSREGISTER_SUCCESS:
+      return {
+        ...state,
+        // isAuthenticated: true,
+        tutorsusers: action.payload,
+      };
+
+    case TUTORSREGISTER_FAILURE:
+      return {
+        ...state,
+        // isAuthenticated: false,
+        tutorsusers: action.payload,
       };
 
     default:

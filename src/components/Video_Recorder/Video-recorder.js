@@ -5,7 +5,7 @@ const VideoRecorder = () => {
   const [isAudioMuted, setIsAudioMuted] = useState(false);
   const [recordedBlob, setRecordedBlob] = useState(null);
   const videoRef = useRef(null);
-  const recordedVideoRef = useRef(null);
+  const recordedVideoRef = useRef(document.createElement("video"));
   const mediaRecorderRef = useRef(null);
   const chunksRef = useRef([]);
 
@@ -30,9 +30,12 @@ const VideoRecorder = () => {
           const blob = new Blob(chunksRef.current, { type: "video/webm" });
           setRecordedBlob(blob);
           const url = URL.createObjectURL(blob);
-          recordedVideoRef.current.src = url;
+          if (recordedVideoRef.current) {
+            recordedVideoRef.current.src = url;
+          }
           setIsRecording(false);
         };
+        
 
         mediaRecorderRef.current.start();
       })
@@ -82,22 +85,28 @@ const VideoRecorder = () => {
     //   )}
     // </div>
     <div className="video-btnss">
-      {!recordedBlob && <video ref={videoRef} autoPlay playsInline muted={isAudioMuted} />} <br />
-      {!isRecording ? (
-        <button onClick={startRecording}>Start Recording</button>
-      ) : (
-        <button onClick={stopRecording}>Stop Recording</button>
-      )}
-      <button onClick={toggleAudio}>
-        {isAudioMuted ? "Unmute Audio" : "Mute Audio"}
-      </button>
-      {recordedBlob && (
-        <div>
-          <h2>Recorded Video Preview</h2>
-          <video ref={recordedVideoRef} controls />
-        </div>
-      )}
+  {recordedBlob ? (
+    <video ref={recordedVideoRef} controls src={URL.createObjectURL(recordedBlob)} />
+  ) : (
+    <video ref={videoRef} autoPlay playsInline muted={isAudioMuted} />
+  )}
+  <br />
+  {!isRecording ? (
+    <button onClick={startRecording}>Start Recording</button>
+  ) : (
+    <button onClick={stopRecording}>Stop Recording</button>
+  )}
+  <button onClick={toggleAudio}>
+    {isAudioMuted ? "Unmute Audio" : "Mute Audio"}
+  </button>
+  {/* {recordedBlob && (
+    <div>
+      <h2>Recorded Video Preview</h2>
+      <video ref={recordedVideoRef} controls src={URL.createObjectURL(recordedBlob)} />
     </div>
+  )} */}
+</div>
+
   );
 };
 

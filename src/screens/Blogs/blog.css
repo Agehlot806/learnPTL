@@ -1,12 +1,11 @@
-
-
 .blog-item {
     margin: 0 0 50px;
 }
 .blog-item img {
     width: 100%;
-    height: auto;
+    height: 400px;
     margin: 0 0 22px;
+    object-fit: contain;
 }
 .blog-item h2 {
     color: var(--heading-color);
@@ -33,9 +32,10 @@
     margin: 0 0 30px;
 }
 .sidebar-blog-item img {
-    width: 50px;
-    height: auto;
+    width: 70px;
+    height: 70px;
     margin: 0 12px 0 0;
+    object-fit: contain;
 }
 .blog-sidebar-box ul {
     padding: 0;

@@ -59,7 +59,7 @@ function NavRoutes() {
           />
           <Route exact path="/view-profile" element={<Viewprofile />} />
           <Route exact path="/blog" element={<Blog />} />
-          <Route exact path="/blog-details" element={<Blogdetails />} />
+          <Route exact path="/blog-details/:id" element={<Blogdetails />} />
           <Route exact path="/faq" element={<Faq />} />
           <Route exact path="/contact" element={<Contact />} />
           <Route exact path="/get-started" element={<Getstarted />} />

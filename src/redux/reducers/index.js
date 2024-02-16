@@ -9,6 +9,11 @@ import countryReducer from "./CountryShowReducer";
 import ratingReducer from "./RatingShowReducer";
 import createtutorReducer from "./CreateTutorReducer";
 import createspeakerReducer from "./CreateSpeakerReducer";
+import blogShowReducer from "./BlogShowReducer";
+import blogDetailsReducer from "./BlogDetailsReducer";
+import SlotShowReducer from "./SlotShowReducer";
+import LevelShowReducer from "./LevelShowReducer";
+import CertificationShowReducer from "./CertificationReducer";
 
 const rootReducer = combineReducers({
   // Add other reducers here if needed
@@ -21,6 +26,11 @@ const rootReducer = combineReducers({
   ratings: ratingReducer,
   createtutor: createtutorReducer,
   createspeaker: createspeakerReducer,
+  blogs : blogShowReducer,
+  blogdetails : blogDetailsReducer,
+  slotshow: SlotShowReducer,
+  levelshow: LevelShowReducer,
+  certificationshow: CertificationShowReducer
 });
 
 export default rootReducer;

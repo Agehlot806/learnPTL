@@ -24,6 +24,18 @@ import {
   CREATETUTOR_CATEGORIES_FAILURE,
   CREATE_SPEAKER_SUCCESS,
   CREATE_SPEAKER_FAILURE,
+  TUTORSREGISTER_SUCCESS,
+  TUTORSREGISTER_FAILURE,
+  BLOG_SUCCESS,
+  BLOG_FAILURE,
+  BLOGDETAILS_FAILURE,
+  BLOGDETAILS_SUCCESS,
+  FETCH_SLOTS_SUCCESS,
+  FETCH_SLOTS_FAILURE,
+  FETCH_LEVEL_SUCCESS,
+  FETCH_LEVEL_FAILURE,
+  FETCH_CERTIFICATION_SUCCESS,
+  FETCH_CERTIFICATION_FAILURE
 } from "./actionTypes";
 import { BASE_URL } from "../../config";
 import { ApiEndPoints } from "../../utils/apiEndPoint";
@@ -110,7 +122,47 @@ export const registerFailure = () => ({
   type: REGISTER_FAILURE,
 });
 
-// LAtest start
+// Tutors Register Creators
+
+export const tutorsregisterSuccess = (tutorsusers) => async (dispatch) => ({
+  type: TUTORSREGISTER_SUCCESS,
+  payload: tutorsusers,
+});
+
+export const tutorsRegister = (tutorsusers) => async (dispatch) => {
+  console.log("user11111", tutorsusers);
+  try {
+    await axios
+      .post(`${BASE_URL}${ApiEndPoints.LatestNew_API}`, tutorsusers)
+      .then((response) => {
+        console.log("response", response);
+        dispatch({
+          type: TUTORSREGISTER_SUCCESS,
+          payload: response.data,
+        });
+      })
+      .catch((error) => {
+        console.log("error in Register", error.response.data);
+        dispatch({
+          type: TUTORSREGISTER_FAILURE,
+          payload: error.response.data,
+        });
+      });
+  } catch (error) {
+    console.log("error in Register", error.response.data);
+
+    dispatch({
+      type: TUTORSREGISTER_FAILURE,
+      payload: error.response.data,
+    });
+  }
+};
+
+export const tutorsregisterFailure = () => ({
+  type: TUTORSREGISTER_FAILURE,
+});
+
+// Latest start
 export const latestSuccess = (products) => async (dispatch) => ({
   type: FETCH_LATEST_SUCCESS,
   payload: products,
@@ -453,4 +505,204 @@ export const setAuthToken = (token) => ({
 
 export const removeAuthToken = () => ({
   type: REMOVE_AUTH_TOKEN,
+});
+
+
+
+
+
+// Blog section api code
+export const blogShowSuccess = (blogs) => async (dispatch) => ({
+  type: BLOG_SUCCESS,
+  payload: blogs,
+});
+
+export const fetchblogShow = (blogs) => async (dispatch) => {
+  console.log("blogs", blogs);
+  try {
+    await axios
+      .get(`${BASE_URL}${ApiEndPoints.BLOG}`, blogs)
+      .then((response) => {
+        console.log("blog", response);
+        dispatch({
+          type: BLOG_SUCCESS,
+          payload: response?.data?.blogs,
+        });
+      })
+      .catch((error) => {
+        console.log("error in login", error?.response?.data?.blogs);
+        dispatch({
+          type: BLOG_FAILURE,
+          payload: error?.response?.data?.blogs,
+        });
+      });
+  } catch (error) {
+    console.log("error in login", error?.response?.data?.blogs);
+
+    dispatch({
+      type: BLOG_FAILURE,
+      payload: error.response.data.blogs,
+    });
+  }
+};
+
+export const blogshowFailure = () => ({
+  type: BLOG_FAILURE,
+});
+
+
+// Blog details section api code
+export const blogDetailsSuccess = (blogdetails) => async (dispatch) => ({
+  type: BLOGDETAILS_SUCCESS,
+  payload: blogdetails,
+});
+
+export const fetchblogDetails = (id) => async (dispatch) => {
+  try {
+    await axios
+      .get(`${BASE_URL}${ApiEndPoints.BLOG}/${id}`)
+      .then((response) => {
+        console.log("blog details", response);
+        dispatch({
+          type: BLOGDETAILS_SUCCESS,
+          payload: response?.data?.blog,
+        });
+      })
+      .catch((error) => {
+        console.log("error in login", error?.response?.data?.blog);
+        dispatch({
+          type: BLOGDETAILS_FAILURE,
+          payload: error?.response?.data?.blog,
+        });
+      });
+  } catch (error) {
+    console.log("error in login", error?.response?.data?.blog);
+
+    dispatch({
+      type: BLOGDETAILS_FAILURE,
+      payload: error.response.data.blog,
+    });
+  }
+};
+
+export const blogDetailsFailure = () => ({
+  type: BLOGDETAILS_FAILURE,
+});
+
+
+// Blog details section api code
+export const slotSuccess = (slotshow) => async (dispatch) => ({
+  type: FETCH_SLOTS_SUCCESS,
+  payload: slotshow,
+});
+
+export const fetchslotShow = (id) => async (dispatch) => {
+  try {
+    await axios
+      .get(`${BASE_URL}${ApiEndPoints.slotShow}/${id}`)
+      .then((response) => {
+        console.log("slot", response);
+        dispatch({
+          type: FETCH_SLOTS_SUCCESS,
+          payload: response?.data?.slots,
+        });
+      })
+      .catch((error) => {
+        console.log("error in slot", error?.response?.data?.slots);
+        dispatch({
+          type: FETCH_SLOTS_FAILURE,
+          payload: error?.response?.data?.slots,
+        });
+      });
+  } catch (error) {
+    console.log("error in slot", error?.response?.data?.slots);
+
+    dispatch({
+      type: FETCH_SLOTS_FAILURE,
+      payload: error.response.data.slots,
+    });
+  }
+};
+
+export const slotFailure = () => ({
+  type: FETCH_SLOTS_FAILURE,
+});
+
+
+// Level api code
+export const levelSuccess = (levelshow) => async (dispatch) => ({
+  type: FETCH_LEVEL_SUCCESS,
+  payload: levelshow,
+});
+
+export const fetchlevelShow = (levelshow) => async (dispatch) => {
+  try {
+    await axios
+      .get(`${BASE_URL}${ApiEndPoints.levelShow}`,levelshow)
+      .then((response) => {
+        console.log("levelShow", response);
+        dispatch({
+          type: FETCH_LEVEL_SUCCESS,
+          payload: response?.data?.level,
+        });
+      })
+      .catch((error) => {
+        console.log("error in slot", error?.response?.data?.level);
+        dispatch({
+          type: FETCH_LEVEL_FAILURE,
+          payload: error?.response?.data?.level,
+        });
+      });
+  } catch (error) {
+    console.log("error in slot", error?.response?.data?.level);
+
+    dispatch({
+      type: FETCH_LEVEL_FAILURE,
+      payload: error.response.data.level,
+    });
+  }
+};
+
+export const levelFailure = () => ({
+  type: FETCH_LEVEL_FAILURE,
+});
+
+
+// certification api code
+export const certificationShowSuccess = (certificationshow) => async (dispatch) => ({
+  type: FETCH_CERTIFICATION_SUCCESS,
+  payload: certificationshow,
+});
+
+export const fetchcertificationShow = (certificationshow) => async (dispatch) => {
+  console.log("certificationshow", certificationshow);
+  try {
+    await axios
+      .get(`${BASE_URL}${ApiEndPoints.certificationShow}`, certificationshow)
+      .then((response) => {
+        console.log("certificationshow", response);
+        dispatch({
+          type: FETCH_CERTIFICATION_SUCCESS,
+          payload: response?.data?.certification,
+        });
+      })
+      .catch((error) => {
+        console.log("error in certificationshow", error?.response?.data?.certification);
+        dispatch({
+          type: FETCH_CERTIFICATION_FAILURE,
+          payload: error?.response?.data?.certification,
+        });
+      });
+  } catch (error) {
+    console.log("error in certificationshow", error?.response?.data?.certification);
+
+    dispatch({
+      type: FETCH_CERTIFICATION_FAILURE,
+      payload: error.response.data.certification,
+    });
+  }
+};
+
+export const certificationshowFailure = () => ({
+  type: FETCH_CERTIFICATION_FAILURE,
 });

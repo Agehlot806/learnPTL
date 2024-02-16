@@ -32,4 +32,20 @@ export const ApiEndPoints = {
 
   // find tutor CREATE SPEAKER POST API
   CREATE_SPEAKER: "/createspeaker",
+
+
+  // Get APIs
+  BLOG: "/blogshow",
+
+
+  // Slot Api
+  slotShow: "slotshow",
+
+  // Level Api
+  levelShow: "/levelshow",
+
+  // certificationshow Api
+  certificationShow: "/certificationshow",
+
 };
+
