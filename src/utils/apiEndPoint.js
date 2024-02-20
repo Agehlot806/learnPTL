@@ -4,6 +4,8 @@ export const ApiEndPoints = {
 
   // LOGIN API
   LOGIN_API: "/login",
+  // LOGOUT API
+  LOGOUT_API: "/logout",
 
   // FORGET PASSWORD Demo
   FORGET_PASSWORD_API: "FORGETPASSWORDAPI",
@@ -33,10 +35,8 @@ export const ApiEndPoints = {
   // find tutor CREATE SPEAKER POST API
   CREATE_SPEAKER: "/createspeaker",
 
-
   // Get APIs
   BLOG: "/blogshow",
-
 
   // Slot Api
   slotShow: "slotshow",
@@ -46,6 +46,4 @@ export const ApiEndPoints = {
 
   // certificationshow Api
   certificationShow: "/certificationshow",
-
 };
-

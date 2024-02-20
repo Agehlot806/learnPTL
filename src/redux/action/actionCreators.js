@@ -3,7 +3,8 @@ import axios from "axios";
 import {
   LOGIN_SUCCESS,
   LOGIN_FAILURE,
-  LOGOUT,
+  LOGOUT_SUCCESS,
+  LOGOUT_FAILURE,
   SET_AUTH_TOKEN,
   REMOVE_AUTH_TOKEN,
   REGISTER_SUCCESS,
@@ -35,7 +36,7 @@ import {
   FETCH_LEVEL_SUCCESS,
   FETCH_LEVEL_FAILURE,
   FETCH_CERTIFICATION_SUCCESS,
-  FETCH_CERTIFICATION_FAILURE
+  FETCH_CERTIFICATION_FAILURE,
 } from "./actionTypes";
 import { BASE_URL } from "../../config";
 import { ApiEndPoints } from "../../utils/apiEndPoint";
@@ -49,7 +50,11 @@ export const userLogin = (user) => async (dispatch) => {
   console.log("user11111", user);
   try {
     await axios
-      .post(`${BASE_URL}${ApiEndPoints.LOGIN_API}`, user)
+      .post(
+        `${BASE_URL}${ApiEndPoints.LOGIN_API}`,
+
+        user
+      )
       .then((response) => {
         console.log("response", response);
         dispatch({
@@ -75,12 +80,40 @@ export const userLogin = (user) => async (dispatch) => {
 };
 
 export const loginFailure = () => ({
-  type: LOGIN_FAILURE,
+  type: LOGOUT_FAILURE,
 });
 
-export const logout = () => ({
-  type: LOGOUT,
-});
+export const userLogout = (userslogout) => async (dispatch) => {
+  const userid = localStorage.getItem("userid");
+  console.log("userslogout", userslogout);
+  try {
+    await axios
+      .post(`${BASE_URL}${ApiEndPoints.LOGOUT_API}/${userid}`, userslogout)
+      .then((response) => {
+        console.log("response", response);
+        dispatch({
+          type: LOGOUT_SUCCESS,
+          payload: response.data,
+        });
+        // Remove userid from localStorage upon successful logout
+        localStorage.removeItem("userid");
+      })
+      .catch((error) => {
+        console.log("error in Logout", error.response.data);
+        dispatch({
+          type: LOGOUT_FAILURE,
+          payload: error.response.data,
+        });
+      });
+  } catch (error) {
+    console.log("error in Logout", error.response.data);
+
+    dispatch({
+      type: LOGOUT_FAILURE,
+      payload: error.response.data,
+    });
+  }
+};
 
 // Register Creators
 
@@ -172,7 +205,14 @@ export const fetchLatest = (products) => async (dispatch) => {
   console.log("user11111", products);
   try {
     await axios
-      .get(`${BASE_URL}${ApiEndPoints.Latest_API}`, products)
+      .get(
+        `${BASE_URL}${ApiEndPoints.Latest_API}`,
+        //  {
+        //   'Content-Type': 'application/json',
+        //   'Authorization': `Bearer ${localStorage.getItem('token')}` // Pass the token here
+        //   },
+        products
+      )
       .then((response) => {
         console.log("response", response);
         dispatch({
@@ -507,10 +547,6 @@ export const removeAuthToken = () => ({
   type: REMOVE_AUTH_TOKEN,
 });
 
-
-
-
-
 // Blog section api code
 export const blogShowSuccess = (blogs) => async (dispatch) => ({
   type: BLOG_SUCCESS,
@@ -550,7 +586,6 @@ export const blogshowFailure = () => ({
   type: BLOG_FAILURE,
 });
 
-
 // Blog details section api code
 export const blogDetailsSuccess = (blogdetails) => async (dispatch) => ({
   type: BLOGDETAILS_SUCCESS,
@@ -588,7 +623,6 @@ export const fetchblogDetails = (id) => async (dispatch) => {
 export const blogDetailsFailure = () => ({
   type: BLOGDETAILS_FAILURE,
 });
-
 
 // Blog details section api code
 export const slotSuccess = (slotshow) => async (dispatch) => ({
@@ -628,7 +662,6 @@ export const slotFailure = () => ({
   type: FETCH_SLOTS_FAILURE,
 });
 
-
 // Level api code
 export const levelSuccess = (levelshow) => async (dispatch) => ({
   type: FETCH_LEVEL_SUCCESS,
@@ -638,7 +671,7 @@ export const levelSuccess = (levelshow) => async (dispatch) => ({
 export const fetchlevelShow = (levelshow) => async (dispatch) => {
   try {
     await axios
-      .get(`${BASE_URL}${ApiEndPoints.levelShow}`,levelshow)
+      .get(`${BASE_URL}${ApiEndPoints.levelShow}`, levelshow)
       .then((response) => {
         console.log("levelShow", response);
         dispatch({
@@ -667,41 +700,48 @@ export const levelFailure = () => ({
   type: FETCH_LEVEL_FAILURE,
 });
 
-
 // certification api code
-export const certificationShowSuccess = (certificationshow) => async (dispatch) => ({
-  type: FETCH_CERTIFICATION_SUCCESS,
-  payload: certificationshow,
-});
+export const certificationShowSuccess =
+  (certificationshow) => async (dispatch) => ({
+    type: FETCH_CERTIFICATION_SUCCESS,
+    payload: certificationshow,
+  });
 
-export const fetchcertificationShow = (certificationshow) => async (dispatch) => {
-  console.log("certificationshow", certificationshow);
-  try {
-    await axios
-      .get(`${BASE_URL}${ApiEndPoints.certificationShow}`, certificationshow)
-      .then((response) => {
-        console.log("certificationshow", response);
-        dispatch({
-          type: FETCH_CERTIFICATION_SUCCESS,
-          payload: response?.data?.certification,
+export const fetchcertificationShow =
+  (certificationshow) => async (dispatch) => {
+    console.log("certificationshow", certificationshow);
+    try {
+      await axios
+        .get(`${BASE_URL}${ApiEndPoints.certificationShow}`, certificationshow)
+        .then((response) => {
+          console.log("certificationshow", response);
+          dispatch({
+            type: FETCH_CERTIFICATION_SUCCESS,
+            payload: response?.data?.certification,
+          });
+        })
+        .catch((error) => {
+          console.log(
+            "error in certificationshow",
+            error?.response?.data?.certification
+          );
+          dispatch({
+            type: FETCH_CERTIFICATION_FAILURE,
+            payload: error?.response?.data?.certification,
+          });
         });
-      })
-      .catch((error) => {
-        console.log("error in certificationshow", error?.response?.data?.certification);
-        dispatch({
-          type: FETCH_CERTIFICATION_FAILURE,
-          payload: error?.response?.data?.certification,
-        });
+    } catch (error) {
+      console.log(
+        "error in certificationshow",
+        error?.response?.data?.certification
+      );
+
+      dispatch({
+        type: FETCH_CERTIFICATION_FAILURE,
+        payload: error.response.data.certification,
       });
-  } catch (error) {
-    console.log("error in certificationshow", error?.response?.data?.certification);
-
-    dispatch({
-      type: FETCH_CERTIFICATION_FAILURE,
-      payload: error.response.data.certification,
-    });
-  }
-};
+    }
+  };
 
 export const certificationshowFailure = () => ({
   type: FETCH_CERTIFICATION_FAILURE,

@@ -12,20 +12,22 @@ import {
 
 function Allfilter(props) {
   const dispatch = useDispatch();
-  const [highestPrice, setHighestPrice] = useState(0);
-  console.log("highestPrice: ", highestPrice);
-  useEffect(() => {
-    if (props.products && props.products) {
-      let maxPrice = 0;
-      props.products.forEach((product) => {
-        const price = parseFloat(product.price);
-        if (price > maxPrice) {
-          maxPrice = price;
-        }
-      });
-      setHighestPrice(maxPrice);
-    }
-  }, [props.products]);
+
+  let maxPrice = 0;
+  const price =
+    props.products?.length > 0 &&
+    props.products.forEach((product) => {
+      const price = parseFloat(product.price);
+      if (price > maxPrice) {
+        maxPrice = price;
+      }
+    });
+  const [minPriceUpdate, setMinPriceUpdate] = useState(0);
+
+  // Function to update minPriceUpdate
+  // const updateMinPrice = (newMinPrice) => {
+  //   setMinPriceUpdate(newMinPrice);
+  // };
   const handleSwitchClickone = (checked) => {
     props.setSuperTutorsSwitch(checked);
     dispatch(
@@ -126,8 +128,8 @@ function Allfilter(props) {
               <Accordion.Item eventKey="3">
                 <Accordion.Header>{props.Price}</Accordion.Header>
                 <Accordion.Body>
-                  <Pricefilter price={40} firstprice={0} />
-                  {/* <Pricefilter price={highestPrice} firstprice={0} /> */}
+                  <Pricefilter firstprice={minPriceUpdate} price={maxPrice} />
+                  {/* <Pricefilter price={maxPrice} firstprice={minPriceUpdate} /> */}
                 </Accordion.Body>
               </Accordion.Item>
             )}

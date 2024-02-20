@@ -12,7 +12,7 @@ import { fetchSpeakShow } from "../../redux/action/actionCreators";
 function FindgetStarted() {
   const dispatch = useDispatch();
   useEffect(() => {
-    // dispatch(fetchSpeakShow(speaks));
+    dispatch(fetchSpeakShow(speaks));
   }, [dispatch]);
   const { speaks } = useSelector((state) => state.speaks);
   console.log("speakslll: ", speaks);
@@ -62,11 +62,12 @@ function FindgetStarted() {
                       <Form.Label>What do you want to learn?</Form.Label>
                       <Form.Select defaultValue="Choose...">
                         <option>Choose...</option>
-                        {speaks.map((speak) => (
-                          <option key={speak.id} value={speak.speak}>
-                            {speak.speak}
-                          </option>
-                        ))}
+                        {speaks &&
+                          speaks.map((speak) => (
+                            <option key={speak.id} value={speak?.speak}>
+                              {speak?.speak}
+                            </option>
+                          ))}
                       </Form.Select>
                     </Form.Group>
                   </Col>
