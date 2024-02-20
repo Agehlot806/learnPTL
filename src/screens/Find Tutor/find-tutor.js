@@ -285,26 +285,19 @@ function Findtutor() {
             Specialties={"Specialties"}
             nativeSpeaker={"Native Speaker"}
             tutorcategories={"Tutor Categories"}
-            // onFilterChange={handleFilterChange}
             products={products}
-            // setFilteredProducts={setFilteredProducts}
-            // filteredProducts={filteredProducts}
-            // new
             nativeSpeakerSwitch={nativeSpeakerSwitch}
             setNativeSpeakerSwitch={setNativeSpeakerSwitch}
             speakerChecked={speakerChecked}
             setSpeakerChecked={setSpeakerChecked}
-            //
             superTutorsChecked={superTutorsChecked}
             setSuperTutorsChecked={setSuperTutorsChecked}
             professionalTutorsChecked={professionalTutorsChecked}
             setProfessionalTutorsChecked={setProfessionalTutorsChecked}
-            //
             superTutorsSwitch={superTutorsSwitch}
             setSuperTutorsSwitch={setSuperTutorsSwitch}
             professionalTutorsSwitch={professionalTutorsSwitch}
             setProfessionalTutorsSwitch={setProfessionalTutorsSwitch}
-            //
             selectedSpeaks={selectedSpeaks}
             selectedCountry={selectedCountry}
             selectedTutors={selectedTutors}

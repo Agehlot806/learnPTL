@@ -18,11 +18,32 @@ import Button from "../../components/Button";
 import Multilang from "../../components/language/multi-language";
 import Balance from "../../components/models/Balance";
 import Notification from "../../components/models/notification";
+import { userLogout } from "../../redux/action/actionCreators";
+import { useDispatch } from "react-redux";
+import { persistor } from "../../store/configureStore";
 
 function Header() {
-  const [modalShow, setModalShow] = React.useState(false);
-  const [notificationShow, setnotificationShow] = React.useState(false);
+  const dispatch = useDispatch();
+  const userid = localStorage.getItem("userid");
+  const [modalShow, setModalShow] = useState(false);
+  const [notificationShow, setnotificationShow] = useState(false);
+  // const history = useHistory();
 
+  const handleLogout = () => {
+    dispatch(userLogout())
+      .then(() => {
+        // Redirect to the login page after successful logout
+        // history.push('/login');
+        localStorage.removeItem("userid");
+        localStorage.removeItem("token");
+        persistor.purge();
+        // window.location.reload();
+      })
+      .catch((error) => {
+        console.error("Logout error:", error);
+        // Handle logout error if needed
+      });
+  };
   return (
     <Navbar expand="lg" className="nav-bg">
       <Container fluid>
@@ -81,9 +102,14 @@ function Header() {
             />
 
             <Nav.Link>
-              <Link to="/login">
-                <Button hoverColor="theme-button1" label={strings.signinbtn} />
-              </Link>
+              {userid === undefined && (
+                <Link to="/login">
+                  <Button
+                    hoverColor="theme-button1"
+                    label={strings.signinbtn}
+                  />
+                </Link>
+              )}
             </Nav.Link>
             <NavDropdown
               className="profile-icon"
@@ -112,7 +138,9 @@ function Header() {
               </NavDropdown.Item>
               <hr />
               <NavDropdown.Item>
-                <Link to="">Logout</Link>
+                <Link to="" onClick={handleLogout}>
+                  Logout
+                </Link>
               </NavDropdown.Item>
             </NavDropdown>
           </Nav>

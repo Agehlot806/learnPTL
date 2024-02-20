@@ -2,7 +2,8 @@
 import {
   LOGIN_SUCCESS,
   LOGIN_FAILURE,
-  LOGOUT,
+  LOGOUT_SUCCESS,
+  LOGOUT_FAILURE,
   SET_AUTH_TOKEN,
   REMOVE_AUTH_TOKEN,
   REGISTER_SUCCESS,
@@ -40,9 +41,17 @@ const authReducer = (state = initialState, action) => {
         user: action.payload,
       };
 
-    case LOGOUT:
+    case LOGOUT_SUCCESS:
       // toast.info("Logged out successfully.");s
-      return initialState;
+      return {
+        ...state,
+        isAuthenticated: false,
+        user: action.payload,
+      };
+
+    // case LOGOUT_FAILURE:
+    //   // toast.info("Logged out successfully.");s
+    //   return initialState;
 
     case REGISTER_SUCCESS:
       return {
