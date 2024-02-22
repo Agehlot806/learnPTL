@@ -3,20 +3,23 @@ import {
   LOGIN_SUCCESS,
   LOGIN_FAILURE,
   LOGOUT_SUCCESS,
-  LOGOUT_FAILURE,
   SET_AUTH_TOKEN,
   REMOVE_AUTH_TOKEN,
   REGISTER_SUCCESS,
   REGISTER_FAILURE,
-  FETCH_LATEST_SUCCESS,
-  FETCH_LATEST_FAILURE,
   TUTORSREGISTER_SUCCESS,
   TUTORSREGISTER_FAILURE,
+  CHANGEPASSWORD_SUCCESS,
+  CHANGEPASSWORD_FAILURE,
+  FORGET_PASSWORD_SUCCESS,
+  FORGET_PASSWORD_FAILURE,
 } from "../action/actionTypes";
 
 const initialState = {
   isAuthenticated: false,
   user: null,
+  changepassword: null,
+  forgetpassword: null,
   token: null,
   users: null,
   products: null,
@@ -39,6 +42,37 @@ const authReducer = (state = initialState, action) => {
         ...state,
         isAuthenticated: false,
         user: action.payload,
+      };
+
+    case CHANGEPASSWORD_SUCCESS:
+      // toast.success("Login successful!");
+      return {
+        ...state,
+        isAuthenticated: true,
+        changepassword: action.payload,
+      };
+
+    case CHANGEPASSWORD_FAILURE:
+      // toast.error("Login failed. Please try again.");
+      return {
+        ...state,
+        isAuthenticated: false,
+        changepassword: action.payload,
+      };
+    case FORGET_PASSWORD_SUCCESS:
+      // toast.success("Login successful!");
+      return {
+        ...state,
+        isAuthenticated: true,
+        forgetpassword: action.payload,
+      };
+
+    case FORGET_PASSWORD_FAILURE:
+      // toast.error("Login failed. Please try again.");
+      return {
+        ...state,
+        isAuthenticated: false,
+        forgetpassword: action.payload,
       };
 
     case LOGOUT_SUCCESS:

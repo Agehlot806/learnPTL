@@ -4,7 +4,7 @@ import "../Home tutors/get-started.css";
 import { Container, Row, Col, Form } from "react-bootstrap";
 import Button from "../../components/Button";
 import strings from "../../localzation";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import Goals from "../../assets/images/img/goals.webp";
 import Au from "../../assets/images/icons/au.svg";
 import Ca from "../../assets/images/icons/ca.svg";
@@ -17,15 +17,57 @@ import shape4 from "../../assets/images/img/shape4.webp";
 import Img3 from "../../assets/images/img/img3.webp";
 import Logo from "../../assets/images/logo.png";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchLatest } from "../../redux/action/actionCreators";
+import {
+  fetchLatest,
+  fetchtutorcount,
+} from "../../redux/action/actionCreators";
 import Header from "../../directives/Header/header";
 import Footer from "../../directives/Footer/footer";
 
 function Getstarted() {
   const dispatch = useDispatch();
-  const { products } = useSelector((state) => state.products);
+  let { id } = useParams();
+  console.log("harsh ki id: ", id);
+  const { products } = useSelector((state) => state?.products);
+  const { tutorsshowcount } = useSelector((state) => state?.tutorsshowcount);
+  const [selectedValue, setSelectedValue] = useState({
+    id: "",
+    tutors: "",
+    count: "",
+  });
+  console.log("harsh ka logic: ", selectedValue);
+
+  // useEffect(() => {
+  //   const filteredTutorsShowCount = tutorsshowcount.filter(
+  //     (tutor) => tutor?.id == id
+  //   );
+  //   setSelectedValue(filteredTutorsShowCount);
+  // }, [id, tutorsshowcount]);
+
+  useEffect(() => {
+    const filteredTutorsShowCount = tutorsshowcount?.find(
+      (tutor) => tutor?.id == id
+    );
+
+    if (filteredTutorsShowCount) {
+      setSelectedValue({
+        id: filteredTutorsShowCount?.id,
+        tutors: filteredTutorsShowCount?.tutors,
+        count: filteredTutorsShowCount?.Counts,
+      });
+    } else {
+      // Reset the selectedValue if the tutor is not found
+      setSelectedValue({
+        id: "",
+        tutors: "",
+        count: "",
+      });
+    }
+  }, [id, tutorsshowcount]);
+
   useEffect(() => {
     dispatch(fetchLatest(products));
+    dispatch(fetchtutorcount(tutorsshowcount));
   }, [dispatch]);
 
   // Step Functionality
@@ -35,6 +77,7 @@ function Getstarted() {
   const navigate = useNavigate();
   const nextStep = () => {
     setStep((prevStep) => prevStep + 1);
+    navigate(`/get-started/${id}`);
   };
 
   const prevStep = () => {
@@ -43,7 +86,7 @@ function Getstarted() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    navigate("/find-tutor");
+    navigate(`/find-tutor/${id}`);
   };
 
   const [highestPrice, setHighestPrice] = useState(0);
@@ -60,6 +103,17 @@ function Getstarted() {
       setHighestPrice(maxPrice);
     }
   }, [products]);
+
+  // Function to handle the change in the select input
+  const handleSelectChange = (event) => {
+    const selectedOptionIndex = event.target.selectedIndex;
+    const selectedOption = tutorsshowcount[selectedOptionIndex - 1]; // Assuming tutorsshowcount is available in the scope
+    setSelectedValue({
+      id: selectedOption?.id,
+      tutors: selectedOption?.tutors,
+      count: selectedOption?.Counts,
+    });
+  };
   return (
     <>
       <section>
@@ -106,35 +160,47 @@ function Getstarted() {
                                 <Form.Label>
                                   What do you want to learn?
                                 </Form.Label>
-                                <Form.Select defaultValue="Choose...">
+                                <Form.Select
+                                  // defaultValue="Choose..."
+                                  value={selectedValue?.tutors}
+                                  key={selectedValue?.id}
+                                  onChange={handleSelectChange}
+                                >
                                   <option>Choose...</option>
-                                  {speaks &&
-                                    speaks.map((speak) => (
-                                      <option
-                                        key={speak.id}
-                                        value={speak?.speak}
-                                      >
-                                        {speak?.speak}
-                                      </option>
-                                    ))}
+                                  {tutorsshowcount &&
+                                    tutorsshowcount.map(
+                                      (tutorscount, index) => (
+                                        <option
+                                          key={tutorscount?.id}
+                                          value={tutorscount?.tutors}
+                                        >
+                                          {tutorscount?.tutors}
+                                          {/* {console.log(
+                                            "harsh: ",
+                                            tutorscount?.Counts
+                                          )} */}
+                                        </option>
+                                      )
+                                    )}
                                 </Form.Select>
                               </Form.Group>
                             </Col>
                             <Col lg={5} className="align-self-center mt-4">
-                              <Link to="/get-started">
-                                <Button
-                                  onClick={nextStep}
-                                  className="theme-button1 mt-1"
-                                  hoverColor="theme-button1"
-                                  label="Get Started"
-                                  icon="fa fa-long-arrow-right"
-                                  iconPosition="right"
-                                />
-                              </Link>
+                              {/* <Link to="/get-started"> */}
+                              <Button
+                                onClick={nextStep}
+                                className="theme-button1 mt-1"
+                                hoverColor="theme-button1"
+                                label="Get Started"
+                                icon="fa fa-long-arrow-right"
+                                iconPosition="right"
+                              />
+                              {/* </Link> */}
                             </Col>
                           </Row>
                           <Link to="">
-                            I want to choose from 17,222 Tutors{" "}
+                            I want to choose from {selectedValue?.count} Tutors{" "}
+                            {/* I want to choose from 17,222 Tutors{" "} */}
                             <i className="fa fa-long-arrow-right" />
                           </Link>
                         </div>

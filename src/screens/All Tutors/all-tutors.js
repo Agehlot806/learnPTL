@@ -1,19 +1,129 @@
-import React from 'react'
-import Header from '../../directives/Header/header'
-import Footer from '../../directives/Footer/footer'
-import { Link } from 'react-router-dom'
-import { Col, Container, Row } from 'react-bootstrap'
-import Allbg from '../../components/All bg Banner/all-bg'
+import React, { useEffect } from "react";
+import Header from "../../directives/Header/header";
+import Footer from "../../directives/Footer/footer";
+import { Link, useNavigate } from "react-router-dom";
+import { Col, Container, Row } from "react-bootstrap";
+import Allbg from "../../components/All bg Banner/all-bg";
+import { fetchtutorcount } from "../../redux/action/actionCreators";
+import { useDispatch, useSelector } from "react-redux";
 
 function Alltutors() {
-    return (
-        <>
-            <Header />
-            <Allbg title="All Tutors Language" linkTo="/" linkText="Home"/>
-            <section className='section-padding'>
-                <Container>
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const handleNavigate = (id) => {
+    navigate(`/get-started/${id}`);
+  };
+  const { tutorsshowcount } = useSelector((state) => state.tutorsshowcount);
+  useEffect(() => {
+    dispatch(fetchtutorcount(tutorsshowcount));
+  }, [dispatch]);
+  return (
+    <>
+      <Header />
+      <Allbg title="All Tutors Language" linkTo="/" linkText="Home" />
+      <section className="section-padding">
+        <Container>
+          <Row>
+            {tutorsshowcount &&
+              tutorsshowcount.map((tutorscount, index) => (
+                <Col
+                  lg={3}
+                  sm={4}
+                  xs={6}
+                  className="mb-4"
+                  key={index}
+                  onClick={() => handleNavigate(tutorscount.id)}
+                  style={{ cursor: "pointer" }}
+                >
+                  <div className="Tutors-Language">
+                    <h4>{tutorscount.tutors}</h4>
                     <Row>
-                        <Col lg={3} sm={3} xs={6} className='mb-4'>
+                      <Col lg={3}>
+                        {" "}
+                        <svg
+                          aria-hidden="true"
+                          focusable="false"
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="48"
+                          height="48"
+                          fill="none"
+                          viewBox="0 0 48 48"
+                        >
+                          <g id="Frame 316128405">
+                            <g id="Group 316127862">
+                              <circle
+                                id="Ellipse 8"
+                                cx="24"
+                                cy="23"
+                                r="4"
+                                fill="#121117"
+                                stroke="#121117"
+                                stroke-width="2"
+                              ></circle>
+                              <path
+                                id="Vector 1"
+                                stroke="#fff"
+                                d="M24 20.5V23h2"
+                              ></path>
+                              <path
+                                id="Rectangle 4438"
+                                stroke="#121117"
+                                stroke-width="2"
+                                d="M18 31h12v13H18z"
+                              ></path>
+                              <path
+                                id="Rectangle 4439"
+                                stroke="#121117"
+                                stroke-width="2"
+                                d="M16 15h16v16H16z"
+                              ></path>
+                              <path
+                                id="Rectangle 4440"
+                                fill="#121117"
+                                d="M14 14h20v2H14z"
+                              ></path>
+                              <path
+                                id="Rectangle 4444"
+                                fill="#121117"
+                                d="M14 30h20v2H14z"
+                              ></path>
+                              <path
+                                id="Rectangle 4441"
+                                fill="#121117"
+                                d="M17 11h14v2H17z"
+                              ></path>
+                              <path
+                                id="Rectangle 4442"
+                                fill="#121117"
+                                d="M19 8h10v2H19z"
+                              ></path>
+                              <path
+                                id="Rectangle 4443"
+                                fill="#121117"
+                                d="M23.333 3h1.334L26 7h-4l1.333-4Z"
+                              ></path>
+                              <path
+                                id="Rectangle 4445"
+                                fill="#121117"
+                                d="M21 34h2v7h-2z"
+                              ></path>
+                              <path
+                                id="Rectangle 4446"
+                                fill="#121117"
+                                d="M25 34h2v7h-2z"
+                              ></path>
+                            </g>
+                          </g>
+                        </svg>
+                      </Col>
+                      <Col lg={9} className="align-self-center">
+                        <h6>{tutorscount.Counts} teachers</h6>
+                      </Col>
+                    </Row>
+                  </div>
+                </Col>
+              ))}
+            {/* <Col lg={3} sm={3} xs={6} className='mb-4'>
                             <Link to="/find-getStarted">
                                 <div className="Tutors-Language">
                                     <h4>English tutors</h4>
@@ -130,13 +240,13 @@ function Alltutors() {
                                     </Col>
                                 </Row>
                             </div>
-                        </Col>
-                    </Row>
-                </Container>
-            </section>
-            <Footer />
-        </>
-    )
+                        </Col> */}
+          </Row>
+        </Container>
+      </section>
+      <Footer />
+    </>
+  );
 }
 
-export default Alltutors
+export default Alltutors;

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "../Find Tutor/find-tutor.css";
 import Header from "../../directives/Header/header";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { Col, Container, Row, Accordion } from "react-bootstrap";
 import Img5 from "../../assets/images/img/img5.jpg";
 import Img6 from "../../assets/images/img/img6.jpg";
@@ -29,6 +29,8 @@ import BookscheduleSlot from "../../components/models/Book-scheduleSlot";
 
 function Findtutor() {
   const dispatch = useDispatch();
+  let { id } = useParams();
+  console.log("agayi id : ", id);
   const { products } = useSelector((state) => state.products);
   const { tutors } = useSelector((state) => state.tutors);
   console.log("tutors: ", tutors);

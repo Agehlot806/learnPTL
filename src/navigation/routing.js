@@ -39,7 +39,6 @@ const ScrollToTop = () => {
 };
 
 function NavRoutes() {
-  
   return (
     <>
       <BrowserRouter>
@@ -51,7 +50,7 @@ function NavRoutes() {
           <Route exact path="/forgot-password" element={<Forgotpassword />} />
           <Route exact path="/become-a-tutor" element={<BecomeATutor />} />
           <Route exact path="/register-a-tutor" element={<RegisterTutore />} />
-          <Route exact path="/find-tutor" element={<Findtutor />} />
+          <Route exact path="/find-tutor/:id" element={<Findtutor />} />
           <Route
             exact
             path="/instructor-consultation"
@@ -62,7 +61,7 @@ function NavRoutes() {
           <Route exact path="/blog-details/:id" element={<Blogdetails />} />
           <Route exact path="/faq" element={<Faq />} />
           <Route exact path="/contact" element={<Contact />} />
-          <Route exact path="/get-started" element={<Getstarted />} />
+          <Route exact path="/get-started/:id" element={<Getstarted />} />
           <Route exact path="/find-getStarted" element={<FindgetStarted />} />
           <Route exact path="/all-tutors" element={<Alltutors />} />
           <Route

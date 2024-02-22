@@ -2,13 +2,16 @@ export const ApiEndPoints = {
   // REGISTRATION API
   REGISTRATION_API: "/register",
 
-  // LOGIN API
+  // LOGIN API , CHANGE PASSWORD API , LOGOUT API START
   LOGIN_API: "/login",
-  // LOGOUT API
+  CHANGEPASSWORD_API: "/changepassword",
   LOGOUT_API: "/logout",
 
   // FORGET PASSWORD Demo
-  FORGET_PASSWORD_API: "FORGETPASSWORDAPI",
+  FORGET_PASSWORD_API: "/forget_password",
+  // profile
+  PROFILE_GET_API: "/profile",
+  PROFILE_UPDATE_API: "/updateprofile",
 
   // Latest Api Find Tutor API
   Latest_API: "/latest",
@@ -37,6 +40,7 @@ export const ApiEndPoints = {
 
   // Get APIs
   BLOG: "/blogshow",
+  CONTACTPOST: "/contact",
 
   // Slot Api
   slotShow: "slotshow",

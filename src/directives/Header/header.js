@@ -12,7 +12,7 @@ import "../Header/header.css";
 import Logo from "../../assets/images/logo.png";
 import En from "../../assets/images/icons/en.png";
 import Img1 from "../../assets/images/img/img1.jpg";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import strings from "../../localzation";
 import Button from "../../components/Button";
 import Multilang from "../../components/language/multi-language";
@@ -24,6 +24,7 @@ import { persistor } from "../../store/configureStore";
 
 function Header() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const userid = localStorage.getItem("userid");
   const [modalShow, setModalShow] = useState(false);
   const [notificationShow, setnotificationShow] = useState(false);
@@ -37,7 +38,8 @@ function Header() {
         localStorage.removeItem("userid");
         localStorage.removeItem("token");
         persistor.purge();
-        // window.location.reload();
+        window.location.reload();
+        navigate("/");
       })
       .catch((error) => {
         console.error("Logout error:", error);
@@ -102,7 +104,7 @@ function Header() {
             />
 
             <Nav.Link>
-              {userid === undefined && (
+              {(userid === null || userid === undefined) && (
                 <Link to="/login">
                   <Button
                     hoverColor="theme-button1"

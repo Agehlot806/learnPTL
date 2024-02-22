@@ -39,10 +39,21 @@ import {
   FETCH_CERTIFICATION_FAILURE,
   FETCH_TUTORCOUNT_SUCCESS,
   FETCH_TUTORCOUNT_FAILURE,
+  CONTACT_FORM_SUCCESS,
+  CONTACT_FORM_FAILURE,
+  PROFILE_UPDATE_SUCCESS,
+  PROFILE_UPDATE_FAILURE,
+  RESET_STATE,
+  PROFILE_GET_SUCCESS,
+  PROFILE_GET_FAILURE,
+  CHANGEPASSWORD_SUCCESS,
+  CHANGEPASSWORD_FAILURE,
+  FORGET_PASSWORD_FAILURE,
+  FORGET_PASSWORD_SUCCESS,
 } from "./actionTypes";
 import { BASE_URL } from "../../config";
 import { ApiEndPoints } from "../../utils/apiEndPoint";
-
+// login start
 export const loginSuccess = (user) => async (dispatch) => ({
   type: LOGIN_SUCCESS,
   payload: user,
@@ -84,7 +95,102 @@ export const userLogin = (user) => async (dispatch) => {
 export const loginFailure = () => ({
   type: LOGOUT_FAILURE,
 });
+// login end
+// CHANEPASSWORD START
+export const changePasswordSuccess = (changepassword) => async (dispatch) => ({
+  type: CHANGEPASSWORD_SUCCESS,
+  payload: changepassword,
+});
 
+export const userChangePassword = (changepassword) => async (dispatch) => {
+  const userid = localStorage.getItem("userid");
+  console.log("changepassword", changepassword);
+  try {
+    await axios
+      .post(
+        `${BASE_URL}${ApiEndPoints.CHANGEPASSWORD_API}/${userid}`,
+
+        changepassword
+      )
+      .then((response) => {
+        console.log("response", response);
+        dispatch({
+          type: CHANGEPASSWORD_SUCCESS,
+          payload: response.data,
+        });
+      })
+      .catch((error) => {
+        console.log("error in login", error.response.data);
+        dispatch({
+          type: CHANGEPASSWORD_FAILURE,
+          payload: error.response.data,
+        });
+      });
+  } catch (error) {
+    console.log("error in login", error.response.data);
+
+    dispatch({
+      type: CHANGEPASSWORD_FAILURE,
+      payload: error.response.data,
+    });
+  }
+};
+
+export const changePasswordFailure = () => ({
+  type: CHANGEPASSWORD_FAILURE,
+});
+// CHANEPASSWORD END
+// FORGETPASSWORD START
+export const forgetPasswordSuccess = (forgetpassword) => async (dispatch) => ({
+  type: FORGET_PASSWORD_SUCCESS,
+  payload: forgetpassword,
+});
+
+export const userForgetPassword = (forgetpassword) => async (dispatch) => {
+  // const userid = localStorage.getItem("userid");
+  console.log("forgetpassword", forgetpassword);
+  try {
+    await axios
+      .post(
+        `${BASE_URL}${ApiEndPoints.FORGET_PASSWORD_API}`,
+
+        forgetpassword
+      )
+      .then((response) => {
+        console.log("response", response);
+        dispatch({
+          type: FORGET_PASSWORD_SUCCESS,
+          payload: response.data,
+        });
+      })
+      .catch((error) => {
+        console.log("error in login", error.response.data);
+        dispatch({
+          type: FORGET_PASSWORD_FAILURE,
+          payload: error.response.data,
+        });
+      });
+  } catch (error) {
+    console.log("error in login", error.response.data);
+
+    dispatch({
+      type: FORGET_PASSWORD_FAILURE,
+      payload: error.response.data,
+    });
+  }
+};
+
+export const forgetPasswordFailure = () => ({
+  type: CHANGEPASSWORD_FAILURE,
+});
+export const removeforgetPasswordData = () => async (dispatch) => {
+  dispatch({
+    type: FORGET_PASSWORD_SUCCESS,
+    payload: [],
+  });
+};
+// FORGETPASSWORD END
+// loout start
 export const userLogout = (userslogout) => async (dispatch) => {
   const userid = localStorage.getItem("userid");
   console.log("userslogout", userslogout);
@@ -116,9 +222,12 @@ export const userLogout = (userslogout) => async (dispatch) => {
     });
   }
 };
+export const resetState = () => ({
+  type: RESET_STATE,
+});
+// logout end
 
 // Register Creators
-
 export const registerSuccess = (users) => async (dispatch) => ({
   type: REGISTER_SUCCESS,
   payload: users,
@@ -156,9 +265,15 @@ export const userRegister = (users) => async (dispatch) => {
 export const registerFailure = () => ({
   type: REGISTER_FAILURE,
 });
+export const removeregisterData = () => async (dispatch) => {
+  dispatch({
+    type: REGISTER_SUCCESS,
+    payload: [],
+  });
+};
+// Register Creators End
 
 // Tutors Register Creators
-
 export const tutorsregisterSuccess = (tutorsusers) => async (dispatch) => ({
   type: TUTORSREGISTER_SUCCESS,
   payload: tutorsusers,
@@ -196,6 +311,7 @@ export const tutorsRegister = (tutorsusers) => async (dispatch) => {
 export const tutorsregisterFailure = () => ({
   type: TUTORSREGISTER_FAILURE,
 });
+// Tutors Register Creators End
 
 // Latest start
 export const latestSuccess = (products) => async (dispatch) => ({
@@ -243,6 +359,7 @@ export const latestFailure = () => ({
   type: FETCH_LATEST_FAILURE,
 });
 // latest api end
+
 // TUTORS_SHOW start
 export const tutorsShowSuccess = (tutors) => async (dispatch) => ({
   type: TUTORS_SHOW_SUCCESS,
@@ -282,6 +399,7 @@ export const tutorsshowFailure = () => ({
   type: TUTORS_SHOW_FAILURE,
 });
 // tutor show end
+
 // SPECIALTIES SHOW start
 export const specialtiesShowSuccess = (specialties) => async (dispatch) => ({
   type: SPECIALTIESSHOW_SUCCESS,
@@ -321,6 +439,7 @@ export const specialtiesShowFailure = () => ({
   type: SPECIALTIESSHOW_FAILURE,
 });
 // SPECIALTIES SHOW end
+
 // speaks SHOW start
 export const speaksShowSuccess = (speaks) => async (dispatch) => ({
   type: SPEAK_SHOW_SUCCESS,
@@ -362,6 +481,7 @@ export const speaksShowFailure = () => ({
   type: SPEAK_SHOW_FAILURE,
 });
 // speaks SHOW end
+
 // COUNTRY SHOW start
 export const countryShowSuccess = (countrys) => async (dispatch) => ({
   type: COUNTRY_SHOW_SUCCESS,
@@ -403,6 +523,7 @@ export const countryShowFailure = () => ({
   type: SPEAK_SHOW_FAILURE,
 });
 // country SHOW end
+
 // RATINGS SHOW start
 export const ratingShowSuccess = (ratings) => async (dispatch) => ({
   type: RATING_SHOW_SUCCESS,
@@ -444,10 +565,8 @@ export const ratingShowFailure = () => ({
   type: SPEAK_SHOW_FAILURE,
 });
 // Rating SHOW end
-//CREATETUTOR_CATEGORIES_SUCCESS start
-// CREATE_SPEAKER_SUCCESS
-// CREATE_SPEAKER_FAILURE
 
+//CREATETUTOR CATEGORIES start
 export const createTutorCategorySuccess =
   (createtutor) => async (dispatch) => ({
     type: CREATETUTOR_CATEGORIES_SUCCESS,
@@ -493,9 +612,9 @@ export const fetchCreateTutorCategory = (createtutor) => async (dispatch) => {
 export const createTutorCategoryFailure = () => ({
   type: CREATETUTOR_CATEGORIES_FAILURE,
 });
-// CREATETUTOR_CATEGORIES_SUCCESS end
+// CREATETUTOR CATEGORIES end
 
-// CREATE_SPEAKER Start
+// CREATE SPEAKER Start
 export const createSpeakerSuccess = (createspeaker) => async (dispatch) => ({
   type: CREATE_SPEAKER_SUCCESS,
   payload: createspeaker,
@@ -539,6 +658,7 @@ export const createSpeakerFailure = () => ({
   type: CREATE_SPEAKER_FAILURE,
 });
 // CREATESPEAKER end
+
 // Token Code
 export const setAuthToken = (token) => ({
   type: SET_AUTH_TOKEN,
@@ -587,6 +707,7 @@ export const fetchblogShow = (blogs) => async (dispatch) => {
 export const blogshowFailure = () => ({
   type: BLOG_FAILURE,
 });
+// Blog section api code End
 
 // Blog details section api code
 export const blogDetailsSuccess = (blogdetails) => async (dispatch) => ({
@@ -626,7 +747,9 @@ export const blogDetailsFailure = () => ({
   type: BLOGDETAILS_FAILURE,
 });
 
-// Blog details section api code
+// Blog details section api code End
+
+// Slot api code Start
 export const slotSuccess = (slotshow) => async (dispatch) => ({
   type: FETCH_SLOTS_SUCCESS,
   payload: slotshow,
@@ -663,8 +786,9 @@ export const fetchslotShow = (id) => async (dispatch) => {
 export const slotFailure = () => ({
   type: FETCH_SLOTS_FAILURE,
 });
+// Slot api code End
 
-// Level api code
+// Level api code Start
 export const levelSuccess = (levelshow) => async (dispatch) => ({
   type: FETCH_LEVEL_SUCCESS,
   payload: levelshow,
@@ -701,8 +825,9 @@ export const fetchlevelShow = (levelshow) => async (dispatch) => {
 export const levelFailure = () => ({
   type: FETCH_LEVEL_FAILURE,
 });
+// Level api code End
 
-// certification api code
+// certification api code Start
 export const certificationShowSuccess =
   (certificationshow) => async (dispatch) => ({
     type: FETCH_CERTIFICATION_SUCCESS,
@@ -748,8 +873,9 @@ export const fetchcertificationShow =
 export const certificationshowFailure = () => ({
   type: FETCH_CERTIFICATION_FAILURE,
 });
+// certification api code End
 
-// tutors Show count api code
+// tutors Show count api code Start
 export const tutorcountSuccess = (tutorsshowcount) => async (dispatch) => ({
   type: FETCH_TUTORCOUNT_SUCCESS,
   payload: tutorsshowcount,
@@ -786,3 +912,148 @@ export const fetchtutorcount = (tutors) => async (dispatch) => {
 export const tutorcountFailure = () => ({
   type: BLOGDETAILS_FAILURE,
 });
+// tutors Show count api code End
+
+// CONTACTPOST Start
+export const contactFormSuccess = (contactform) => async (dispatch) => ({
+  type: CONTACT_FORM_SUCCESS,
+  payload: contactform,
+});
+
+export const contactFormPost = (contactform) => async (dispatch) => {
+  console.log("contactform", contactform);
+  try {
+    await axios
+      .post(`${BASE_URL}${ApiEndPoints?.CONTACTPOST}`, contactform)
+      .then((response) => {
+        console.log("response", response);
+        dispatch({
+          type: CONTACT_FORM_SUCCESS,
+          payload: response?.data,
+        });
+      })
+      .catch((error) => {
+        console.log("error in CONTACTPOST", error?.response?.data);
+        dispatch({
+          type: CONTACT_FORM_FAILURE,
+          payload: error?.response?.data,
+        });
+      });
+  } catch (error) {
+    console.log("error in CONTACTPOST", error.response.data);
+
+    dispatch({
+      type: CONTACT_FORM_FAILURE,
+      payload: error?.response?.data,
+    });
+  }
+};
+
+export const contactFormFailure = () => ({
+  type: REGISTER_FAILURE,
+});
+
+export const removeFormData = () => async (dispatch) => {
+  dispatch({
+    type: CONTACT_FORM_SUCCESS,
+    payload: [],
+  });
+};
+// CONTACTPOST End
+
+// profile Get Start
+export const profileDetailSuccess = (profiledetails) => async (dispatch) => ({
+  type: PROFILE_GET_SUCCESS,
+  payload: profiledetails,
+});
+
+export const fetchprofileDetail = (profiledetails) => async (dispatch) => {
+  const userid = localStorage.getItem("userid");
+  console.log("useriduserid", userid);
+  try {
+    await axios
+      .get(`${BASE_URL}${ApiEndPoints.PROFILE_GET_API}/${userid}`)
+      .then((response) => {
+        console.log("responseresponseresponse", response);
+        dispatch({
+          type: PROFILE_GET_SUCCESS,
+          payload: response?.data?.user,
+        });
+      })
+      .catch((error) => {
+        console.log("error in profile details", error?.response?.data?.user);
+        dispatch({
+          type: PROFILE_GET_FAILURE,
+          payload: error?.response?.data?.user,
+        });
+      });
+  } catch (error) {
+    console.log("error in login", error?.response?.data?.user);
+
+    dispatch({
+      type: PROFILE_GET_FAILURE,
+      payload: error?.response?.data?.user,
+    });
+  }
+};
+
+export const profileDetailFailure = () => ({
+  type: PROFILE_GET_FAILURE,
+});
+// profile Get END
+// profile Update Start
+export const profileUpdateSuccess = (profileData) => async (dispatch) => ({
+  type: PROFILE_UPDATE_SUCCESS,
+  payload: profileData,
+});
+
+export const profileUpdatePost = (profileData) => async (dispatch) => {
+  const userid = localStorage.getItem("userid");
+  console.log("useriduserid", userid);
+  console.log("profileData", profileData);
+  try {
+    await axios
+      .put(
+        `${BASE_URL}${ApiEndPoints?.PROFILE_UPDATE_API}/${userid}`,
+        profileData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      )
+      .then((response) => {
+        console.log("response", response);
+        dispatch({
+          type: PROFILE_UPDATE_SUCCESS,
+          payload: response?.data,
+        });
+      })
+      .catch((error) => {
+        console.log("error in PROFILE_UPDATE_API", error?.response?.data);
+        dispatch({
+          type: PROFILE_UPDATE_FAILURE,
+          payload: error?.response?.data,
+        });
+      });
+  } catch (error) {
+    console.log("error in PROFILE_UPDATE_API", error.response.data);
+
+    dispatch({
+      type: PROFILE_UPDATE_FAILURE,
+      payload: error?.response?.data,
+    });
+  }
+};
+
+export const profileUpdateFailure = () => ({
+  type: PROFILE_UPDATE_FAILURE,
+});
+
+export const removeProfileData = () => async (dispatch) => {
+  dispatch({
+    type: PROFILE_UPDATE_SUCCESS,
+    payload: [],
+  });
+};
+// profile Update Start
