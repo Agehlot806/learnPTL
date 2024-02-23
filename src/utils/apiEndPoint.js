@@ -53,4 +53,6 @@ export const ApiEndPoints = {
 
   // tutorsshowcount Api
   tutorsShowcount: "/tutorsshowcount",
+  // reviewshow Api
+  REVIEW_SHOW: "/reviewshow",
 };

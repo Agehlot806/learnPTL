@@ -20,9 +20,12 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   fetchLatest,
   fetchtutorcount,
+  fetchSpecialtiesShow,
+  fetchCreateSpeaker,
 } from "../../redux/action/actionCreators";
 import Header from "../../directives/Header/header";
 import Footer from "../../directives/Footer/footer";
+import Allfilter from "../../components/Filter/all-filter";
 
 function Getstarted() {
   const dispatch = useDispatch();
@@ -30,8 +33,22 @@ function Getstarted() {
   console.log("harsh ki id: ", id);
   const { products } = useSelector((state) => state?.products);
   const { tutorsshowcount } = useSelector((state) => state?.tutorsshowcount);
+  // ************************************************************************ //
+  const { specialties } = useSelector((state) => state.specialties);
+  const specialtiesData = specialties.slice(0, 5);
+  const [nativeSpeakerSwitch, setNativeSpeakerSwitch] = useState(false);
+  const handleSwitchChangeSpeaker = (checked) => {
+    console.log("handleSwitchChangeSpeaker: ", checked);
+    setNativeSpeakerSwitch(checked);
+    dispatch(
+      fetchCreateSpeaker({
+        user_id: 1,
+        speaker: checked,
+      })
+    );
+  };
   const [selectedValue, setSelectedValue] = useState({
-    id: "",
+    id: id,
     tutors: "",
     count: "",
   });
@@ -68,6 +85,7 @@ function Getstarted() {
   useEffect(() => {
     dispatch(fetchLatest(products));
     dispatch(fetchtutorcount(tutorsshowcount));
+    dispatch(fetchSpecialtiesShow, specialties);
   }, [dispatch]);
 
   // Step Functionality
@@ -77,7 +95,7 @@ function Getstarted() {
   const navigate = useNavigate();
   const nextStep = () => {
     setStep((prevStep) => prevStep + 1);
-    navigate(`/get-started/${id}`);
+    navigate(`/get-started/${selectedValue.id}`);
   };
 
   const prevStep = () => {
@@ -537,7 +555,19 @@ function Getstarted() {
                         </Col>
                         <Col lg={4} sm={4}>
                           <div className="skip-area">
-                            <Form.Check type="switch" />
+                            <Form.Check
+                              type="switch"
+                              onChange={(e) =>
+                                handleSwitchChangeSpeaker(e.target.checked)
+                              }
+                              id="nativeSpeakerSwitch"
+                              checked={nativeSpeakerSwitch}
+                            />
+                            {/* <Allfilter
+                              nativeSpeaker={"Native Speaker"}
+                              nativeSpeakerSwitch={nativeSpeakerSwitch}
+                              setNativeSpeakerSwitch={setNativeSpeakerSwitch}
+                            /> */}
                           </div>
                         </Col>
                       </Row>
@@ -696,21 +726,29 @@ function Getstarted() {
                         </Col>
                       </Row>
 
-                      <div className="presearch-option">
-                        <Row>
-                          <Col lg={11} sm={11} className="align-self-center">
-                            <h6>Conversational English</h6>
-                          </Col>
-                          <Col lg={1} sm={1}>
-                            <Form.Check
-                              type="checkbox"
-                              name="formHorizontalRadios"
-                              id="formHorizontalRadios1"
-                            />
-                          </Col>
-                        </Row>
-                      </div>
-                      <div className="presearch-option">
+                      {specialtiesData.map((item, index) => (
+                        <div className="presearch-option" key={index}>
+                          <Row>
+                            <>
+                              <Col
+                                lg={11}
+                                sm={11}
+                                className="align-self-center"
+                              >
+                                <h6>{item.specialties}</h6>
+                              </Col>
+                              <Col lg={1} sm={1}>
+                                <Form.Check
+                                  type="checkbox"
+                                  name="formHorizontalRadios"
+                                  id="formHorizontalRadios1"
+                                />
+                              </Col>
+                            </>
+                          </Row>
+                        </div>
+                      ))}
+                      {/* <div className="presearch-option">
                         <Row>
                           <Col lg={11} sm={11} className="align-self-center">
                             <h6>Business English</h6>
@@ -765,7 +803,7 @@ function Getstarted() {
                             />
                           </Col>
                         </Row>
-                      </div>
+                      </div> */}
                       <Button
                         onClick={nextStep}
                         className="theme-button1 w-100 mt-1"

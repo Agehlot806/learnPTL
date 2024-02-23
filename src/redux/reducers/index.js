@@ -17,12 +17,14 @@ import CertificationShowReducer from "./CertificationReducer";
 import TutorCountReducer from "./TutorCountReducer";
 import contactReducer from "./contactReducer";
 import profileReducer from "./profileReducer";
+import reviewReducer from "./ReviewReducer";
 
 const rootReducer = combineReducers({
   // Add other reducers here if needed
   auth: authReducer,
   profile: profileReducer,
   products: productReducer,
+  reviews: reviewReducer,
   tutors: tutorReducer,
   specialties: specialtiesReducer,
   speaks: speakReducer,

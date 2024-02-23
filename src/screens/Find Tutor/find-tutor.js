@@ -30,7 +30,8 @@ import BookscheduleSlot from "../../components/models/Book-scheduleSlot";
 function Findtutor() {
   const dispatch = useDispatch();
   let { id } = useParams();
-  console.log("agayi id : ", id);
+  console.log("id: ", id);
+
   const { products } = useSelector((state) => state.products);
   const { tutors } = useSelector((state) => state.tutors);
   console.log("tutors: ", tutors);

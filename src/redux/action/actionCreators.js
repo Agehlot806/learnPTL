@@ -50,6 +50,8 @@ import {
   CHANGEPASSWORD_FAILURE,
   FORGET_PASSWORD_FAILURE,
   FORGET_PASSWORD_SUCCESS,
+  FETCH_REVIEW_SUCCESS,
+  FETCH_REVIEW_FAILURE,
 } from "./actionTypes";
 import { BASE_URL } from "../../config";
 import { ApiEndPoints } from "../../utils/apiEndPoint";
@@ -324,12 +326,11 @@ export const fetchLatest = (products) => async (dispatch) => {
   try {
     await axios
       .get(
-        `${BASE_URL}${ApiEndPoints.Latest_API}`,
+        `${BASE_URL}${ApiEndPoints.Latest_API}`
         //  {
         //   'Content-Type': 'application/json',
         //   'Authorization': `Bearer ${localStorage.getItem('token')}` // Pass the token here
         //   },
-        products
       )
       .then((response) => {
         console.log("response", response);
@@ -1057,3 +1058,42 @@ export const removeProfileData = () => async (dispatch) => {
   });
 };
 // profile Update Start
+
+// Review start
+// export const reviewSuccess = (review) => async (dispatch) => ({
+//   type: FETCH_REVIEW_SUCCESS,
+//   payload: review,
+// });
+
+export const fetchReview = () => async (dispatch) => {
+  try {
+    await axios
+      .get(`${BASE_URL}${ApiEndPoints.REVIEW_SHOW}`)
+      .then((response) => {
+        console.log("reviewresponse", response);
+        dispatch({
+          type: FETCH_REVIEW_SUCCESS,
+          payload: response?.data?.slots,
+        });
+      })
+      .catch((error) => {
+        console.log("error in login", error?.response?.data?.slots);
+        dispatch({
+          type: FETCH_REVIEW_FAILURE,
+          payload: error?.response?.data?.slots,
+        });
+      });
+  } catch (error) {
+    console.log("error in login", error?.response?.data?.slots);
+
+    dispatch({
+      type: FETCH_REVIEW_FAILURE,
+      payload: error.response.data.slots,
+    });
+  }
+};
+
+// export const reviewFailure = () => ({
+//   type: FETCH_REVIEW_FAILURE,
+// });
+// Review api end

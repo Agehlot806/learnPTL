@@ -56,7 +56,7 @@ function Header() {
         <Navbar.Collapse id="navbarScroll">
           <Nav className="nav-menus ms-auto my-2 my-lg-0">
             <Nav.Link>
-              <Link to="/get-started">Find tutors</Link>
+              <Link to={`/get-started/${1}`}>Find tutors</Link>
             </Nav.Link>
             <Nav.Link>
               <Link to="/become-a-tutor"> {strings.Becomeatutor}</Link>
