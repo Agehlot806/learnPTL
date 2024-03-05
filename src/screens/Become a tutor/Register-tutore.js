@@ -20,39 +20,44 @@ import {
 import Header from "../../directives/Header/header";
 import Footer from "../../directives/Footer/footer";
 import Allbg from "../../components/All bg Banner/all-bg";
-import { toast } from 'react-toastify';
+import { toast } from "react-toastify";
 
 const RegisterTutore = () => {
   const dispatch = useDispatch();
   const auth = useSelector((state) => state.auth);
-  const { tutorsusers } = useSelector(state => state.auth)
+  const { tutorsusers } = useSelector((state) => state.auth);
   const { countrys } = useSelector((state) => state.countrys);
   const { speaks } = useSelector((state) => state.speaks);
   const { certificationshow } = useSelector((state) => state.certificationshow);
-  const [tutorsRegisterData, settutorsRegisterData] = useState({
-    name: '',
-    description: '',
-    price: '',
-    rating: '',
-    level: '',
-    categories: '',
-    duration: '',
-    speak: '',
-    country: '',
-    specialties: '',
-    image: '',
-    video: '',
-    speaker: '',
-    professionaltutors: '',
-    Supertutors: '',
-    lastname: '',
-    firstprice: '',
-    mobileNumber: '',
-    certificate: '',
-    Education: '',
-    Schedule: '',
+  const [isVisible, setIsVisible] = useState(true);
+  console.log("isVisible: ", isVisible);
+  const [isEductionVisible, setIsEductionVisible] = useState(true);
+  console.log("isEductionVisible: ", isEductionVisible);
 
-  })
+  useEffect(() => {
+    setCertificate((prevCertificate) => {
+      return prevCertificate.map((cert) => ({
+        ...cert,
+        teachingcertification: isVisible,
+      }));
+    });
+  }, [isVisible]);
+
+  // Function to toggle the visibility of the <h1> element
+  const toggleVisibility = () => {
+    setIsVisible(!isVisible);
+  };
+  useEffect(() => {
+    setContactsEducation((prevCertificate) => {
+      return prevCertificate.map((cert) => ({
+        ...cert,
+        educationdegree: isEductionVisible,
+      }));
+    });
+  }, [isEductionVisible]);
+  const toggleEductionVisibility = () => {
+    setIsEductionVisible(!isEductionVisible);
+  };
   const [step1Completed, setStep1Completed] = useState(false);
   useEffect(() => {
     dispatch(fetchCountryShow(countrys));
@@ -61,39 +66,80 @@ const RegisterTutore = () => {
   }, [dispatch]);
   const [currentStep, setCurrentStep] = useState(1);
   const [over18Checked, setOver18Checked] = useState(false);
-  // Tutors Register api code 
+  // Tutors Register api code
 
   const handleTutorsRegister = () => {
-    if (tutorsRegisterData.email === '') {
+    // Check if any field is empty
+    const isEmpty = Object.values(tutorsRegisterData).some(
+      (value) => value === ""
+    );
+
+    if (isEmpty) {
       toast.error(tutorsusers.message);
     } else {
       const formData = new FormData();
-      formData.append('name', tutorsRegisterData.name);
-      formData.append('description', tutorsRegisterData.description);
-      formData.append('price', tutorsRegisterData.price);
-      formData.append('rating', tutorsRegisterData.rating);
-      formData.append('level', tutorsRegisterData.level);
-      formData.append('categories', tutorsRegisterData.categories);
-      formData.append('duration', tutorsRegisterData.duration);
-      formData.append('speak', tutorsRegisterData.speak);
-      formData.append('country', tutorsRegisterData.country);
-      formData.append('specialties', tutorsRegisterData.specialties);
-      formData.append('image', tutorsRegisterData.image);
-      formData.append('video', tutorsRegisterData.video);
-      formData.append('speaker', tutorsRegisterData.speaker);
-      formData.append('professionaltutors', tutorsRegisterData.professionaltutors);
-      formData.append('Supertutors', tutorsRegisterData.Supertutors);
-      formData.append('lastname', tutorsRegisterData.lastname);
-      formData.append('firstprice', tutorsRegisterData.firstprice);
-      formData.append('mobileNumber', tutorsRegisterData.mobileNumber);
-      formData.append('certificate', tutorsRegisterData.certificate);
-      formData.append('Education', tutorsRegisterData.Education);
-      formData.append('review', tutorsRegisterData.review);
-      formData.append('Schedule', tutorsRegisterData.Schedule);
+      // Append all form data
+      formData.append("name", tutorsRegisterData.name);
+      formData.append("description", tutorsRegisterData.description);
+      formData.append("price", tutorsRegisterData.price);
+      formData.append("rating", tutorsRegisterData.rating);
+      formData.append("level", tutorsRegisterData.level);
+      formData.append("categories", tutorsRegisterData.categories);
+      formData.append("duration", tutorsRegisterData.duration);
+      formData.append("speak", tutorsRegisterData.speak);
+      formData.append("country", tutorsRegisterData.country);
+      formData.append("specialties", tutorsRegisterData.specialties);
+      formData.append("image", tutorsRegisterData.image);
+      formData.append("video", tutorsRegisterData.video);
+      formData.append("speaker", tutorsRegisterData.speaker);
+      formData.append(
+        "professionaltutors",
+        tutorsRegisterData.professionaltutors
+      );
+      formData.append("Supertutors", tutorsRegisterData.Supertutors);
+      formData.append("lastname", tutorsRegisterData.lastname);
+      formData.append("firstprice", tutorsRegisterData.firstprice);
+      formData.append("mobileNumber", tutorsRegisterData.mobileNumber);
+      formData.append("certificate", tutorsRegisterData.certificate);
+      formData.append("Education", tutorsRegisterData.Education);
+      formData.append("review", tutorsRegisterData.review);
+      formData.append("Schedule", tutorsRegisterData.Schedule);
+      // certificate
+      formData.append("issuedby", tutorsRegisterData.issuedby);
+      formData.append("selectedYear", tutorsRegisterData.selectedYear);
+      formData.append("selectedYearend", tutorsRegisterData.selectedYearend);
+      // edu
+      formData.append("university", tutorsRegisterData.university);
+      formData.append("degree", tutorsRegisterData.degree);
+      formData.append("specialization", tutorsRegisterData.specialization);
+      formData.append("degreeType", tutorsRegisterData.degreetype);
+      formData.append(
+        "yearsOfStudyStart",
+        tutorsRegisterData.yearsOfStudyStart
+      );
+      formData.append("yearsOfStudyEnd", tutorsRegisterData.yearsOfStudyEnd);
+      formData.append("uploadDiploma", tutorsRegisterData.uploadDiploma);
+      formData.append(
+        "teachingcertification",
+        tutorsRegisterData.educationdegree
+      );
+      // profile details
+      formData.append(
+        "introduce_yourself",
+        tutorsRegisterData.introduce_yourself
+      );
+      formData.append(
+        "teaching_experience",
+        tutorsRegisterData.teaching_experience
+      );
+      formData.append(
+        "motivate_potential_students",
+        tutorsRegisterData.motivate_potential_students
+      );
+      formData.append("catchy_headline", tutorsRegisterData.catchy_headline);
 
       dispatch(tutorsRegister(formData));
     }
-
   };
 
   useEffect(() => {
@@ -103,8 +149,6 @@ const RegisterTutore = () => {
       toast.error(tutorsusers.message);
     }
   }, [tutorsusers]);
-
-
 
   // Function to handle click on the "Next" button
   const handleNext = () => {
@@ -121,6 +165,21 @@ const RegisterTutore = () => {
           setCurrentStep(currentStep + 1);
         }
         break;
+      case 3:
+        if (validateStep3()) {
+          setCurrentStep(currentStep + 1);
+        }
+        break;
+      case 4:
+        if (validateStep4()) {
+          setCurrentStep(currentStep + 1);
+        }
+        break;
+      case 5:
+        if (validateStep5()) {
+          setCurrentStep(currentStep + 1);
+        }
+        break;
       // Add validation for other steps as needed
       default:
         break;
@@ -128,10 +187,16 @@ const RegisterTutore = () => {
   };
 
   const validateStep1 = () => {
-    if (tutorsRegisterData.name && tutorsRegisterData.lastname && tutorsRegisterData.country && tutorsRegisterData.speak && tutorsRegisterData.mobileNumber) {
+    if (
+      tutorsRegisterData.name &&
+      tutorsRegisterData.lastname &&
+      tutorsRegisterData.country &&
+      tutorsRegisterData.speak &&
+      tutorsRegisterData.mobileNumber
+    ) {
       return true;
     } else {
-      toast.error('Please fill all required fields for Step 1.');
+      toast.error("Please fill all required fields for Step 1.");
       return false;
     }
   };
@@ -140,18 +205,82 @@ const RegisterTutore = () => {
     if (file) {
       return true;
     } else {
-      toast.error('Please fill all required fields for Step 2.');
+      toast.error("Please fill all required fields for Step 2.");
       return false;
     }
   };
+  const validateStep3 = () => {
+    if (tutorsRegisterData.teachingcertification) {
+      console.log("trueee");
+      return true;
+    } else {
+      console.log("false else");
+      // Check if all other fields are blank
+      if (
+        tutorsRegisterData.subject &&
+        tutorsRegisterData.certificate &&
+        tutorsRegisterData.issuedby &&
+        tutorsRegisterData.country &&
+        tutorsRegisterData.selectedYear &&
+        tutorsRegisterData.selectedYearend &&
+        tutorsRegisterData.uploadPhoto
+      ) {
+        console.log("treeee ");
+        // If all other fields are blank, return true without checking teachingcertification
+        return true;
+      } else {
+        toast.error("Please provide teaching certification.");
+        console.log("false else 222");
+        return false;
+      }
+    }
+  };
+  const validateStep4 = () => {
+    if (tutorsRegisterData.educationdegree) {
+      console.log("trueee");
+      return true;
+    } else {
+      console.log("false else");
+      // Check if all other fields are blank
+      if (
+        tutorsRegisterData.university &&
+        tutorsRegisterData.degree &&
+        tutorsRegisterData.degreetype &&
+        tutorsRegisterData.specialization &&
+        tutorsRegisterData.selectedYear &&
+        tutorsRegisterData.selectedYearend &&
+        tutorsRegisterData.uploadDiploma
+      ) {
+        console.log("treeee ");
+        // If all other fields are blank, return true without checking teachingcertification
+        return true;
+      } else {
+        toast.error("Please provide teaching certification.");
+        console.log("false else 222");
+        return false;
+      }
+    }
+  };
 
+  const validateStep5 = () => {
+    if (
+      tutorsRegisterData.introduce_yourself &&
+      tutorsRegisterData.teaching_experience &&
+      tutorsRegisterData.motivate_potential_students &&
+      tutorsRegisterData.catchy_headline
+    ) {
+      return true;
+    } else {
+      toast.error("Please fill all required fields for Step 5.");
+      return false;
+    }
+  };
   // Function to handle click on the "Back" button
   const handleBack = () => {
     if (currentStep > 1) {
       setCurrentStep(currentStep - 1);
     }
   };
-
 
   const tipsImages = [{ img: tipimg }, { img: tipimgone }, { img: tipimgtwo }];
   const tipsData = [
@@ -164,42 +293,6 @@ const RegisterTutore = () => {
     },
     { tips: "Avoid logos or contact information" },
     { tips: "You are the only person in the photo" },
-  ];
-  const profiledescriptionData = [
-    {
-      title: "1. Introduce yourself",
-      description:
-        "Show potential students who you are! Share your teaching experience and passion for education and briefly mention your interests and hobbies.",
-      placeholder: "Hello, my name is... and i'm from...",
-      alert:
-        "Don’t include your last name or present your information in a CV format",
-      eventkey: 0,
-    },
-    {
-      title: "2. Teaching experience",
-      description:
-        "Provide a detailed description of your relevant teaching experience. Include certifications, teaching methodology, education, and subject expertise.",
-      placeholder:
-        "I have 5 years of teaching experience. I’m TEFL Certified, and my classes are...",
-      eventkey: 1,
-    },
-    {
-      title: "3. Motivate potential students",
-      description:
-        "Encourage students to book their first lesson. Highlight the benefits of learning with you!",
-      placeholder:
-        "Book a trial lesson with me so we can discuss your goals and how I can help you reach them...",
-      alert:
-        "Do not include any information regarding free trial lessons or discounts, or any of your personal contact details",
-      eventkey: 2,
-    },
-    {
-      title: "4. Write a catchy headline",
-      description:
-        "Your headline is the first thing students see about you. Make it attention-grabbing, mention your specific teaching language and encourage students to read your full description.",
-      placeholder: "Certified tutor with 5 years of experience",
-      eventkey: 3,
-    },
   ];
   const [textAreaValue, setTextAreaValue] = useState("");
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -243,16 +336,6 @@ const RegisterTutore = () => {
   //   setFileUploaded(false);
   // };
 
-  const [isVisible, setIsVisible] = useState(true);
-  const [isEductionVisible, setIsEductionVisible] = useState(true);
-
-  // Function to toggle the visibility of the <h1> element
-  const toggleVisibility = () => {
-    setIsVisible(!isVisible);
-  };
-  const toggleEductionVisibility = () => {
-    setIsEductionVisible(!isEductionVisible);
-  };
   // about languages spokes
   const [languageFields, setLanguageFields] = useState([{ id: 1 }]); // Initial language field
 
@@ -311,12 +394,11 @@ const RegisterTutore = () => {
     setFile(null);
   };
 
-
   const handleImageUpload = () => {
     if (file) {
-      console.log('Uploading image:', file);
+      // console.log("Uploading image:", file);
     } else {
-      console.error('No image file selected.');
+      // console.error("No image file selected.");
     }
   };
 
@@ -400,11 +482,13 @@ const RegisterTutore = () => {
       setMonday(updatedContacts);
     }
   };
-
-  const [contacts, setContacts] = useState([{ name: '', contact: '', address: '' }]);
+  // ***************************************
+  const [contacts, setContacts] = useState([
+    { name: "", contact: "", address: "" },
+  ]);
 
   const addContact = () => {
-    setContacts([...contacts, { desiredValue: '', contact: '', address: '' }]);
+    setContacts([...contacts, { desiredValue: "", contact: "", address: "" }]);
   };
 
   const removeContact = (index) => {
@@ -420,71 +504,237 @@ const RegisterTutore = () => {
     setContacts(updatedContacts);
   };
 
-  const [contactsEducation, setContactsEducation] = useState([{ name: '', contact: '', address: '' }]);
+  // const [contactsEducation, setContactsEducation] = useState([
+  //   { name: "", contact: "", address: "" },
+  // ]);
+
+  // const addContactEducation = () => {
+  //   setContactsEducation([
+  //     ...contactsEducation,
+  //     { desiredValue: "", contact: "", address: "" },
+  //   ]);
+  // };
+
+  // const removeContactEducation = (index) => {
+  //   if (index !== 0) {
+  //     const updatedContactsEducation = contactsEducation.filter(
+  //       (_, i) => i !== index
+  //     );
+  //     setContactsEducation(updatedContactsEducation);
+  //   }
+  // };
+
+  // const handleFieldChangeEducation = (index, fieldName, value) => {
+  //   const updatedContactsEducation = [...contactsEducation];
+  //   updatedContactsEducation[index][fieldName] = value;
+  //   setContactsEducation(updatedContactsEducation);
+  // };
+  // ***************************************************** education
+  const degreeTypeData = [
+    { type: "Graduate diploma" },
+    { type: "Graduate certificate" },
+    { type: `Master's degree` },
+    { type: `PhD (Doctor of Philosophy)` },
+  ];
+  const [contactsEducation, setContactsEducation] = useState([
+    {
+      educationdegree: isEductionVisible,
+      university: "",
+      degree: "",
+      specialization: "",
+      degreetype: "",
+      selectedYear: "",
+      selectedYearend: "",
+      uploadDiploma: null,
+    },
+  ]);
 
   const addContactEducation = () => {
-    setContactsEducation([...contactsEducation, { desiredValue: '', contact: '', address: '' }]);
+    setContactsEducation([
+      ...contactsEducation,
+      {
+        educationdegree: isEductionVisible,
+        university: "",
+        degree: "",
+        specialization: "",
+        degreetype: "",
+        selectedYear: "",
+        selectedYearend: "",
+        uploadDiploma: null,
+      },
+    ]);
   };
 
   const removeContactEducation = (index) => {
-    if (index !== 0) {
-      const updatedContactsEducation = contactsEducation.filter((_, i) => i !== index);
-      setContactsEducation(updatedContactsEducation);
+    const rows = [...contactsEducation];
+    rows.splice(index, 1);
+    setContactsEducation(rows);
+  };
+
+  const handleFieldChangeEducation = (index, event) => {
+    const { name, value, files } = event.target;
+    let list = [...contactsEducation];
+    // console.log("listt: ", list);
+    if (files) {
+      list[index][name] = files[0];
+    } else {
+      list[index][name] = value;
+    }
+    setContactsEducation(list);
+  };
+  console.log("edusuyash ", contactsEducation);
+  const removeImageEducation = (index, event) => {
+    event.preventDefault();
+    const list = [...contactsEducation];
+    list[index].uploadDiploma = null;
+    setContactsEducation(list);
+    // console.log("listtt: ", list);
+    // Reset the value of the corresponding file input field
+    const fileInput = document.getElementById(`fileInput-${index}`);
+    if (fileInput) {
+      fileInput.value = ""; // Reset the value to clear the file input
     }
   };
+  // *****************************************************
+  const [certificate, setCertificate] = useState([
+    {
+      teachingcertification: isVisible,
+      subject: "",
+      certificate: "",
+      description: "",
+      issuedby: "",
+      country: "",
+      selectedYear: "",
+      selectedYearend: "",
+      uploadPhoto: null,
+    },
+  ]);
 
-  const handleFieldChangeEducation = (index, fieldName, value) => {
-    const updatedContactsEducation = [...contactsEducation];
-    updatedContactsEducation[index][fieldName] = value;
-    setContactsEducation(updatedContactsEducation);
+  const addCertificate = () => {
+    setCertificate([
+      ...certificate,
+      {
+        teachingcertification: isVisible,
+        subject: "",
+        certificate: "",
+        description: "",
+        issuedby: "",
+        country: "",
+        selectedYear: "",
+        selectedYearend: "",
+        uploadPhoto: null,
+      },
+    ]);
   };
-  /////tarun/////
 
-  const [inputFields, setInputFields] = useState([{
-    teachingcertification: '',
-    subject: '',
-    certificate: '',
-    description: '',
-    selectedYearend: ''
-  }]);
-  const addInputField = () => {
-    setInputFields([...inputFields, {
-      teachingcertification: '',
-      subject: '',
-      certificate: '',
-      description: '',  
-      selectedYearend: ''
-    }])
-  }
-  const removeInputFields = (index) => {
-    const rows = [...inputFields];
+  const removeCertificate = (index) => {
+    const rows = [...certificate];
     rows.splice(index, 1);
-    setInputFields(rows);
-  }
-  const handleChangetarun = (index, evnt) => {
-    const { name, value } = evnt.target;
-    const list = [...inputFields];
-    list[index][name] = value;
-    setInputFields(list);
-  }
+    setCertificate(rows);
+  };
 
-  console.log("inputFieldsinputFields", inputFields);
+  const handleChangeCertificate = (index, event) => {
+    const { name, value, files } = event.target;
+    let list = [...certificate];
+    // console.log("listt: ", list);
+    if (files) {
+      list[index][name] = files[0];
+    } else {
+      list[index][name] = value;
+    }
+    setCertificate(list);
+  };
+  console.log("certificatesuyash ", certificate);
+  const removeImageCertificate = (index, event) => {
+    event.preventDefault();
+    const list = [...certificate];
+    list[index].uploadPhoto = null;
+    setCertificate(list);
+    // console.log("listtt: ", list);
+    // Reset the value of the corresponding file input field
+    const fileInput = document.getElementById(`fileInput-${index}`);
+    if (fileInput) {
+      fileInput.value = ""; // Reset the value to clear the file input
+    }
+  };
+  // *************************************
+
+  const [profileDescriptionDetails, setprofileDescriptionDetails] = useState([
+    {
+      introduce_yourself: "",
+      teaching_experience: "",
+      motivate_potential_students: "",
+      catchy_headline: "",
+    },
+  ]);
+  console.log("profileDescriptionDetails: ", profileDescriptionDetails);
+  const handleChangeProfileDescription = (index, event) => {
+    const { name, value } = event.target;
+    let list = [...profileDescriptionDetails];
+    list[index][name] = value;
+    setprofileDescriptionDetails(list);
+  };
+  const [tutorsRegisterData, settutorsRegisterData] = useState({
+    name: "",
+    price: "",
+    rating: "",
+    level: "",
+    categories: "",
+    duration: "",
+    speak: "",
+    specialties: "",
+    image: "",
+    video: "",
+    speaker: "",
+    professionaltutors: "",
+    Supertutors: "",
+    lastname: "",
+    firstprice: "",
+    mobileNumber: "",
+    certificate: "",
+    Education: "",
+    Schedule: "",
+    // certificate
+    // description: "",
+    // subject: "",
+    // country: "",
+    // issuedby: "",
+    // selectedYear: "",
+    // selectedYearend: "",
+    // uploadPhoto: "",
+    teachingcertification: isVisible,
+    // certificate
+
+    // edu
+    educationdegree: isEductionVisible,
+    // university: "",
+    // degree: "",
+    // degreetype: "",
+    // specialization: "",
+    // yearsOfStudyStart: "",
+    // yearsOfStudyEnd: "",
+    // uploadDiploma: "",
+    // Profile description
+    introduce_yourself: "",
+    teaching_experience: "",
+    motivate_potential_students: "",
+    catchy_headline: "",
+  });
+  console.log("tutorsRegisterData: ", tutorsRegisterData);
   return (
     <>
       <Header />
 
-
       <Allbg title="Register A Tutor" linkTo="/" linkText="Home" />
 
-
       <section className="section-padding">
-
         <div>
           <ul className="registermenu">
-            <li >
+            <li>
               <a>
                 {" "}
-                <span className={step1Completed ? 'completed' : ''}>1</span>About
+                <span className={step1Completed ? "completed" : ""}>1</span>
+                About
               </a>
               <i class="fa fa-angle-right" aria-hidden="true"></i>
             </li>
@@ -552,34 +802,44 @@ const RegisterTutore = () => {
                         <Form.Control
                           className="text-fieldhover"
                           type="text"
-                          placeholder="Enter first name"
+                          placeholder="Enter First Name"
+                          value={tutorsRegisterData.name}
                           onChange={(e) => {
                             settutorsRegisterData({
                               ...tutorsRegisterData,
-                              name: e.target.value
-                            })
+                              name: e.target.value,
+                            });
                           }}
                         />
                       </Form.Group>
                       <Form.Group className="mb-3" controlId="formBasicEmail">
                         <Form.Label>Last Name</Form.Label>
-                        <Form.Control type="email" placeholder="Enter email"
+                        <Form.Control
+                          type="email"
+                          placeholder="Enter Last Name"
+                          value={tutorsRegisterData.lastname}
                           onChange={(e) => {
                             settutorsRegisterData({
                               ...tutorsRegisterData,
-                              lastname: e.target.value
-                            })
-                          }} />
+                              lastname: e.target.value,
+                            });
+                          }}
+                        />
                       </Form.Group>
 
                       <Form.Group className="mb-3" controlId="formBasicEmail">
                         <Form.Label>Country of origin</Form.Label>
-                        <Form.Select aria-label="Choose Country..." onChange={(e) => {
-                          settutorsRegisterData({
-                            ...tutorsRegisterData,
-                            country: e.target.value
-                          })
-                        }}>
+                        <Form.Select
+                          aria-label="Choose Country..."
+                          value={tutorsRegisterData.country}
+                          onChange={(e) => {
+                            settutorsRegisterData({
+                              ...tutorsRegisterData,
+                              country: e.target.value,
+                            });
+                          }}
+                        >
+                          <option defaultValue="">Select Country</option>
                           {countrys?.map((country) => (
                             <option key={country?.id} value={country?.id}>
                               {country?.country}
@@ -666,12 +926,16 @@ const RegisterTutore = () => {
                         controlId="formBasicEmail"
                       >
                         <Form.Label>Subject taught</Form.Label>
-                        <Form.Select aria-label="Choose Subject..." onChange={(e) => {
-                          settutorsRegisterData({
-                            ...tutorsRegisterData,
-                            speak: e.target.value
-                          })
-                        }}>
+                        <Form.Select
+                          aria-label="Choose Subject..."
+                          value={tutorsRegisterData.speak}
+                          onChange={(e) => {
+                            settutorsRegisterData({
+                              ...tutorsRegisterData,
+                              speak: e.target.value,
+                            });
+                          }}
+                        >
                           <option>Choose Subject taught...</option>
                           {speaks?.map((speak) => (
                             <option key={speak.id} value={speak.id}>
@@ -682,16 +946,24 @@ const RegisterTutore = () => {
                       </Form.Group>
                       <Form.Group className="mb-3" controlId="formBasicEmail">
                         <Form.Label>Phone Number (Optional)</Form.Label>
-                        <Form.Control type="number" placeholder="Enter phone number" onChange={(e) => {
-                          settutorsRegisterData({
-                            ...tutorsRegisterData,
-                            mobileNumber: e.target.value
-                          })
-                        }} />
+                        <Form.Control
+                          type="number"
+                          placeholder="Enter phone number"
+                          value={tutorsRegisterData.mobileNumber}
+                          onChange={(e) => {
+                            settutorsRegisterData({
+                              ...tutorsRegisterData,
+                              mobileNumber: e.target.value,
+                            });
+                          }}
+                        />
                       </Form.Group>
                       <Form.Check aria-label="option 1">
-                        <Form.Check.Input className="check_box" checked={over18Checked}
-                          onChange={(e) => setOver18Checked(e.target.checked)} />
+                        <Form.Check.Input
+                          className="check_box"
+                          checked={over18Checked}
+                          onChange={(e) => setOver18Checked(e.target.checked)}
+                        />
                         <Form.Check.Label>{`
   I confirm I’m over 18`}</Form.Check.Label>
                       </Form.Check>
@@ -832,185 +1104,270 @@ const RegisterTutore = () => {
                         teaching certification later.
                       </p>
                     )}
-                    {contacts.map((contact, index) => (
-                      <div key={index} className="mt-4">
-                        <Form>
-                          {
-                            inputFields.map((data, index) => {
-                              const { teachingcertification, subject, certificate, description, issuedby, country, selectedYear, selectedYearend, uploadPhoto } = data;
-                              return (
-                                <>
-                                  <div className="d-flex justify-content-between">
-                                    <Form.Check aria-label="option 1">
-                                      <Form.Check.Input
-                                        className="check_box"
-                                        onChange={toggleVisibility}
-                                        checked={!isVisible}
-                                        onInput={(evnt) => handleChangetarun(index, evnt)}
-                                        value={teachingcertification} name="teachingcertification"
+                    {/* {contacts.map((contact, index) => ( */}
+                    <div
+                      // key={index}
+                      className="mt-4"
+                    >
+                      <Form>
+                        {certificate.map((data, index) => {
+                          const {
+                            teachingcertification,
+                            subject,
+                            certificate,
+                            description,
+                            issuedby,
+                            country,
+                            selectedYear,
+                            selectedYearend,
+                            uploadPhoto,
+                          } = data;
+                          return (
+                            <>
+                              <div className="d-flex justify-content-between">
+                                <Form.Check aria-label="option 1">
+                                  <Form.Check.Input
+                                    className="check_box"
+                                    onChange={toggleVisibility}
+                                    checked={!isVisible}
+                                    value={isVisible}
+                                    name="teachingcertification"
+                                  />
+                                  <Form.Check.Label>
+                                    {`I don’t have any teaching certification yet`}
+                                  </Form.Check.Label>
+                                </Form.Check>
+                                {index > 0 && (
+                                  <Link
+                                    onClick={() => removeCertificate(index)}
+                                  >
+                                    <i className="fa fa-times-circle-o" />
+                                  </Link>
+                                )}
+                              </div>
+                              {isVisible && (
+                                <div className="row" key={index}>
+                                  <div className="col-12">
+                                    <Form.Group
+                                      className="mb-3 mt-3"
+                                      controlId="formBasicEmail"
+                                      // value={contact.desiredValue}
+                                      // onChange={(e) =>
+                                      //   handleFieldChange(
+                                      //     index,
+                                      //     "name",
+                                      //     e.target.value
+                                      //   )
+                                      // }
+                                    >
+                                      <Form.Label>Subject</Form.Label>
+                                      <Form.Select
+                                        aria-label="Choose Subject..."
+                                        onChange={(event) =>
+                                          handleChangeCertificate(index, event)
+                                        }
+                                        value={subject}
+                                        name="subject"
+                                      >
+                                        <option>Choose Subject...</option>
+                                        {speaks?.map((speak) => (
+                                          <option
+                                            key={speak?.id}
+                                            value={speak?.name}
+                                          >
+                                            {speak?.speak}
+                                          </option>
+                                        ))}
+                                      </Form.Select>
+                                    </Form.Group>
+                                    <Form.Group
+                                      className="mb-3 mt-3"
+                                      controlId="formBasicEmail"
+                                    >
+                                      <Form.Label>Certificate</Form.Label>
+                                      <Form.Select
+                                        aria-label="Choose Certificate..."
+                                        onChange={(event) =>
+                                          handleChangeCertificate(index, event)
+                                        }
+                                        value={certificate}
+                                        name="certificate"
+                                      >
+                                        <option>Choose Certificate...</option>
+                                        {certificationshow.map((item) => (
+                                          <option
+                                            key={item?.id}
+                                            value={item?.name}
+                                          >
+                                            {item?.certification}
+                                          </option>
+                                        ))}
+                                      </Form.Select>
+                                    </Form.Group>
+                                    <Form.Group
+                                      className="mb-3"
+                                      controlId="formBasicEmail"
+                                    >
+                                      <Form.Label>Description</Form.Label>
+                                      <Form.Control
+                                        className="text-fieldhover"
+                                        type="text"
+                                        placeholder="Description"
+                                        onChange={(event) =>
+                                          handleChangeCertificate(index, event)
+                                        }
+                                        value={description}
+                                        name="description"
                                       />
-                                      <Form.Check.Label>
-                                        {`I don’t have any teaching certification yet`}
-                                      </Form.Check.Label>
-                                    </Form.Check>
-                                    {index > 0 && (
-                                      <Link onClick={() => removeContact(index)}>
-                                        <i className="fa fa-times-circle-o" />
-                                      </Link>
+                                    </Form.Group>
+                                    <Form.Group
+                                      className="mb-3"
+                                      controlId="formBasicEmail"
+                                    >
+                                      <Form.Label>Issued by</Form.Label>
+                                      <Form.Control
+                                        type="text"
+                                        placeholder="Issued by"
+                                        onChange={(event) =>
+                                          handleChangeCertificate(index, event)
+                                        }
+                                        value={issuedby}
+                                        name="issuedby"
+                                      />
+                                    </Form.Group>
+                                    <Form.Group
+                                      className="mb-3"
+                                      controlId="formBasicEmail"
+                                    >
+                                      <Form.Label>Country of origin</Form.Label>
+                                      <Form.Select
+                                        aria-label="Choose Country..."
+                                        onChange={(event) =>
+                                          handleChangeCertificate(index, event)
+                                        }
+                                        value={country}
+                                        name="country"
+                                      >
+                                        <option>Choose Country...</option>
+                                        {countrys?.map((country) => (
+                                          <option
+                                            key={country.id}
+                                            value={country.id}
+                                          >
+                                            {country.country}
+                                          </option>
+                                        ))}
+                                      </Form.Select>
+                                    </Form.Group>
+                                    <Row>
+                                      <Form.Group className="mb-3">
+                                        <Form.Label>Years of study</Form.Label>
+                                        <Row>
+                                          <Col>
+                                            <Form.Select
+                                              aria-label="Choose Years of study..."
+                                              value={selectedYear}
+                                              onChange={handleYearChange}
+                                              onInput={(event) =>
+                                                handleChangeCertificate(
+                                                  index,
+                                                  event
+                                                )
+                                              }
+                                              name="selectedYear"
+                                            >
+                                              <option>
+                                                Choose Years of study...
+                                              </option>
+                                              {years.map((year) => (
+                                                <option key={year} value={year}>
+                                                  {year}
+                                                </option>
+                                              ))}
+                                            </Form.Select>
+                                          </Col>
+                                          <Col>
+                                            <Form.Select
+                                              aria-label="Choose Years of study..."
+                                              value={selectedYearend}
+                                              onChange={handleYearChange}
+                                              onInput={(event) =>
+                                                handleChangeCertificate(
+                                                  index,
+                                                  event
+                                                )
+                                              }
+                                              name="selectedYearend"
+                                            >
+                                              <option>
+                                                Choose Years of study...
+                                              </option>
+                                              {years.map((year) => (
+                                                <option key={year} value={year}>
+                                                  {year}
+                                                </option>
+                                              ))}
+                                            </Form.Select>
+                                          </Col>
+                                        </Row>
+                                      </Form.Group>
+                                    </Row>
+                                    <div className="Diplomaarea">
+                                      <h1>Get a 'Diploma verified' badge</h1>
+                                      <p>
+                                        Upload your diploma to boost your
+                                        credibility! Our team will review it and
+                                        add the badge to your profile. Once
+                                        reviewed, your files will be deleted.
+                                      </p>
+                                      <p>
+                                        JPG or PNG format; maximum size of 20MB.
+                                      </p>
+                                    </div>
+                                    <Form.Group className="mb-3">
+                                      <Form.Label>
+                                        {strings.uploadPhoto}
+                                      </Form.Label>
+                                      <Form.Control
+                                        type="file"
+                                        placeholder={strings.uploadPhoto}
+                                        onChange={(event) =>
+                                          handleChangeCertificate(index, event)
+                                        }
+                                        name="uploadPhoto"
+                                        id={`fileInput-${index}`}
+                                      />
+                                    </Form.Group>
+                                  </div>
+                                  <div className="col-2">
+                                    {uploadPhoto && (
+                                      // certificate.length !== 1 ? (
+                                      <button
+                                        className="btn btn-outline-danger"
+                                        onClick={(event) =>
+                                          removeImageCertificate(index, event)
+                                        }
+                                      >
+                                        Remove
+                                      </button>
+
+                                      // ) : (
+                                      //   ""
                                     )}
                                   </div>
-                                  {isVisible && (
-                                    <div className="row" key={index}>
-                                      <div className="col-12">
-                                        <Form.Group
-                                          className="mb-3 mt-3"
-                                          controlId="formBasicEmail"
-                                          value={contact.desiredValue}
-                                          onChange={(e) => handleFieldChange(index, 'name', e.target.value)}
-                                        >
-                                          <Form.Label>Subject</Form.Label>
-                                          <Form.Select aria-label="Choose Subject..."
-                                            onChange={(evnt) => handleChangetarun(index, evnt)}
-                                            value={subject} name="subject">
-                                            <option>Choose Subject...</option>
-                                            {speaks?.map((speak) => (
-                                              <option key={speak?.id} value={speak?.name}>
-                                                {speak?.speak}
-                                              </option>
-                                            ))}
-                                          </Form.Select>
-                                        </Form.Group>
-                                        <Form.Group
-                                          className="mb-3 mt-3"
-                                          controlId="formBasicEmail"
-                                        >
-                                          <Form.Label>Certificate</Form.Label>
-                                          <Form.Select aria-label="Choose Certificate..."
-                                            onChange={(evnt) => handleChangetarun(index, evnt)}
-                                            value={certificate} name="certificate">
-                                            <option>Choose Certificate...</option>
-                                            {certificationshow.map((item) => (
-                                              <option key={item?.id} value={item?.name}>
-                                                {item?.certification}
-                                              </option>
-                                            ))}
-                                          </Form.Select>
-                                        </Form.Group>
-                                        <Form.Group
-                                          className="mb-3"
-                                          controlId="formBasicEmail"
-                                        >
-                                          <Form.Label>Description</Form.Label>
-                                          <Form.Control
-                                            className="text-fieldhover"
-                                            type="text"
-                                            placeholder="Description"
-                                            onChange={(evnt) => handleChangetarun(index, evnt)}
-                                            value={description} name="description"
-                                          />
-                                        </Form.Group>
-                                        <Form.Group
-                                          className="mb-3"
-                                          controlId="formBasicEmail"
-                                        >
-                                          <Form.Label>Issued by</Form.Label>
-                                          <Form.Control
-                                            type="text"
-                                            placeholder="Issued by"
-                                            onChange={(evnt) => handleChangetarun(index, evnt)}
-                                            value={issuedby} name="issuedby"
-                                          />
-                                        </Form.Group>
-                                        <Form.Group
-                                          className="mb-3"
-                                          controlId="formBasicEmail"
-                                        >
-                                          <Form.Label>Country of origin</Form.Label>
-                                          <Form.Select aria-label="Choose Country..."
-                                            onChange={(evnt) => handleChangetarun(index, evnt)}
-                                            value={country} name="country">
-                                            <option>Choose Country...</option>
-                                            {countrys?.map((country) => (
-                                              <option key={country.id} value={country.id}>
-                                                {country.country}
-                                              </option>
-                                            ))}
-                                          </Form.Select>
-                                        </Form.Group>
-                                        <Row>
-                                          <Form.Group className="mb-3">
-                                            <Form.Label>Years of study</Form.Label>
-                                            <Row>
-                                              <Col>
-                                                <Form.Select
-                                                  aria-label="Choose Years of study..."
-                                                  value={selectedYear}
-                                                  onChange={handleYearChange}
-                                                  onInput={(evnt) => handleChangetarun(index, evnt)}
-                                                  name="selectedYear"
-                                                >
-                                                  <option>Choose Years of study...</option>
-                                                  {years.map((year) => (
-                                                    <option key={year} value={year}>
-                                                      {year}
-                                                    </option>
-                                                  ))}
-                                                </Form.Select>
-                                              </Col>
-                                              <Col>
-                                                <Form.Select
-                                                  aria-label="Choose Years of study..."
-                                                  value={selectedYearend}
-                                                  onChange={handleYearChange}
-                                                  onInput={(evnt) => handleChangetarun(index, evnt)}
-                                                  name="selectedYearend"
-                                                >
-                                                  <option>Choose Years of study...</option>
-                                                  {years.map((year) => (
-                                                    <option key={year} value={year}>
-                                                      {year}
-                                                    </option>
-                                                  ))}
-                                                </Form.Select>
-                                              </Col>
-                                            </Row>
-                                          </Form.Group>
-                                        </Row>
-                                        <div className="Diplomaarea">
-                                          <h1>Get a 'Diploma verified' badge</h1>
-                                          <p>
-                                            Upload your diploma to boost your credibility! Our
-                                            team will review it and add the badge to your profile.
-                                            Once reviewed, your files will be deleted.
-                                          </p>
-                                          <p>JPG or PNG format; maximum size of 20MB.</p>
-                                        </div>
-                                        <Form.Group
-                                          className="mb-3"
-                                          controlId="formBasicEmail"
-                                        >
-                                          <Form.Label>{strings.uploadPhoto}</Form.Label>
-                                          <Form.Control
-                                            type="file"
-                                            placeholder={strings.uploadPhoto}
-                                            onChange={(evnt) => handleChangetarun(index, evnt)}
-                                            value={uploadPhoto} name="uploadPhoto"
-                                          />
-                                        </Form.Group>
-                                      </div>
-                                      <div className="col-2">
-                                        {(inputFields.length !== 1) ? <button className="btn btn-outline-danger" onClick={removeInputFields}>Remove</button> : ''}
-                                      </div>
-                                    </div>
-                                  )}
-                                </>
-                              )
-                            })
-                          }
-                        </Form>
-                      </div>
-                    ))}
-                    <Link className="addlang" onClick={addContact}>add another Certificate</Link>
+                                </div>
+                              )}
+                            </>
+                          );
+                        })}
+                      </Form>
+                    </div>
+                    {/* ))} */}
+                    {isVisible && (
+                      <Link className="addlang" onClick={addCertificate}>
+                        add another Certificate
+                      </Link>
+                    )}
                     {/* after click on step 2 next button step one hide and display step 3 data */}
                     <Row>
                       <Col>
@@ -1050,129 +1407,210 @@ const RegisterTutore = () => {
                         teaching certification later.
                       </p>
                     )}
-                    {contactsEducation.map((contactEducation, index) => (
-                      <div key={index} className="mt-4">
-                        <Form>
-                          <Form.Check aria-label="option 1">
-                            <Form.Check.Input
-                              className="check_box"
-                              onChange={toggleEductionVisibility}
-                              checked={!isEductionVisible}
-                            />
-                            <Form.Check.Label>
-                              {`I don’t have a higher education degree`}
-                            </Form.Check.Label>
-                          </Form.Check>
-                          {isEductionVisible && (
-                            <>
-                              <Form.Group
-                                className="mb-3"
-                                controlId="formBasicEmail"
-                              >
-                                <Form.Label>University</Form.Label>
-                                <Form.Control
-                                  className="text-fieldhover"
-                                  type="text"
-                                  placeholder="E.G Mount Royal University"
+                    {/* {contactsEducation.map((contactEducation, index) => ( */}
+                    {contactsEducation.map((data, index) => {
+                      const {
+                        educationdegree,
+                        degree,
+                        degreetype,
+                        specialization,
+                        university,
+                        selectedYear,
+                        selectedYearend,
+                        uploadDiploma,
+                      } = data;
+                      return (
+                        <>
+                          <div className="mt-4">
+                            <Form>
+                              <Form.Check aria-label="option 1">
+                                <Form.Check.Input
+                                  className="check_box"
+                                  onChange={toggleEductionVisibility}
+                                  checked={!isEductionVisible}
+                                  value={isEductionVisible}
+                                  name="educationdegree"
                                 />
-                              </Form.Group>
-                              <Form.Group
-                                className="mb-3"
-                                controlId="formBasicEmail"
-                              >
-                                <Form.Label>Degree</Form.Label>
-                                <Form.Control
-                                  className="text-fieldhover"
-                                  type="text"
-                                  placeholder="E.G Bachelor's degree in the Eniglish Language"
-                                />
-                              </Form.Group>
-                              <Form.Group
-                                className="mb-3"
-                                controlId="formBasicEmail"
-                              >
-                                <Form.Label>Specialization</Form.Label>
-                                <Form.Control
-                                  className="text-fieldhover"
-                                  type="text"
-                                  placeholder="E.G Teaching Eniglish as a Foreign Language"
-                                />
-                              </Form.Group>
-                              <Form.Group
-                                className="mb-3 mt-3"
-                                controlId="formBasicEmail"
-                              >
-                                <Form.Label>Degree type</Form.Label>
-                                <Form.Select aria-label="Choose Degree type...">
-                                  <option>Choose Degree type...</option>
-                                  <option value="1">One</option>
-                                  <option value="2">Two</option>
-                                  <option value="3">Three</option>
-                                </Form.Select>
-                              </Form.Group>
-                              <Row>
-                                <Form.Group className="mb-3">
-                                  <Form.Label>Years of study</Form.Label>
+                                <Form.Check.Label>
+                                  {`I don’t have a higher education degree`}
+                                </Form.Check.Label>
+                              </Form.Check>
+                              {isEductionVisible && (
+                                <>
+                                  <Form.Group
+                                    className="mb-3"
+                                    controlId="formBasicEmail"
+                                    key={index}
+                                  >
+                                    <Form.Label>University</Form.Label>
+                                    <Form.Control
+                                      className="text-fieldhover"
+                                      type="text"
+                                      placeholder="E.G Mount Royal University"
+                                      onChange={(event) =>
+                                        handleFieldChangeEducation(index, event)
+                                      }
+                                      value={university}
+                                      name="university"
+                                    />
+                                  </Form.Group>
+                                  <Form.Group
+                                    className="mb-3"
+                                    controlId="formBasicEmail"
+                                  >
+                                    <Form.Label>Degree</Form.Label>
+                                    <Form.Control
+                                      className="text-fieldhover"
+                                      type="text"
+                                      placeholder="E.G Bachelor's degree in the Eniglish Language"
+                                      onChange={(event) =>
+                                        handleFieldChangeEducation(index, event)
+                                      }
+                                      value={degree}
+                                      name="degree"
+                                    />
+                                  </Form.Group>
+                                  <Form.Group
+                                    className="mb-3"
+                                    controlId="formBasicEmail"
+                                  >
+                                    <Form.Label>Specialization</Form.Label>
+                                    <Form.Control
+                                      className="text-fieldhover"
+                                      type="text"
+                                      placeholder="E.G Teaching Eniglish as a Foreign Language"
+                                      onChange={(event) =>
+                                        handleFieldChangeEducation(index, event)
+                                      }
+                                      value={specialization}
+                                      name="specialization"
+                                    />
+                                  </Form.Group>
+                                  <Form.Group
+                                    className="mb-3 mt-3"
+                                    controlId="formBasicEmail"
+                                  >
+                                    <Form.Label>Degree type</Form.Label>
+                                    <Form.Select
+                                      aria-label="Choose Degree type..."
+                                      onChange={(event) =>
+                                        handleFieldChangeEducation(index, event)
+                                      }
+                                      value={degreetype}
+                                      name="degreetype"
+                                    >
+                                      <option>Choose Degree type...</option>
+                                      {degreeTypeData.map((item, index) => (
+                                        <option
+                                          key={item?.index}
+                                          value={item?.type}
+                                        >
+                                          {item?.type}
+                                        </option>
+                                      ))}
+                                    </Form.Select>
+                                  </Form.Group>
                                   <Row>
-                                    <Col>
-                                      <Form.Select
-                                        aria-label="Choose Years of study..."
-                                        value={selectedYear}
-                                        onChange={handleYearChange}
-                                      >
-                                        <option>Choose Years of study...</option>
-                                        {years.map((year) => (
-                                          <option key={year} value={year}>
-                                            {year}
-                                          </option>
-                                        ))}
-                                      </Form.Select>
-                                    </Col>
-                                    <Col>
-                                      <Form.Select
-                                        aria-label="Choose Years of study..."
-                                        value={selectedYear}
-                                        onChange={handleYearChange}
-                                      >
-                                        <option>Choose Years of study...</option>
-                                        {years.map((year) => (
-                                          <option key={year} value={year}>
-                                            {year}
-                                          </option>
-                                        ))}
-                                      </Form.Select>
-                                    </Col>
+                                    <Form.Group className="mb-3">
+                                      <Form.Label>Years of study</Form.Label>
+                                      <Row>
+                                        <Col>
+                                          <Form.Select
+                                            aria-label="Choose Years of study..."
+                                            value={selectedYear}
+                                            onChange={handleYearChange}
+                                            onInput={(event) =>
+                                              handleFieldChangeEducation(
+                                                index,
+                                                event
+                                              )
+                                            }
+                                            name="selectedYear"
+                                          >
+                                            <option>
+                                              Choose Years of study...
+                                            </option>
+                                            {years.map((year) => (
+                                              <option key={year} value={year}>
+                                                {year}
+                                              </option>
+                                            ))}
+                                          </Form.Select>
+                                        </Col>
+                                        <Col>
+                                          <Form.Select
+                                            aria-label="Choose Years of study..."
+                                            value={selectedYearend}
+                                            onChange={handleYearChange}
+                                            onInput={(event) =>
+                                              handleFieldChangeEducation(
+                                                index,
+                                                event
+                                              )
+                                            }
+                                            name="selectedYearend"
+                                          >
+                                            <option>
+                                              Choose Years of study...
+                                            </option>
+                                            {years.map((year) => (
+                                              <option key={year} value={year}>
+                                                {year}
+                                              </option>
+                                            ))}
+                                          </Form.Select>
+                                        </Col>
+                                      </Row>
+                                    </Form.Group>
                                   </Row>
-                                </Form.Group>
-                              </Row>
+                                </>
+                              )}
+                            </Form>
+                            {/* {isEductionVisible && ( */}
+                            <div className="Diplomaarea">
+                              <h1>Get a 'Diploma verified' badge</h1>
+                              <p>
+                                Upload your diploma to boost your credibility!
+                                Our team will review it and add the badge to
+                                your profile. Once reviewed, your files will be
+                                deleted.
+                              </p>
+                              <p>JPG or PNG format; maximum size of 20MB.</p>
+                            </div>
+                            <Form.Group className="mb-3">
+                              <Form.Label>{strings.uploadPhoto}</Form.Label>
+                              <Form.Control
+                                type="file"
+                                placeholder={strings.uploadPhoto}
+                                onChange={(event) =>
+                                  handleFieldChangeEducation(index, event)
+                                }
+                                name="uploadDiploma"
+                                id={`fileInput-${index}`}
+                              />
+                            </Form.Group>
 
-                            </>
-                          )}
-                        </Form>
-                        {isEductionVisible && (
-                          <div className="Diplomaarea">
-                            <h1>Get a 'Diploma verified' badge</h1>
-                            <p>
-                              Upload your diploma to boost your credibility! Our
-                              team will review it and add the badge to your profile.
-                              Once reviewed, your files will be deleted.
-                            </p>
-                            <p>JPG or PNG format; maximum size of 20MB.</p>
-                            <Button
-                              className="theme-button1 w-100 mt-3"
-                              hoverColor="theme-button1"
-                              label={strings.uploadPhoto}
-                            // onClick={handleBack}
-                            />
+                            {uploadDiploma && (
+                              <div className="col-2">
+                                <button
+                                  className="btn btn-outline-danger"
+                                  onClick={(event) =>
+                                    removeImageEducation(index, event)
+                                  }
+                                >
+                                  Remove
+                                </button>
+                              </div>
+                            )}
                           </div>
-                        )}
-                        {index > 0 && (
-                          <Button onClick={() => removeContactEducation(index)} className="red-button w-100 mt-3 mb-3" hoverColor="theme-button1"
-                            label="Remove" />
-                        )}
-                      </div>
-                    ))}
-                    <Link className="addlang" onClick={addContactEducation}>add another Education</Link>
+                        </>
+                      );
+                    })}
+                    {isEductionVisible && (
+                      <Link className="addlang" onClick={addContactEducation}>
+                        add another Education
+                      </Link>
+                    )}
                     {/* after click on step 2 next button step one hide and display step 3 data */}
                     <Row>
                       <Col>
@@ -1211,89 +1649,173 @@ const RegisterTutore = () => {
                           guidelines to get approved
                         </Link>
                       </p>
-                      {profiledescriptionData.map((item, index) => (
-                        <Accordion
-                          defaultActiveKey={item.eventkey == 0}
-                          key={index}
-                        >
-                          <Accordion.Item eventKey={item.eventkey}>
-                            <Accordion.Header>{item.title}</Accordion.Header>
-                            <Accordion.Body>
-                              <Form.Control
-                                as="textarea"
-                                rows={3}
-                                placeholder={item.placeholder}
-                                value={textAreaValue[index] || ""}
-                                onChange={(e) => handleChange(e, index)}
-                              />
-                              {item.description}
-                              {item.alert && (
-                                <div className="cvformate_alert">
-                                  <p>
-                                    <span>
-                                      {" "}
-                                      <i
-                                        class="fa fa-info-circle"
-                                        aria-hidden="true"
-                                      ></i>
-                                    </span>{" "}
-                                    {item.alert}
-                                  </p>
-                                </div>
-                              )}
-                            </Accordion.Body>
-                          </Accordion.Item>
-                        </Accordion>
-                      ))}
-                      {/* <Form>
-                    {profiledescriptionData.map((item, index) => (
-                      <>
-                        <div key={index}>
-                          <Form.Group
-                            className="mb-3"
-                            controlId={`textarea-${index}`}
-                          >
-                            <Form.Label>{item.title}</Form.Label>
-                            {index === 0 && (
-                              <>
-                                <Form.Label>{item.description}</Form.Label>
-                                <Form.Control
-                                  as="textarea"
-                                  rows={3}
-                                  placeholder={item.placeholder}
-                                  value={textAreaValue[index] || ""}
-                                  onChange={(e) => handleChange(e, index)}
-                                />
-                                {item.alert && (
-                                  <div className="cvformate_alert">
-                                    <p>
-                                      <span>
-                                        {" "}
-                                        <i
-                                          class="fa fa-info-circle"
-                                          aria-hidden="true"
-                                        ></i>
-                                      </span>{" "}
-                                      {item.alert}
-                                    </p>
-                                  </div>
-                                )}
-                              </>
-                            )}
-                          </Form.Group>
-                          {index === 0 && (
-                            <Button
-                              className="theme-button1 w-100 mt-3"
-                              hoverColor="theme-button1"
-                              label={strings.Continue}
-                              disabled={!textAreaValue[index]}
-                              onClick={handleContinue}
+                      {/* 1 */}
+                      <Accordion defaultActiveKey={0} key={0}>
+                        <Accordion.Item eventKey={0}>
+                          <Accordion.Header>
+                            1. Introduce yourself
+                          </Accordion.Header>
+                          <Accordion.Body>
+                            <Form.Control
+                              as="textarea"
+                              rows={3}
+                              placeholder={`Hello, my name is... and i'm from...`}
+                              // name="introduce_yourself"
+                              value={tutorsRegisterData.introduce_yourself}
+                              // onChange={(e) =>
+                              //   handleChangeProfileDescription(0, e)
+                              // }
+                              onChange={(e) => {
+                                settutorsRegisterData({
+                                  ...tutorsRegisterData,
+                                  introduce_yourself: e.target.value,
+                                });
+                              }}
                             />
-                          )}
-                        </div>
-                      </>
-                    ))}
-                  </Form> */}
+                            Show potential students who you are! Share your
+                            teaching experience and passion for education and
+                            briefly mention your interests and hobbies.
+                            {/* {item.alert && ( */}
+                            <div className="cvformate_alert">
+                              <p>
+                                <span>
+                                  {" "}
+                                  <i
+                                    class="fa fa-info-circle"
+                                    aria-hidden="true"
+                                  ></i>
+                                </span>{" "}
+                                Don’t include your last name or present your
+                                information in a CV format
+                              </p>
+                            </div>
+                            {/* )} */}
+                          </Accordion.Body>
+                        </Accordion.Item>
+                      </Accordion>
+                      {/* 2 */}
+                      <Accordion defaultActiveKey={0} key={1}>
+                        <Accordion.Item eventKey={1}>
+                          <Accordion.Header>
+                            2. Teaching experience
+                          </Accordion.Header>
+                          <Accordion.Body>
+                            <Form.Control
+                              as="textarea"
+                              rows={3}
+                              placeholder={`I have 5 years of teaching experience. I’m TEFL Certified, and my classes are...`}
+                              // name="teaching_experience"
+                              value={tutorsRegisterData.teaching_experience}
+                              // onChange={(e) =>
+                              //   handleChangeProfileDescription(0, e)
+                              // }
+                              onChange={(e) => {
+                                settutorsRegisterData({
+                                  ...tutorsRegisterData,
+                                  teaching_experience: e.target.value,
+                                });
+                              }}
+                            />
+                            Provide a detailed description of your relevant
+                            teaching experience. Include certifications,
+                            teaching methodology, education, and subject
+                            expertise.
+                            {/* {item.alert && ( */}
+                            {/* <div className="cvformate_alert">
+                              <p>
+                                <span>
+                                  {" "}
+                                  <i
+                                    class="fa fa-info-circle"
+                                    aria-hidden="true"
+                                  ></i>
+                                </span>{" "}
+                                Don’t include your last name or present your
+                                information in a CV format
+                              </p>
+                            </div> */}
+                            {/* )} */}
+                          </Accordion.Body>
+                        </Accordion.Item>
+                      </Accordion>
+                      {/* 3 */}
+                      <Accordion defaultActiveKey={0} key={2}>
+                        <Accordion.Item eventKey={2}>
+                          <Accordion.Header>
+                            3. Motivate potential students
+                          </Accordion.Header>
+                          <Accordion.Body>
+                            <Form.Control
+                              as="textarea"
+                              rows={3}
+                              placeholder={`Book a trial lesson with me so we can discuss your goals and how I can help you reach them...`}
+                              // name="motivate_potential_students"
+                              value={
+                                tutorsRegisterData.motivate_potential_students
+                              }
+                              // onChange={(e) =>
+                              //   handleChangeProfileDescription(0, e)
+                              // }
+                              onChange={(e) => {
+                                settutorsRegisterData({
+                                  ...tutorsRegisterData,
+                                  motivate_potential_students: e.target.value,
+                                });
+                              }}
+                            />
+                            Encourage students to book their first lesson.
+                            Highlight the benefits of learning with you!
+                            {/* {item.alert && ( */}
+                            <div className="cvformate_alert">
+                              <p>
+                                <span>
+                                  {" "}
+                                  <i
+                                    class="fa fa-info-circle"
+                                    aria-hidden="true"
+                                  ></i>
+                                </span>{" "}
+                                Do not include any information regarding free
+                                trial lessons or discounts, or any of your
+                                personal contact details
+                              </p>
+                            </div>
+                            {/* )} */}
+                          </Accordion.Body>
+                        </Accordion.Item>
+                      </Accordion>
+                      {/* 4 */}
+                      <Accordion defaultActiveKey={0} key={3}>
+                        <Accordion.Item eventKey={3}>
+                          <Accordion.Header>
+                            4. Write a catchy headline
+                          </Accordion.Header>
+                          <Accordion.Body>
+                            <Form.Control
+                              as="textarea"
+                              rows={3}
+                              placeholder={`Certified tutor with 5 years of experience`}
+                              // name="catchy_headline"
+                              value={tutorsRegisterData.catchy_headline}
+                              // onChange={(e) =>
+                              //   handleChangeProfileDescription(0, e)
+                              // }
+                              onChange={(e) => {
+                                settutorsRegisterData({
+                                  ...tutorsRegisterData,
+                                  catchy_headline: e.target.value,
+                                });
+                              }}
+                            />
+                            Your headline is the first thing students see about
+                            you. Make it attention-grabbing, mention your
+                            specific teaching language and encourage students to
+                            read your full description.
+                          </Accordion.Body>
+                        </Accordion.Item>
+                      </Accordion>
+                      {/* <Form>
+                  
                       {/* after click on step 2 next button step one hide and display step 3 data */}
                       <Row>
                         <Col>
@@ -1477,8 +1999,12 @@ const RegisterTutore = () => {
                           </Col>
                           <Col>
                             {index > 0 && (
-                              <Button onClick={() => removeMonday(index)} className="red-button w-100 mt-3 mb-3" hoverColor="theme-button1"
-                                label="Remove" />
+                              <Button
+                                onClick={() => removeMonday(index)}
+                                className="red-button w-100 mt-3 mb-3"
+                                hoverColor="theme-button1"
+                                label="Remove"
+                              />
                             )}
                           </Col>
                         </Row>
@@ -1533,8 +2059,12 @@ const RegisterTutore = () => {
                           </Col>
                           <Col>
                             {index > 0 && (
-                              <Button onClick={() => removeTuesday(index)} className="red-button w-100 mt-3 mb-3" hoverColor="theme-button1"
-                                label="Remove" />
+                              <Button
+                                onClick={() => removeTuesday(index)}
+                                className="red-button w-100 mt-3 mb-3"
+                                hoverColor="theme-button1"
+                                label="Remove"
+                              />
                             )}
                           </Col>
                         </Row>
@@ -1589,8 +2119,12 @@ const RegisterTutore = () => {
                           </Col>
                           <Col>
                             {index > 0 && (
-                              <Button onClick={() => removeWednesday(index)} className="red-button w-100 mt-3 mb-3" hoverColor="theme-button1"
-                                label="Remove" />
+                              <Button
+                                onClick={() => removeWednesday(index)}
+                                className="red-button w-100 mt-3 mb-3"
+                                hoverColor="theme-button1"
+                                label="Remove"
+                              />
                             )}
                           </Col>
                         </Row>
@@ -1645,8 +2179,12 @@ const RegisterTutore = () => {
                           </Col>
                           <Col>
                             {index > 0 && (
-                              <Button onClick={() => removeThursday(index)} className="red-button w-100 mt-3 mb-3" hoverColor="theme-button1"
-                                label="Remove" />
+                              <Button
+                                onClick={() => removeThursday(index)}
+                                className="red-button w-100 mt-3 mb-3"
+                                hoverColor="theme-button1"
+                                label="Remove"
+                              />
                             )}
                           </Col>
                         </Row>
@@ -1700,8 +2238,12 @@ const RegisterTutore = () => {
                             </Form.Group>
                           </Col>
                           {index > 0 && (
-                            <Button onClick={() => removeFriday(index)} className="red-button w-100 mt-3 mb-3" hoverColor="theme-button1"
-                              label="Remove" />
+                            <Button
+                              onClick={() => removeFriday(index)}
+                              className="red-button w-100 mt-3 mb-3"
+                              hoverColor="theme-button1"
+                              label="Remove"
+                            />
                           )}
                         </Row>
                       ))}
@@ -1754,8 +2296,12 @@ const RegisterTutore = () => {
                             </Form.Group>
                           </Col>
                           {index > 0 && (
-                            <Button onClick={() => removeSaturday(index)} className="red-button w-100 mt-3 mb-3" hoverColor="theme-button1"
-                              label="Remove" />
+                            <Button
+                              onClick={() => removeSaturday(index)}
+                              className="red-button w-100 mt-3 mb-3"
+                              hoverColor="theme-button1"
+                              label="Remove"
+                            />
                           )}
                         </Row>
                       ))}
@@ -1808,8 +2354,12 @@ const RegisterTutore = () => {
                             </Form.Group>
                           </Col>
                           {index > 0 && (
-                            <Button onClick={() => removeSunday(index)} className="red-button w-100 mt-3 mb-3" hoverColor="theme-button1"
-                              label="Remove" />
+                            <Button
+                              onClick={() => removeSunday(index)}
+                              className="red-button w-100 mt-3 mb-3"
+                              hoverColor="theme-button1"
+                              label="Remove"
+                            />
                           )}
                         </Row>
                       ))}
@@ -1988,7 +2538,6 @@ const RegisterTutore = () => {
           </Container>
         </section>
       </section>
-
 
       <Footer />
     </>

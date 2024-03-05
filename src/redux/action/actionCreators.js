@@ -1003,10 +1003,10 @@ export const profileDetailFailure = () => ({
 });
 // profile Get END
 // profile Update Start
-export const profileUpdateSuccess = (profileData) => async (dispatch) => ({
-  type: PROFILE_UPDATE_SUCCESS,
-  payload: profileData,
-});
+// export const profileUpdateSuccess = (profileData) => async (dispatch) => ({
+//   type: PROFILE_UPDATE_SUCCESS,
+//   payload: profileData,
+// });
 
 export const profileUpdatePost = (profileData) => async (dispatch) => {
   const userid = localStorage.getItem("userid");

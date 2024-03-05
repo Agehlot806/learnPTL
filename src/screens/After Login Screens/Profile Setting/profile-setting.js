@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Header from "../../../directives/Header/header";
 import Footer from "../../../directives/Footer/footer";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Hand from "../../../assets/images/icons/waving-hand.png";
 import { Container, Row, Col, Nav, Tab, Form, Table } from "react-bootstrap";
 import "../Profile Setting/profile-setting.css";
@@ -24,6 +24,7 @@ import moment from "moment-timezone";
 
 function Profilesetting() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { response, profileDetails } = useSelector((state) => state.profile);
   const { changepassword } = useSelector((state) => state.auth);
   console.log("response: ", response);
@@ -41,6 +42,7 @@ function Profilesetting() {
     timezone: "",
     profileImage: "",
   });
+  console.log("profileData: ", profileData);
 
   // Handle form input changes
   const handleInputChange = (e) => {
@@ -71,9 +73,17 @@ function Profilesetting() {
     formData.append("firstname", profileData.firstname);
     formData.append("lastname", profileData.lastname);
     formData.append("mobileNumber", profileData.mobileNumber);
-    formData.append("timezone", profileData.timezone);
+    formData.append("timezone", profileData?.timezone);
     formData.append("profileImage", profileData.profileImage);
-    dispatch(profileUpdatePost(formData)); // Dispatch action to update profile data
+    dispatch(profileUpdatePost(formData))
+      .then(() => {
+        // If the profile update is successful, navigate to the home screen
+        navigate("/"); // Assuming 'navigate' is imported from 'react-router-dom'
+      })
+      .catch((error) => {
+        console.error("Profile update error:", error);
+        // Handle profile update error if needed
+      });
   };
 
   // CHANGE PASSWORD START
@@ -234,6 +244,7 @@ function Profilesetting() {
                               placeholder="Enter Email"
                               name="email"
                               value={profileData?.email}
+                              disabled
                               onChange={handleInputChange}
                             />
                           </Form.Group>

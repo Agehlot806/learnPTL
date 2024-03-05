@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Container,
   Form,
@@ -18,18 +18,24 @@ import Button from "../../components/Button";
 import Multilang from "../../components/language/multi-language";
 import Balance from "../../components/models/Balance";
 import Notification from "../../components/models/notification";
-import { userLogout } from "../../redux/action/actionCreators";
-import { useDispatch } from "react-redux";
+import {
+  fetchprofileDetail,
+  userLogout,
+} from "../../redux/action/actionCreators";
+import { useDispatch, useSelector } from "react-redux";
 import { persistor } from "../../store/configureStore";
 
 function Header() {
   const dispatch = useDispatch();
+  const { profileDetails } = useSelector((state) => state.profile);
   const navigate = useNavigate();
   const userid = localStorage.getItem("userid");
   const [modalShow, setModalShow] = useState(false);
   const [notificationShow, setnotificationShow] = useState(false);
   // const history = useHistory();
-
+  useEffect(() => {
+    dispatch(fetchprofileDetail());
+  }, [dispatch]);
   const handleLogout = () => {
     dispatch(userLogout())
       .then(() => {
@@ -113,38 +119,48 @@ function Header() {
                 </Link>
               )}
             </Nav.Link>
-            <NavDropdown
-              className="profile-icon"
-              title={<img src={Img1} alt="Currency" />}
-            >
-              <NavDropdown.Item>
-                <Link to="/find-tutor">Home</Link>
-              </NavDropdown.Item>
-              <NavDropdown.Item>
-                <Link to="/message">Messages</Link>
-              </NavDropdown.Item>
-              <NavDropdown.Item>
-                <Link to="/my-learning">My Learning</Link>
-              </NavDropdown.Item>
-              <NavDropdown.Item>
-                <Link to="/wishlist">Saved Tutor</Link>
-              </NavDropdown.Item>
-              <NavDropdown.Item>
-                <Link to="/invite-a-friend">invite A Friend</Link>
-              </NavDropdown.Item>
-              <NavDropdown.Item>
-                <Link to="/profile-setting">Profile Setting</Link>
-              </NavDropdown.Item>
-              <NavDropdown.Item>
-                <Link to="">Help</Link>
-              </NavDropdown.Item>
-              <hr />
-              <NavDropdown.Item>
-                <Link to="" onClick={handleLogout}>
-                  Logout
-                </Link>
-              </NavDropdown.Item>
-            </NavDropdown>
+            {userid && (
+              <NavDropdown
+                className="profile-icon"
+                title={
+                  <img
+                    src={
+                      "https://storyfy.webzproject.shop/uploads/" +
+                      profileDetails?.profileImage
+                    }
+                    alt="Currency"
+                  />
+                }
+              >
+                <NavDropdown.Item>
+                  <Link to="/find-tutor">Home</Link>
+                </NavDropdown.Item>
+                <NavDropdown.Item>
+                  <Link to="/message">Messages</Link>
+                </NavDropdown.Item>
+                <NavDropdown.Item>
+                  <Link to="/my-learning">My Learning</Link>
+                </NavDropdown.Item>
+                <NavDropdown.Item>
+                  <Link to="/wishlist">Saved Tutor</Link>
+                </NavDropdown.Item>
+                <NavDropdown.Item>
+                  <Link to="/invite-a-friend">invite A Friend</Link>
+                </NavDropdown.Item>
+                <NavDropdown.Item>
+                  <Link to="/profile-setting">Profile Setting</Link>
+                </NavDropdown.Item>
+                <NavDropdown.Item>
+                  <Link to="">Help</Link>
+                </NavDropdown.Item>
+                <hr />
+                <NavDropdown.Item>
+                  <Link to="" onClick={handleLogout}>
+                    Logout
+                  </Link>
+                </NavDropdown.Item>
+              </NavDropdown>
+            )}
           </Nav>
         </Navbar.Collapse>
       </Container>
