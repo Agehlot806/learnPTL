@@ -23,6 +23,9 @@ const Pricefilter = (props) => {
             onChange={(newValues) => {
               setValues(newValues);
             }}
+            onFinalChange={(val) => {
+              props.onChangePrice(val);
+            }}
             renderTrack={({ props, children }) => (
               <div
                 onMouseDown={props.onMouseDown}

@@ -13,7 +13,7 @@ import {
 function Allfilter(props) {
   const dispatch = useDispatch();
 
-  let maxPrice = 0;
+  let maxPrice = 100;
   const price =
     props.products?.length > 0 &&
     props.products.forEach((product) => {
@@ -30,6 +30,10 @@ function Allfilter(props) {
   // };
   const handleSwitchClickone = (checked) => {
     props.setSuperTutorsSwitch(checked);
+    props.setAllFilterData({
+      ...props.allFilterData,
+      supertutors: checked ? 1 : 0,
+    });
     dispatch(
       fetchCreateTutorCategory({
         user_id: 1,
@@ -52,6 +56,10 @@ function Allfilter(props) {
   const handleSwitchChangeSpeaker = (checked) => {
     console.log("handleSwitchChangeSpeaker: ", checked);
     props.setNativeSpeakerSwitch(checked);
+    props.setAllFilterData({
+      ...props.allFilterData,
+      speaker: checked ? 1 : 0,
+    });
     dispatch(
       fetchCreateSpeaker({
         user_id: 1,
@@ -61,6 +69,10 @@ function Allfilter(props) {
   };
   // -----------------------------------------------
   const handleSwitchChangeSpeakerNew = (isChecked) => {
+    props.setAllFilterData({
+      ...props.allFilterData,
+      speaker: isChecked ? 0 : "",
+    });
     props.setSpeakerChecked(isChecked);
   };
   //   superTutorsChecked
@@ -69,6 +81,11 @@ function Allfilter(props) {
 
   const handleSuperTutorsSwitch = (isChecked) => {
     props.setSuperTutorsChecked(isChecked);
+
+    props.setAllFilterData({
+      ...props.allFilterData,
+      supertutors: isChecked ? 0 : "",
+    });
   };
   const handleProfessionalTutors = (isChecked) => {
     props.setProfessionalTutorsChecked(isChecked);
@@ -128,7 +145,11 @@ function Allfilter(props) {
               <Accordion.Item eventKey="3">
                 <Accordion.Header>{props.Price}</Accordion.Header>
                 <Accordion.Body>
-                  <Pricefilter firstprice={minPriceUpdate} price={maxPrice} />
+                  <Pricefilter
+                    firstprice={minPriceUpdate}
+                    price={maxPrice}
+                    onChangePrice={props.onChangePrice}
+                  />
                   {/* <Pricefilter price={maxPrice} firstprice={minPriceUpdate} /> */}
                 </Accordion.Body>
               </Accordion.Item>
@@ -153,7 +174,7 @@ function Allfilter(props) {
                             type="checkbox"
                             className="form-check-input"
                             // id={`checkbox_${index}`}
-                            checked={props.selectedCountry.includes(
+                            checked={props.allFilterData.country.includes(
                               option.country
                             )}
                             onChange={() =>

@@ -52,6 +52,10 @@ import {
   FORGET_PASSWORD_SUCCESS,
   FETCH_REVIEW_SUCCESS,
   FETCH_REVIEW_FAILURE,
+  FETCH_FAQS_SUCCESS,
+  FETCH_FAQS_FAILURE,
+  FETCH_LATEST_FILTER_SUCCESS,
+  FETCH_LATEST_FILTER_FAILURE,
 } from "./actionTypes";
 import { BASE_URL } from "../../config";
 import { ApiEndPoints } from "../../utils/apiEndPoint";
@@ -352,6 +356,46 @@ export const fetchLatest = (products) => async (dispatch) => {
     dispatch({
       type: FETCH_LATEST_FAILURE,
       payload: error.response.data.products,
+    });
+  }
+};
+export const fetchLatestFilter = (filterData) => async (dispatch) => {
+  try {
+    await axios
+      // .get(`http://192.168.1.41:5000/api/latest-filter`, {
+      .get(`${BASE_URL}${ApiEndPoints.LATEST_FILTER_API}`, {
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+        },
+        params: filterData, // Assuming filterData is an object representing query parameters
+      })
+      .then((response) => {
+        const { page, pageSize, totalPages, totalItems } = response.data;
+        console.log("response", response);
+        dispatch({
+          type: FETCH_LATEST_FILTER_SUCCESS,
+          payload: {
+            page,
+            pageSize,
+            totalPages,
+            totalItems,
+            data: response.data.data, // Assuming you also want to pass the data array
+          },
+        });
+      })
+      .catch((error) => {
+        console.log("error in login", error?.response?.data);
+        dispatch({
+          type: FETCH_LATEST_FILTER_FAILURE,
+          payload: error?.response?.data,
+        });
+      });
+  } catch (error) {
+    console.log("error in login", error?.response?.data);
+
+    dispatch({
+      type: FETCH_LATEST_FILTER_FAILURE,
+      payload: error.response.data,
     });
   }
 };
@@ -1089,6 +1133,38 @@ export const fetchReview = () => async (dispatch) => {
     dispatch({
       type: FETCH_REVIEW_FAILURE,
       payload: error.response.data.slots,
+    });
+  }
+};
+export const fetchFaqs = () => async (dispatch) => {
+  try {
+    await axios
+      .get(`${BASE_URL}${ApiEndPoints.FAQS_API}`, {
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+        },
+        data: JSON.stringify({ status: 1 }),
+      })
+      .then((response) => {
+        console.log("reviewresponse", response);
+        dispatch({
+          type: FETCH_FAQS_SUCCESS,
+          payload: response?.data?.faqData,
+        });
+      })
+      .catch((error) => {
+        console.log("error in login", error?.response?.data?.faqData);
+        dispatch({
+          type: FETCH_FAQS_FAILURE,
+          payload: error?.response?.data?.faqData,
+        });
+      });
+  } catch (error) {
+    console.log("error in login", error?.response?.data?.faqData);
+
+    dispatch({
+      type: FETCH_FAQS_FAILURE,
+      payload: error.response.data.faqData,
     });
   }
 };

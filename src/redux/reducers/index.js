@@ -18,13 +18,17 @@ import TutorCountReducer from "./TutorCountReducer";
 import contactReducer from "./contactReducer";
 import profileReducer from "./profileReducer";
 import reviewReducer from "./ReviewReducer";
+import faqsReducer from "./FaqsReducer";
+import latestFilterReducer from "./LatestFilterReducer";
 
 const rootReducer = combineReducers({
   // Add other reducers here if needed
   auth: authReducer,
   profile: profileReducer,
   products: productReducer,
+  latestfilter: latestFilterReducer,
   reviews: reviewReducer,
+  faqs: faqsReducer,
   tutors: tutorReducer,
   specialties: specialtiesReducer,
   speaks: speakReducer,

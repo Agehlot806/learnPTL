@@ -15,6 +15,7 @@ export const ApiEndPoints = {
 
   // Latest Api Find Tutor API
   Latest_API: "/latest",
+  LATEST_FILTER_API: "/latest-filter",
   // post
   LatestNew_API: "/latest/new",
   // filter findTutor TUTORS SHOW API
@@ -55,4 +56,5 @@ export const ApiEndPoints = {
   tutorsShowcount: "/tutorsshowcount",
   // reviewshow Api
   REVIEW_SHOW: "/reviewshow",
+  FAQS_API: "/faqs",
 };

@@ -19,6 +19,7 @@ import {
   fetchCreateSpeaker,
   fetchCreateTutorCategory,
   fetchLatest,
+  fetchLatestFilter,
   fetchRatingShow,
   fetchSpeakShow,
   fetchSpecialtiesShow,
@@ -26,47 +27,50 @@ import {
 import { fetchTutorsShow } from "../../redux/action/actionCreators";
 import SendMessage from "../../components/models/send-message";
 import BookscheduleSlot from "../../components/models/Book-scheduleSlot";
+import { arrowFunctionExpression } from "@babel/types";
 
 function Findtutor() {
   const dispatch = useDispatch();
   let { id } = useParams();
-  console.log("id: ", id);
-
-  const { products } = useSelector((state) => state.products);
   const { tutors } = useSelector((state) => state.tutors);
-  console.log("tutors: ", tutors);
   const { specialties } = useSelector((state) => state.specialties);
   const { speaks } = useSelector((state) => state.speaks);
   const { countrys } = useSelector((state) => state.countrys);
   const { ratings } = useSelector((state) => state.ratings);
   const { speaker } = useSelector((state) => state.createspeaker);
-  console.log("speakerrr: ", speaker);
+  const { latestfilter } = useSelector((state) => state.latestfilter);
+  const { data } =
+    useSelector((state) => state.latestfilter.latestfilter) || {};
+
   const [nativeSpeakerSwitch, setNativeSpeakerSwitch] = useState(false);
   const [speakerChecked, setSpeakerChecked] = useState(false);
   const [superTutorsSwitch, setSuperTutorsSwitch] = useState(false);
   const [superTutorsChecked, setSuperTutorsChecked] = useState(false);
-  console.log("superTutorsChecked: ", superTutorsChecked);
   const [professionalTutorsSwitch, setProfessionalTutorsSwitch] =
     useState(false);
   const [professionalTutorsChecked, setProfessionalTutorsChecked] =
     useState(false);
-  console.log("professionalTutorsChecked: ", professionalTutorsChecked);
-
-  console.log("nativeSpeakerSwitch: ", nativeSpeakerSwitch);
-
-  //   const { createtutor } = useSelector((state) => state.createtutor);
-  //   const { createspeaker } = useSelector((state) => state.createspeaker);
-
-  const [currentItems, setCurrentItems] = useState([]);
+  const [allFilterData, setAllFilterData] = useState({
+    categories: [],
+    country: [],
+    specialtie: [],
+    speak: [],
+    price: [],
+    speaker: "",
+    supertutors: "",
+  });
+  console.log("allFilterData", allFilterData);
+  // const [currentItems, setCurrentItems] = useState([]);
 
   useEffect(() => {
-    dispatch(fetchLatest(products));
-    dispatch(fetchTutorsShow(tutors));
-    dispatch(fetchSpecialtiesShow(specialties));
-    dispatch(fetchSpeakShow(speaks));
-    dispatch(fetchCountryShow(countrys));
-    dispatch(fetchRatingShow(ratings));
-    // dispatch(fetchCreateTutorCategory(createtutor));
+    // dispatch(fetchLatest(products));
+    dispatch(fetchTutorsShow());
+    dispatch(fetchSpecialtiesShow());
+    dispatch(fetchSpeakShow());
+    dispatch(fetchCountryShow());
+    dispatch(fetchRatingShow());
+    // dispatch(fetchLatestFilter());
+    // dispatch(fetchCreateTutorCategory());
     dispatch(
       fetchCreateTutorCategory({
         superTutors: false,
@@ -79,11 +83,50 @@ function Findtutor() {
       })
     );
   }, [dispatch]);
-  // dispatch(fetchCreateSpeaker(createspeaker));
 
+  // dispatch(fetchCreateSpeaker(createspeaker));
+  const [filterManageData, setFilterManageData] = useState([]);
+  useEffect(() => {
+    setFilterManageData(data);
+  }, [data]);
   const [modalShow, setModalShow] = useState(false);
-  const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 6; // Number of items per page
+  // const [currentPage, setCurrentPage] = useState(1);
+  // const itemsPerPage = latestfilter.totalItems; // Number of items per page
+  const [currentPage, setCurrentPage] = useState(latestfilter?.page || 1);
+  const [itemsPerPage, setItemsPerPage] = useState(
+    latestfilter?.pageSize || 10
+  );
+  const totalItems = latestfilter?.totalItems || 0;
+
+  useEffect(() => {
+    // Update current page if it's different in the latest filter
+    if (latestfilter?.page && latestfilter?.page !== currentPage) {
+      setCurrentPage(latestfilter?.page);
+    }
+
+    // Update items per page if it's different in the latest filter
+    if (latestfilter?.pageSize && latestfilter?.pageSize !== itemsPerPage) {
+      setItemsPerPage(latestfilter?.pageSize);
+    }
+  }, [itemsPerPage]);
+
+  const paginate = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };
+
+  // Calculate index of the first and last item
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+
+  // Logic to display current items
+  const currentItems = filterManageData?.slice(
+    indexOfFirstItem,
+    indexOfLastItem
+  );
+
+  useEffect(() => {
+    filteredProducts(allFilterData);
+  }, [allFilterData, currentPage]);
 
   const allFindTutor = [
     {
@@ -154,22 +197,23 @@ function Findtutor() {
     );
   };
 
-  const indexOfLastItem = currentPage * itemsPerPage;
-  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  // const indexOfLastItem = currentPage * itemsPerPage;
+  // const indexOfFirstItem = indexOfLastItem - itemsPerPage;
   //   const currentItems = products?.slice(indexOfFirstItem, indexOfLastItem);
   // const currentItems = products
   //   ? products?.slice(indexOfFirstItem, indexOfLastItem)
   //   : [];
-  const paginatedItems = currentItems?.slice(indexOfFirstItem, indexOfLastItem);
+  // const paginatedItems = currentItems?.slice(indexOfFirstItem, indexOfLastItem);
+  // console.log("currentItems: ", currentItems);
 
-  useEffect(() => {
-    // Initially set the current items to products
-    setCurrentItems(products);
-  }, [products]);
+  // useEffect(() => {
+  //   // Initially set the current items to products
+  //   setCurrentItems(data);
+  // }, [data]);
 
-  const paginate = (pageNumber) => {
-    setCurrentPage(pageNumber);
-  };
+  // const paginate = (pageNumber) => {
+  //   setCurrentPage(pageNumber);
+  // };
 
   const handleShow = () => setModalShow(true);
   const handleClose = () => setModalShow(false);
@@ -180,93 +224,156 @@ function Findtutor() {
   const [selectedTutors, setSelectedTutors] = useState([]);
   const [selectedSpecialties, setSelectedSpecialties] = useState([]);
   const handleSpeakCheckboxChange = (speakId) => {
-    // Toggle the selected state of the clicked speak
-    setSelectedSpeaks((prevSelected) => {
-      if (prevSelected.includes(speakId)) {
-        return prevSelected.filter((id) => id !== speakId);
-      } else {
-        return [...prevSelected, speakId];
-      }
+    let data = [...allFilterData.speak];
+    if (data.includes(speakId)) {
+      data = data.filter((item) => item !== speakId);
+    } else {
+      data.push(speakId);
+    }
+
+    setSelectedSpeaks(data);
+    setAllFilterData({
+      ...allFilterData,
+      speak: data,
     });
   };
   const handleCountryCheckboxChange = (country) => {
     // Toggle the selected state of the clicked country
-    console.log("country", country);
-    setSelectedCountry((prevSelected) => {
-      if (prevSelected.includes(country)) {
-        return prevSelected.filter((item) => item !== country);
-      } else {
-        return [...prevSelected, country];
-      }
+    let data = [...allFilterData.country];
+    if (data.includes(country)) {
+      data = data.filter((item) => item !== country);
+    } else {
+      data.push(country);
+    }
+
+    setSelectedCountry(data);
+    setAllFilterData({
+      ...allFilterData,
+      country: data,
     });
   };
   const handleTutorsCheckboxChange = (tutors) => {
     // Toggle the selected state of the clicked country
-    console.log("tutors", tutors);
-    setSelectedTutors((prevSelected) => {
-      if (prevSelected.includes(tutors)) {
-        return prevSelected.filter((item) => item !== tutors);
-      } else {
-        return [...prevSelected, tutors];
-      }
+    let data = [...allFilterData.categories];
+    if (data.includes(tutors)) {
+      data = data.filter((item) => item !== tutors);
+    } else {
+      data.push(tutors);
+    }
+    setAllFilterData({
+      ...allFilterData,
+      categories: data,
     });
+    setSelectedTutors(data);
   };
   const handleSpecialtiesCheckboxChange = (specialties) => {
-    // Toggle the selected state of the clicked country
-    console.log("specialties", specialties);
-    setSelectedSpecialties((prevSelected) => {
-      if (prevSelected.includes(specialties)) {
-        return prevSelected.filter((item) => item !== specialties);
-      } else {
-        return [...prevSelected, specialties];
-      }
+    let data = [...allFilterData.specialtie];
+    if (data.includes(specialties)) {
+      data = data.filter((item) => item !== specialties);
+    } else {
+      data.push(specialties);
+    }
+
+    setSelectedSpecialties(data);
+    setAllFilterData({
+      ...allFilterData,
+      specialtie: data,
     });
   };
 
-  const filteredProducts = products?.filter((product) => {
-    // Check if the product meets the conditions for each filter
-    const speaksCondition =
-      selectedSpeaks.length === 0 || selectedSpeaks.includes(product.speak);
-    const tutorsCondition =
-      selectedTutors.length === 0 ||
-      selectedTutors.includes(product.categories);
-    const specialtiesCondition =
-      selectedSpecialties.length === 0 ||
-      selectedSpecialties.includes(product.specialties);
-    const countryCondition =
-      selectedCountry.length === 0 || selectedCountry.includes(product.country);
+  const onChangePrice = (price) => {
+    setAllFilterData({
+      ...allFilterData,
+      price: price,
+    });
+  };
 
-    // Apply additional conditions based on speakerChecked and nativeSpeakerSwitch
-    const speakerCondition =
-      (speakerChecked && nativeSpeakerSwitch && product.speaker === 1) ||
-      (!speakerChecked && true) ||
-      (!nativeSpeakerSwitch && product.speaker === 0);
+  const filteredProducts = (data) => {
+    console.log("datadata", data);
+    const alltutor = new URLSearchParams();
+    alltutor.append("pageSize", "10");
+    alltutor.append("page", currentPage);
+    alltutor.append("sortBy", "");
+    alltutor.append("sortOrder", "");
+    alltutor.append("country", data.country);
+    alltutor.append("level", "");
+    alltutor.append("specialties", data.specialtie);
+    alltutor.append("speaker", data.speaker);
+    alltutor.append("search", "");
+    alltutor.append("categories", data.categories);
+    alltutor.append("supertutors", data.supertutors);
+    alltutor.append("professionaltutors", "");
+    alltutor.append("minPrice", data.price[0] ?? "");
+    alltutor.append("maxPrice", data.price[1] ?? "");
+    alltutor.append("speak", data.speak);
+    alltutor.append("duration", "");
+    const NewData = {
+      pageSize: "10",
+      page: "1",
+      sortBy: "price",
+      sortOrder: "ASC",
+      country: data.country,
+      level: "A1",
+      specialties: data.specialtie,
+      speaker: data.speaker,
+      search: "Carolina",
+      categories: data.categories,
+      supertutors: data.supertutors,
+      professionaltutors: "1",
+      minPrice: data.price[0] ?? 0,
+      maxPrice: data.price[1] ?? 100,
+      speak: data.speak,
+      duration: "9pm-4pm,2am-4am",
+    };
+    dispatch(fetchLatestFilter(alltutor));
 
-    // Apply additional conditions based on superTutorsChecked and superTutorsSwitch
-    const superTutorsCondition =
-      (superTutorsChecked && superTutorsSwitch && product.Supertutors === 1) ||
-      (!superTutorsChecked && true) ||
-      (!superTutorsSwitch && product.Supertutors === 0);
+    console.log("NewData", NewData);
+  };
 
-    // Apply additional conditions based on professionalTutorsChecked and professionalTutorsSwitch
-    const professionalTutorsCondition =
-      (professionalTutorsChecked &&
-        professionalTutorsSwitch &&
-        product.professionaltutors === 1) ||
-      (!professionalTutorsChecked && true) ||
-      (!professionalTutorsSwitch && product.professionaltutors === 0);
+  // const filteredProducts = data?.filter((product) => {
+  //   // Check if the product meets the conditions for each filter
+  //   const speaksCondition =
+  //     selectedSpeaks.length === 0 || selectedSpeaks.includes(product.speak);
+  //   const tutorsCondition =
+  //     selectedTutors.length === 0 ||
+  //     selectedTutors.includes(product.categories);
+  //   const specialtiesCondition =
+  //     selectedSpecialties.length === 0 ||
+  //     selectedSpecialties.includes(product.specialties);
+  //   const countryCondition =
+  //     selectedCountry.length === 0 || selectedCountry.includes(product.country);
 
-    // Return true only if all conditions are met
-    return (
-      speaksCondition &&
-      tutorsCondition &&
-      specialtiesCondition &&
-      countryCondition &&
-      speakerCondition &&
-      superTutorsCondition &&
-      professionalTutorsCondition
-    );
-  });
+  //   // Apply additional conditions based on speakerChecked and nativeSpeakerSwitch
+  //   const speakerCondition =
+  //     (speakerChecked && nativeSpeakerSwitch && product.speaker === 1) ||
+  //     (!speakerChecked && true) ||
+  //     (!nativeSpeakerSwitch && product.speaker === 0);
+
+  //   // Apply additional conditions based on superTutorsChecked and superTutorsSwitch
+  //   const superTutorsCondition =
+  //     (superTutorsChecked && superTutorsSwitch && product.Supertutors === 1) ||
+  //     (!superTutorsChecked && true) ||
+  //     (!superTutorsSwitch && product.Supertutors === 0);
+
+  //   // Apply additional conditions based on professionalTutorsChecked and professionalTutorsSwitch
+  //   const professionalTutorsCondition =
+  //     (professionalTutorsChecked &&
+  //       professionalTutorsSwitch &&
+  //       product.professionaltutors === 1) ||
+  //     (!professionalTutorsChecked && true) ||
+  //     (!professionalTutorsSwitch && product.professionaltutors === 0);
+
+  //   // Return true only if all conditions are met
+  //   return (
+  //     speaksCondition &&
+  //     tutorsCondition &&
+  //     specialtiesCondition &&
+  //     countryCondition &&
+  //     speakerCondition &&
+  //     superTutorsCondition &&
+  //     professionalTutorsCondition
+  //   );
+  // });
   return (
     <>
       <Header />
@@ -288,7 +395,7 @@ function Findtutor() {
             Specialties={"Specialties"}
             nativeSpeaker={"Native Speaker"}
             tutorcategories={"Tutor Categories"}
-            products={products}
+            products={data}
             nativeSpeakerSwitch={nativeSpeakerSwitch}
             setNativeSpeakerSwitch={setNativeSpeakerSwitch}
             speakerChecked={speakerChecked}
@@ -309,6 +416,9 @@ function Findtutor() {
             handleSpeakCheckboxChange={handleSpeakCheckboxChange}
             handleCountryCheckboxChange={handleCountryCheckboxChange}
             handleTutorsCheckboxChange={handleTutorsCheckboxChange}
+            onChangePrice={onChangePrice}
+            allFilterData={allFilterData}
+            setAllFilterData={setAllFilterData}
           />
         </Container>
       </section>
@@ -316,8 +426,8 @@ function Findtutor() {
         <Container>
           <div className="filter-cards">
             <Row>
-              {filteredProducts &&
-                filteredProducts.map((tutor, index) => (
+              {filterManageData &&
+                filterManageData.map((tutor, index) => (
                   <Col lg={4} className="mb-4">
                     <div className="course-cards" key={tutor?.id}>
                       <Link to=""></Link>
@@ -387,7 +497,7 @@ function Findtutor() {
                   </Col>
                 ))}
             </Row>
-            {currentItems &&
+            {/* {currentItems &&
               currentItems.map((tutor, index) => (
                 <div key={tutor?.id}>
                   <TeacherstutorModel
@@ -398,9 +508,9 @@ function Findtutor() {
                     onHide={() => setModalShow(false)}
                   />
                 </div>
-              ))}
+              ))} */}
           </div>
-          <div className="pagination-container">
+          {/* <div className="pagination-container">
             <ul className="pagination">
               {Array.from({
                 length: Math.ceil(allFindTutor.length / itemsPerPage),
@@ -415,6 +525,23 @@ function Findtutor() {
                   </Link>
                 </li>
               ))}
+            </ul>
+          </div> */}
+          <div className="pagination-container">
+            <ul className="pagination">
+              {Array.from({ length: Math.ceil(totalItems / itemsPerPage) }).map(
+                (_, index) => (
+                  <li key={index} className="page-item">
+                    <Link
+                      to="#"
+                      className="page-link"
+                      onClick={() => paginate(index + 1)}
+                    >
+                      {index + 1}
+                    </Link>
+                  </li>
+                )
+              )}
             </ul>
           </div>
         </Container>
